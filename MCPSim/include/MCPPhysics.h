@@ -19,8 +19,6 @@ struct ElectronProcess {
 
 class Physics {
 public:
-    static constexpr double pi = M_PI;
-
     static std::random_device rd;
     static std::mt19937 gen;
 

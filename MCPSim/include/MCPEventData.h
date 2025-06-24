@@ -58,7 +58,6 @@ public:
     std::vector<float> finalPosX, finalPosY, finalPosZ;  // Final position
     std::vector<float> finalVelX, finalVelY, finalVelZ;  // Final velocity
     std::vector<float> finalEnergy;  // Final energy
-    std::vector<float> transitTime;  // Transit time (finalTime - birthTime)
     
     Track();
     virtual ~Track();  // Virtual destructor
@@ -100,7 +99,7 @@ public:
     void AddStep(int trackID, float time,
                 float posX, float posY, float posZ,
                 float velX, float velY, float velZ,
-                float energy, bool interaction = false);
+                float energy);
                 
     ClassDef(Step, 1);
 };

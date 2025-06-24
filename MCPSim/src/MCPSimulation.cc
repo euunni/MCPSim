@@ -57,14 +57,14 @@ int Simulation::CreateElectron(int parentID, float time,
 void Simulation::AddElectronStep(int trackID, float time,
                                float posX, float posY, float posZ,
                                float velX, float velY, float velZ,
-                               float energy, bool isInteraction) {
+                               float energy) {
     // Find internal trackID corresponding to external trackID
     auto it = trackIDMap_.find(trackID);
     if (it != trackIDMap_.end()) {
         int internalTrackID = it->second;
         
         // Add step
-        steps_.AddStep(internalTrackID, time, posX, posY, posZ, velX, velY, velZ, energy, isInteraction);
+        steps_.AddStep(internalTrackID, time, posX, posY, posZ, velX, velY, velZ, energy);
     }
 }
 

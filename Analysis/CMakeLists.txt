@@ -1,9 +1,11 @@
 set(SOURCES
-    src/functions.cc
+    src/MCPAnalyzer.cc
+    src/MCPVisualizer.cc
 )
 
 set(HEADERS
-    include/functions.h
+    include/MCPAnalyzer.h
+    include/MCPVisualizer.h
 )
 
 add_library(Analysis SHARED ${SOURCES} ${HEADERS})

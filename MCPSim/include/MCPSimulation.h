@@ -34,7 +34,7 @@ private:
     void AddElectronStep(int trackID, float time,
                        float posX, float posY, float posZ,
                        float velX, float velY, float velZ,
-                       float energy, bool isInteraction = false);
+                       float energy);
     
     // Electron termination (anode hit or end)
     void FinalizeElectron(int trackID, int status, float time,

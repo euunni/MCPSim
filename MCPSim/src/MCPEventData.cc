@@ -81,24 +81,16 @@ void Track::Reset() {
     trackID.clear();
     parentID.clear();
     birthTime.clear();
-    birthPosX.clear();
-    birthPosY.clear();
-    birthPosZ.clear();
-    birthVelX.clear();
-    birthVelY.clear();
-    birthVelZ.clear();
+    birthPosX.clear(); birthPosY.clear(); birthPosZ.clear();
+    birthVelX.clear(); birthVelY.clear(); birthVelZ.clear();
     birthEnergy.clear();
     processType.clear();
     isAnode.clear();
     finalTime.clear();
-    finalPosX.clear();
-    finalPosY.clear();
-    finalPosZ.clear();
-    finalVelX.clear();
-    finalVelY.clear();
-    finalVelZ.clear();
+    finalPosX.clear(); finalPosY.clear(); finalPosZ.clear();
+    finalVelX.clear(); finalVelY.clear(); finalVelZ.clear();
     finalEnergy.clear();
-    transitTime.clear();
+    // transitTime removed - calculated on demand
 }
 
 int Track::AddTrack(int parID, float time,
@@ -119,7 +111,7 @@ int Track::AddTrack(int parID, float time,
     birthVelZ.push_back(velZ);
     birthEnergy.push_back(energy);
     processType.push_back(procType);
-    isAnode.push_back(0); // 초기값은 0 (애노드에 도달하지 않음)
+    isAnode.push_back(0);
     
     finalTime.push_back(time);
     finalPosX.push_back(posX);
@@ -129,7 +121,6 @@ int Track::AddTrack(int parID, float time,
     finalVelY.push_back(velY);
     finalVelZ.push_back(velZ);
     finalEnergy.push_back(energy);
-    transitTime.push_back(0.0f);
     
     return trID;
 }
@@ -149,7 +140,6 @@ void Track::FinalizeTrack(int trID, int isAnodeHit, float time,
         finalVelY[idx] = velY;
         finalVelZ[idx] = velZ;
         finalEnergy[idx] = energy;
-        transitTime[idx] = time - birthTime[idx]; 
     }
 }
 
@@ -180,13 +170,12 @@ void Step::Reset() {
     velY.clear();
     velZ.clear();
     energy.clear();
-    isInteraction.clear();
 }
 
 void Step::AddStep(int trID, float t,
                  float pX, float pY, float pZ,
                  float vX, float vY, float vZ,
-                 float e, bool interaction) {
+                 float e) {
     nSteps++;
     trackID.push_back(trID);
     time.push_back(t);
@@ -197,7 +186,6 @@ void Step::AddStep(int trID, float t,
     velY.push_back(vY);
     velZ.push_back(vZ);
     energy.push_back(e);
-    isInteraction.push_back(interaction);
 }
 
 Event::Event() {
@@ -249,7 +237,7 @@ void Event::GetAnodeElectrons(std::vector<int>& anodeTrackID,
             finalPosY.push_back(tracks.finalPosY[i]);
             finalPosZ.push_back(tracks.finalPosZ[i]);
             finalEnergy.push_back(tracks.finalEnergy[i]);
-            transitTime.push_back(tracks.transitTime[i]);
+            transitTime.push_back(tracks.finalTime[i] - tracks.birthTime[i]);
             processType.push_back(tracks.processType[i]);
             Vx.push_back(tracks.finalVelX[i]);
             Vy.push_back(tracks.finalVelY[i]);
