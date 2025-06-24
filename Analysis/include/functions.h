@@ -31,10 +31,10 @@
 #include "TCollection.h"
 #include "TView3D.h"
 
-// 데이터 로드 함수
+// Data loading function
 void loadRootFile(const std::string& filename, std::vector<mcp::Event*>& eventPtrs);
 
-// 전자 증폭 트리 구조 생성 함수
+// Create electron amplification tree structure
 struct ElectronNode {
     int trackID;
     int parentID;
@@ -48,11 +48,11 @@ typedef std::map<int, ElectronNode> ElectronCascadeTree;
 
 ElectronCascadeTree buildElectronCascadeTree(const mcp::Event& event);
 
-// 시각화 함수들
-// 2D 히스토그램: pore 내 위치별 전자 생성 밀도
+// Visualization functions
+// 2D histogram: electron creation density per location in the pore
 void createDensityHistogram(const mcp::Event& event, const std::string& outputFileName);
 
-// 단일 pore 내 증폭 과정 애니메이션 생성
+// Create animation of the amplification process in a single pore
 void createCascadeAnimation(const mcp::Event& event, const std::string& outputFileName);
 
 #endif // FUNCTIONS_H

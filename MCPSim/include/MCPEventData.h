@@ -35,69 +35,68 @@ public:
     ClassDef(ConfigParameters, 1);  
 };
 
-// 물리 프로세스 타입 상수 정의
+// Physical process type
 enum ProcessType {
-    PROCESS_BACKSCATTER = 0,  // 후방 산란
-    PROCESS_REDIFFUSED = 1,   // 재확산
-    PROCESS_SECONDARY = 2     // 이차 전자 방출
+    PROCESS_BACKSCATTER = 0,  // Backscattering
+    PROCESS_REDIFFUSED = 1,   // Rediffused electron
+    PROCESS_SECONDARY = 2     // Secondary emission
 };
 
-// 트랙 클래스: 실제 전자 정보를 저장
+// Track class: Store actual electron information
 class Track : public TObject {
 public:
-    int nTracks;                   // 총 트랙 수
-    std::vector<int> trackID;      // 트랙 ID
-    std::vector<int> parentID;     // 부모 트랙 ID
-    std::vector<float> birthTime;  // 생성 시간
-    std::vector<float> birthPosX, birthPosY, birthPosZ;  // 생성 위치
-    std::vector<float> birthVelX, birthVelY, birthVelZ;  // 초기 속도
-    std::vector<float> birthEnergy;  // 초기 에너지
-    std::vector<int> processType;  // 생성 프로세스 타입
-    std::vector<int> isAnode;      // 애노드 도달 여부 (0: 도달하지 않음, 1: 도달함)
-    std::vector<float> finalTime;  // 최종 시간 (애노드 도달 또는 종료 시간)
-    std::vector<float> finalPosX, finalPosY, finalPosZ;  // 최종 위치
-    std::vector<float> finalVelX, finalVelY, finalVelZ;  // 최종 속도
-    std::vector<float> finalEnergy;  // 최종 에너지
-    std::vector<float> transitTime;  // 이동 시간 (finalTime - birthTime)
+    int nTracks;                   // Total number of tracks
+    std::vector<int> trackID;      // Track ID
+    std::vector<int> parentID;     // Parent track ID
+    std::vector<float> birthTime;  // Birth time
+    std::vector<float> birthPosX, birthPosY, birthPosZ;  // Birth position
+    std::vector<float> birthVelX, birthVelY, birthVelZ;  // Initial velocity
+    std::vector<float> birthEnergy;  // Initial energy
+    std::vector<int> processType;  // Creation process type
+    std::vector<int> isAnode;      // Anode hit (0: not hit, 1: hit)
+    std::vector<float> finalTime;  // Final time (anode hit or end time)
+    std::vector<float> finalPosX, finalPosY, finalPosZ;  // Final position
+    std::vector<float> finalVelX, finalVelY, finalVelZ;  // Final velocity
+    std::vector<float> finalEnergy;  // Final energy
+    std::vector<float> transitTime;  // Transit time (finalTime - birthTime)
     
     Track();
-    virtual ~Track();  // 가상 소멸자 추가
+    virtual ~Track();  // Virtual destructor
     void Reset();
     
-    // 새 트랙 추가 (전자 생성)
+    // Add new track (electron creation)
     int AddTrack(int parentID, float time,
                 float posX, float posY, float posZ,
                 float velX, float velY, float velZ,
                 float energy, int procType);
     
-    // 트랙 종료 (애노드 도달 또는 종료)
+    // Finalize track (anode hit or end)
     void FinalizeTrack(int trackID, int isAnodeHit, float time,
                       float posX, float posY, float posZ,
                       float velX, float velY, float velZ,
                       float energy);
                       
-    // 트랙 ID로 인덱스 찾기
+    // Find track index by track ID
     int FindTrackIndex(int trackID) const;
     
     ClassDef(Track, 1);
 };
 
-// 스텝 클래스: 전자 궤적 정보를 저장
+// Step class: Store electron trajectory information
 class Step : public TObject {
 public:
-    int nSteps;                    // 총 스텝 수
-    std::vector<int> trackID;      // 어떤 트랙의 스텝인지
-    std::vector<float> time;       // 시간
-    std::vector<float> posX, posY, posZ;  // 위치
-    std::vector<float> velX, velY, velZ;  // 속도
-    std::vector<float> energy;     // 에너지
-    std::vector<bool> isInteraction;  // 물리적 상호작용 발생 여부
+    int nSteps;                    // Total number of steps
+    std::vector<int> trackID;      // Which track's step
+    std::vector<float> time;       // Time
+    std::vector<float> posX, posY, posZ;  // Position
+    std::vector<float> velX, velY, velZ;  // Velocity
+    std::vector<float> energy;     // Energy
     
     Step();
-    virtual ~Step();  // 가상 소멸자 추가
+    virtual ~Step();
     void Reset();
     
-    // 스텝 추가
+    // Add step
     void AddStep(int trackID, float time,
                 float posX, float posY, float posZ,
                 float velX, float velY, float velZ,
@@ -110,16 +109,16 @@ class Event : public TObject {
 public:
     EventInfo eventInfo;
     ConfigParameters config;
-    Track tracks;        // 실제 전자 정보
-    Step steps;          // 궤적 포인트 정보
+    Track tracks;        // Actual electron information
+    Step steps;          // Trajectory point information
     
     Event();
     void Reset();
     
-    // 애노드에 도달한 전자 수 계산
+    // Calculate number of electrons that hit the anode
     int GetAnodeElectronCount() const;
     
-    // 애노드에 도달한 전자 정보 얻기 (이전 버전 호환성)
+    // Get information about electrons that hit the anode (for backward compatibility)
     void GetAnodeElectrons(std::vector<int>& anodeTrackID,
                           std::vector<float>& finalPosX, 
                           std::vector<float>& finalPosY, 
@@ -131,7 +130,7 @@ public:
                           std::vector<float>& Vy, 
                           std::vector<float>& Vz) const;
     
-    ClassDef(Event, 2);  // 버전 증가
+    ClassDef(Event, 2);
 };
 
 } // namespace mcp

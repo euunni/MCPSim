@@ -35,7 +35,7 @@ bool MCPRootManager::OpenFile(const std::string& fname, const std::string& mode)
             return false;
         }
         
-        // Track/Step 구조로 브랜치 연결
+        // Connect branches to Track/Step structure
         fEvtTree->SetBranchAddress("EventInfo", &fEventObj->eventInfo);
         fEvtTree->SetBranchAddress("Config", &fEventObj->config);
         fEvtTree->SetBranchAddress("Tracks", &fEventObj->tracks);

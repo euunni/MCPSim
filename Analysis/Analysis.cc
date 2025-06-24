@@ -76,13 +76,11 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // 브랜치 변수 설정 (포인터로 설정)
     mcp::EventInfo* eventInfo = nullptr;
     mcp::ConfigParameters* config = nullptr;
     mcp::Track* tracks = nullptr;
     mcp::Step* steps = nullptr;
     
-    // 브랜치 주소 설정
     tree->SetBranchAddress("EventInfo", &eventInfo);
     tree->SetBranchAddress("Config", &config);
     tree->SetBranchAddress("Tracks", &tracks);
@@ -94,10 +92,8 @@ int main(int argc, char** argv) {
     for (int i = 0; i < nEntries; i++) {
         tree->GetEntry(i);
         
-        // 새 이벤트 객체 생성
         mcp::Event* newEvent = new mcp::Event();
         
-        // 포인터 할당 (복사 없음)
         if (eventInfo) newEvent->eventInfo = *eventInfo;
         if (config) newEvent->config = *config;
         if (tracks) newEvent->tracks = *tracks;
@@ -141,7 +137,6 @@ int main(int argc, char** argv) {
         createCascadeAnimation(selectedEvent, outputPrefix + "_animation");
     }
     
-    // 메모리 해제
     for (auto ptr : eventPtrs) {
         delete ptr;
     }

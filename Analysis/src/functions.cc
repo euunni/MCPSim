@@ -22,13 +22,11 @@ void loadRootFile(const std::string& filename, std::vector<mcp::Event*>& eventPt
         return;
     }
     
-    // 브랜치 변수 설정 (포인터로 설정)
     mcp::EventInfo* eventInfo = nullptr;
     mcp::ConfigParameters* config = nullptr;
     mcp::Track* tracks = nullptr;
     mcp::Step* steps = nullptr;
     
-    // 브랜치 주소 설정
     tree->SetBranchAddress("EventInfo", &eventInfo);
     tree->SetBranchAddress("Config", &config);
     tree->SetBranchAddress("Tracks", &tracks);
@@ -40,10 +38,8 @@ void loadRootFile(const std::string& filename, std::vector<mcp::Event*>& eventPt
     for (int i = 0; i < nEntries; i++) {
         tree->GetEntry(i);
         
-        // 새 이벤트 객체 생성
         mcp::Event* newEvent = new mcp::Event();
         
-        // 포인터 할당 (복사 없음)
         if (eventInfo) newEvent->eventInfo = *eventInfo;
         if (config) newEvent->config = *config;
         if (tracks) newEvent->tracks = *tracks;
@@ -65,9 +61,8 @@ void loadRootFile(const std::string& filename, std::vector<mcp::Event*>& eventPt
         float minZ = std::numeric_limits<float>::max();
         float maxZ = -std::numeric_limits<float>::max();
         
-        // 트랙 정보 사용
         for (int i = 0; i < firstEvent->tracks.nTracks; i++) {
-            // 시작 위치
+            // Start position
             minX = std::min(minX, firstEvent->tracks.birthPosX[i]);
             maxX = std::max(maxX, firstEvent->tracks.birthPosX[i]);
             minY = std::min(minY, firstEvent->tracks.birthPosY[i]);
@@ -75,7 +70,7 @@ void loadRootFile(const std::string& filename, std::vector<mcp::Event*>& eventPt
             minZ = std::min(minZ, firstEvent->tracks.birthPosZ[i]);
             maxZ = std::max(maxZ, firstEvent->tracks.birthPosZ[i]);
             
-            // 최종 위치
+            // Final position
             minX = std::min(minX, firstEvent->tracks.finalPosX[i]);
             maxX = std::max(maxX, firstEvent->tracks.finalPosX[i]);
             minY = std::min(minY, firstEvent->tracks.finalPosY[i]);
@@ -84,7 +79,7 @@ void loadRootFile(const std::string& filename, std::vector<mcp::Event*>& eventPt
             maxZ = std::max(maxZ, firstEvent->tracks.finalPosZ[i]);
         }
         
-        // 스텝 정보 사용
+        // Use step information
         for (int i = 0; i < firstEvent->steps.nSteps; i++) {
             minX = std::min(minX, firstEvent->steps.posX[i]);
             maxX = std::max(maxX, firstEvent->steps.posX[i]);
@@ -163,7 +158,6 @@ void drawPoreBoundary(TVirtualPad* pad, float centerX, float centerY, float minX
 ElectronCascadeTree buildElectronCascadeTree(const mcp::Event& event) {
     ElectronCascadeTree tree;
     
-    // 트랙 정보 사용
     for (int i = 0; i < event.tracks.nTracks; i++) {
         int trackID = event.tracks.trackID[i];
         int parentID = event.tracks.parentID[i];
@@ -204,9 +198,8 @@ void calculateDataRange(const mcp::Event& event,
     minX = minY = minZ = std::numeric_limits<float>::max();
     maxX = maxY = maxZ = -std::numeric_limits<float>::max();
     
-    // 트랙 정보 사용
     for (int i = 0; i < event.tracks.nTracks; i++) {
-        // 시작 위치
+        // Start position
         minX = std::min(minX, event.tracks.birthPosX[i]);
         maxX = std::max(maxX, event.tracks.birthPosX[i]);
         minY = std::min(minY, event.tracks.birthPosY[i]);
@@ -214,7 +207,7 @@ void calculateDataRange(const mcp::Event& event,
         minZ = std::min(minZ, event.tracks.birthPosZ[i]);
         maxZ = std::max(maxZ, event.tracks.birthPosZ[i]);
         
-        // 최종 위치
+        // Final position
         minX = std::min(minX, event.tracks.finalPosX[i]);
         maxX = std::max(maxX, event.tracks.finalPosX[i]);
         minY = std::min(minY, event.tracks.finalPosY[i]);
@@ -223,7 +216,6 @@ void calculateDataRange(const mcp::Event& event,
         maxZ = std::max(maxZ, event.tracks.finalPosZ[i]);
     }
     
-    // 스텝 정보 사용
     for (int i = 0; i < event.steps.nSteps; i++) {
         minX = std::min(minX, event.steps.posX[i]);
         maxX = std::max(maxX, event.steps.posX[i]);
@@ -296,11 +288,11 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
     hDensityXZ->GetXaxis()->SetTitleSize(0.04);  
     hDensityXZ->GetYaxis()->SetTitleSize(0.04);  
     
-    // 시간 범위 계산
+    // Calculate time range
     float minTime = std::numeric_limits<float>::max();
     float maxTime = -std::numeric_limits<float>::max();
     
-    // 트랙 정보를 사용하여 시간 범위 계산
+    // Use track information to calculate time range
     for (int i = 0; i < event.tracks.nTracks; i++) {
         minTime = std::min(minTime, event.tracks.birthTime[i]);
         maxTime = std::max(maxTime, event.tracks.finalTime[i]);
@@ -308,9 +300,9 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
     
     std::cout << "Time range: " << minTime << " - " << maxTime << " ps" << std::endl;
     
-    // 트랙 정보를 히스토그램에 추가 (시작점과 종료점)
+    // Add track information to histogram (start and end points)
     for (int i = 0; i < event.tracks.nTracks; i++) {
-        // 시작점
+        // Start point
         float x = event.tracks.birthPosX[i];
         float y = event.tracks.birthPosY[i];
         float z = event.tracks.birthPosZ[i];
@@ -320,7 +312,7 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
             hDensityXZ->Fill(x, z);
         }
         
-        // 종료점
+        // End point
         x = event.tracks.finalPosX[i];
         y = event.tracks.finalPosY[i];
         z = event.tracks.finalPosZ[i];
@@ -331,14 +323,12 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
         }
     }
     
-    // 스텝 정보도 히스토그램에 추가 (가중치 낮게)
     for (int i = 0; i < event.steps.nSteps; i++) {
         float x = event.steps.posX[i];
         float y = event.steps.posY[i];
         float z = event.steps.posZ[i];
         
         if (x >= minX && x <= maxX && y >= minY && y <= maxY && z >= minZ && z <= maxZ) {
-            // 스텝도 동일한 가중치로 설정 (1.0)
             hDensityXY->Fill(x, y);
             hDensityXZ->Fill(x, z);
         }
@@ -358,7 +348,7 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
     // Draw pore boundary (XY plane)
     drawPoreBoundary(canvasXY, poreCenterX, poreCenterY, minX, maxX, minZ, maxZ);
     
-    // 시간 범위 정보 추가
+    // Add time range information
     TPaveText* timeInfo = new TPaveText(0.15, 0.85, 0.55, 0.90, "NDC");
     timeInfo->SetFillColor(0);
     timeInfo->SetTextAlign(12);
@@ -366,7 +356,7 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
     timeInfo->AddText(Form("Time range: %.2f - %.2f ps", minTime, maxTime));
     timeInfo->Draw();
     
-    // 전자 수 정보 추가
+    // Add electron count information
     TPaveText* electronInfo = new TPaveText(0.15, 0.80, 0.55, 0.85, "NDC");
     electronInfo->SetFillColor(0);
     electronInfo->SetTextAlign(12);
@@ -388,7 +378,7 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
 
     hDensityXZ->Draw("COLZ");
     
-    // 시간 범위 정보 추가
+    // Add time range information
     TPaveText* timeInfoXZ = new TPaveText(0.15, 0.85, 0.55, 0.90, "NDC");
     timeInfoXZ->SetFillColor(0);
     timeInfoXZ->SetTextAlign(12);
@@ -396,7 +386,7 @@ void createDensityHistogram(const mcp::Event& event, const std::string& outputFi
     timeInfoXZ->AddText(Form("Time range: %.2f - %.2f ps", minTime, maxTime));
     timeInfoXZ->Draw();
     
-    // 전자 수 정보 추가
+    // Add electron count information
     TPaveText* electronInfoXZ = new TPaveText(0.15, 0.80, 0.55, 0.85, "NDC");
     electronInfoXZ->SetFillColor(0);
     electronInfoXZ->SetTextAlign(12);
@@ -432,7 +422,7 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
     float minEnergy = std::numeric_limits<float>::max();
     float maxEnergy = -std::numeric_limits<float>::max();
     
-    // 트랙 정보를 사용하여 시간 범위 계산
+    // Use track information to calculate time range
     for (int i = 0; i < event.tracks.nTracks; i++) {
         minTime = std::min(minTime, event.tracks.birthTime[i]);
         maxTime = std::max(maxTime, event.tracks.finalTime[i]);
@@ -440,7 +430,7 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
         maxEnergy = std::max(maxEnergy, event.tracks.finalEnergy[i]);
     }
     
-    // 스텝 정보를 사용하여 시간 범위 계산
+    // Use step information to calculate time range
     for (int i = 0; i < event.steps.nSteps; i++) {
         minTime = std::min(minTime, event.steps.time[i]);
         maxTime = std::max(maxTime, event.steps.time[i]);
@@ -457,7 +447,7 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
     // Create images for each frame
     for (int frame = 0; frame < nFrames; frame++) {
         float currentTime = minTime + frame * timeStep;
-        float timeWindow = 0.1f; // 타임 윈도우를 0.5에서 0.1로 줄임 (더 정확한 시간대의 전자만 표시)
+        float timeWindow = 0.1f; // Reduce time window to 0.1 (show only electrons in the more accurate time range)
         
         TCanvas* canvas = new TCanvas("canvasAnim", 
                                     Form("MCP Pore Electron Cascade (Time: %.2f ps)", currentTime), 
@@ -560,27 +550,27 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
         
         int pointsDrawn = 0;
         
-        // 현재 시간 창에 있는 트랙 표시
+        // Show tracks in the current time window
         for (int i = 0; i < event.tracks.nTracks; i++) {
             float birthTime = event.tracks.birthTime[i];
             float finalTime = event.tracks.finalTime[i];
             
-            // 현재 시간 창에 있는 트랙만 표시
+            // Show only tracks in the current time window
             if ((birthTime <= currentTime + timeWindow && finalTime >= currentTime - timeWindow) ||
                 (birthTime >= currentTime - timeWindow && birthTime <= currentTime + timeWindow) ||
                 (finalTime >= currentTime - timeWindow && finalTime <= currentTime + timeWindow)) {
                 
-                // 시작점 또는 종료점 중 현재 시간에 가까운 점 선택
+                // Select the point closer to the current time among the start and end points
                 float time, x, y, z, energy;
                 if (std::abs(birthTime - currentTime) < std::abs(finalTime - currentTime)) {
-                    // 시작점이 더 가까움
+                    // The start point is closer
                     time = event.tracks.birthTime[i];
                     x = event.tracks.birthPosX[i];
                     y = event.tracks.birthPosY[i];
                     z = event.tracks.birthPosZ[i];
                     energy = event.tracks.birthEnergy[i];
                 } else {
-                    // 종료점이 더 가까움
+                    // The end point is closer
                     time = event.tracks.finalTime[i];
                     x = event.tracks.finalPosX[i];
                     y = event.tracks.finalPosY[i];
@@ -588,31 +578,26 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
                     energy = event.tracks.finalEnergy[i];
                 }
                 
-                // 색상 설정
                 Int_t color = getEnergyColor(energy, minEnergy, maxEnergy);
                 
-                // XY 평면에 표시
                 canvas->cd(1);
                 TMarker* mXY = new TMarker(x, y, 20);
                 mXY->SetMarkerColor(color);
                 mXY->SetMarkerSize(0.8);
                 mXY->Draw();
                 
-                // XZ 평면에 표시
                 canvas->cd(2);
                 TMarker* mXZ = new TMarker(x, z, 20);
                 mXZ->SetMarkerColor(color);
                 mXZ->SetMarkerSize(0.8);
                 mXZ->Draw();
                 
-                // ZY 평면에 표시
                 canvas->cd(3);
                 TMarker* mYZ = new TMarker(z, y, 20);
                 mYZ->SetMarkerColor(color);
                 mYZ->SetMarkerSize(0.8);
                 mYZ->Draw();
                 
-                // 3D 뷰에 표시
                 canvas->cd(4);
                 TPolyMarker3D* pm3d = new TPolyMarker3D(1);
                 pm3d->SetPoint(0, x, y, z);
@@ -625,42 +610,37 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
             }
         }
         
-        // 현재 시간 창에 있는 스텝 표시 (작은 점으로)
+        // Show steps in the current time window (small points)
         for (int i = 0; i < event.steps.nSteps; i++) {
             float time = event.steps.time[i];
             
-            // 현재 시간 창에 있는 스텝만 표시
+            // Show only steps in the current time window
             if (time >= currentTime - timeWindow && time <= currentTime + timeWindow) {
                 float x = event.steps.posX[i];
                 float y = event.steps.posY[i];
                 float z = event.steps.posZ[i];
                 float energy = event.steps.energy[i];
                 
-                // 색상 설정
                 Int_t color = getEnergyColor(energy, minEnergy, maxEnergy);
                 
-                // XY 평면에 표시
                 canvas->cd(1);
                 TMarker* mXY = new TMarker(x, y, 20);
                 mXY->SetMarkerColor(color);
-                mXY->SetMarkerSize(0.8);  // 스텝은 작게 표시
+                mXY->SetMarkerSize(0.8);
                 mXY->Draw();
                 
-                // XZ 평면에 표시
                 canvas->cd(2);
                 TMarker* mXZ = new TMarker(x, z, 20);
                 mXZ->SetMarkerColor(color);
                 mXZ->SetMarkerSize(0.8);
                 mXZ->Draw();
                 
-                // ZY 평면에 표시
                 canvas->cd(3);
                 TMarker* mYZ = new TMarker(z, y, 20);
                 mYZ->SetMarkerColor(color);
                 mYZ->SetMarkerSize(0.8);
                 mYZ->Draw();
                 
-                // 3D 뷰에 표시
                 canvas->cd(4);
                 TPolyMarker3D* pm3d = new TPolyMarker3D(1);
                 pm3d->SetPoint(0, x, y, z);
@@ -673,7 +653,6 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
             }
         }
         
-        // 정보 표시
         canvas->cd(1);
         TPaveText* info = new TPaveText(0.15, 0.85, 0.55, 0.90, "NDC");
         info->SetFillColor(0);
@@ -702,7 +681,6 @@ void createCascadeAnimation(const mcp::Event& event, const std::string& outputFi
         delete stats;
     }
     
-    // Create shell script for animation
     std::string scriptName = outputFileName + "_create_gif.sh";
     std::ofstream scriptFile(scriptName);
     scriptFile << "#!/bin/bash\n";

@@ -29,56 +29,56 @@ Simulation::Simulation()
     , nextTrackID_(0)
 {
     Physics::initialize();  // Initialize static members
-    tracks_.Reset();        // 트랙 초기화
-    steps_.Reset();         // 스텝 초기화
+    tracks_.Reset();        // Track initialization
+    steps_.Reset();         // Step initialization
 }
 
-// 새 전자 생성 (트랙 추가)
+// Create new electron (add track)
 int Simulation::CreateElectron(int parentID, float time,
                              float posX, float posY, float posZ,
                              float velX, float velY, float velZ,
                              float energy, int procType) {
-    // 외부 trackID 생성
+    // Create external trackID
     int externalTrackID = g_nextTrackID++;
     
-    // 내부 trackID 생성 및 매핑
+    // Create internal trackID and mapping
     int internalTrackID = tracks_.AddTrack(parentID, time, 
                                          posX, posY, posZ, 
                                          velX, velY, velZ, 
                                          energy, procType);
     
-    // 매핑 저장
+    // Save mapping
     trackIDMap_[externalTrackID] = internalTrackID;
     
     return externalTrackID;
 }
 
-// 전자 위치 업데이트 (스텝 추가)
+// Update electron position (add step)
 void Simulation::AddElectronStep(int trackID, float time,
                                float posX, float posY, float posZ,
                                float velX, float velY, float velZ,
                                float energy, bool isInteraction) {
-    // 외부 trackID에 해당하는 내부 trackID 찾기
+    // Find internal trackID corresponding to external trackID
     auto it = trackIDMap_.find(trackID);
     if (it != trackIDMap_.end()) {
         int internalTrackID = it->second;
         
-        // 스텝 추가
+        // Add step
         steps_.AddStep(internalTrackID, time, posX, posY, posZ, velX, velY, velZ, energy, isInteraction);
     }
 }
 
-// 전자 종료 (애노드 도달 또는 종료)
+// Electron termination (anode hit or end)
 void Simulation::FinalizeElectron(int trackID, int status, float time,
                                 float posX, float posY, float posZ,
                                 float velX, float velY, float velZ,
                                 float energy) {
-    // 외부 trackID에 해당하는 내부 trackID 찾기
+    // Find internal trackID corresponding to external trackID
     auto it = trackIDMap_.find(trackID);
     if (it != trackIDMap_.end()) {
         int internalTrackID = it->second;
         
-        // 트랙 종료 처리
+        // Finalize track
         tracks_.FinalizeTrack(internalTrackID, status, time, posX, posY, posZ, velX, velY, velZ, energy);
     }
 }
@@ -91,9 +91,9 @@ void Simulation::TrackElectronOutsidePore(const Matrix3x3& start, const Matrix3x
     float endTime = end(2, 0);
     float totalTime = endTime - startTime;
     
-    // 총 시간이 너무 짧으면 중간 지점 하나만 기록
+    // If totalTime is too short, record only one intermediate point
     if (totalTime < timeStep) {
-        // 중간 지점 하나만 기록
+        // Record only one intermediate point
         float x = (start(0, 0) + end(0, 0)) * 0.5f;
         float y = (start(0, 1) + end(0, 1)) * 0.5f;
         float z = (start(0, 2) + end(0, 2)) * 0.5f;
@@ -102,38 +102,38 @@ void Simulation::TrackElectronOutsidePore(const Matrix3x3& start, const Matrix3x
         float vy = (start(1, 1) + end(1, 1)) * 0.5f;
         float vz = (start(1, 2) + end(1, 2)) * 0.5f;
         
-        // 에너지 계산
+        // Calculate energy
         float energy = 0.5f * m * (vx*vx + vy*vy + vz*vz);
         
-        // 중간 위치에서의 전자 정보 기록 (스텝)
+        // Record electron information at the intermediate position (step)
         AddElectronStep(trackID, time, x, y, z, vx, vy, vz, energy);
         return;
     }
     
-    // 중간 단계 수 계산 (메모리 사용량 감소를 위해 단계 수 크게 제한)
+    // Calculate the number of intermediate steps (limit the number of steps to reduce memory usage)
     int numSteps = std::min(3, std::max(1, static_cast<int>(totalTime / timeStep)));
     
     for (int step = 1; step < numSteps; step++) {
         float ratio = static_cast<float>(step) / numSteps;
         float t = totalTime * ratio;
         
-        // 중간 위치 계산 (물리 방정식 사용)
+        // Calculate the intermediate position (using physical equations)
         float x = start(0, 0) + start(1, 0) * t + 0.5f * cts * t * t;
         float y = start(0, 1) + start(1, 1) * t;
         float z = start(0, 2) + start(1, 2) * t;
         
-        // 속도 계산
+        // Calculate velocity
         float vx = start(1, 0) + cts * t;
         float vy = start(1, 1);
         float vz = start(1, 2);
         
-        // 시간 계산
+        // Calculate time
         float time = startTime + t;
         
-        // 에너지 계산
+        // Calculate energy
         float energy = 0.5f * m * (vx*vx + vy*vy + vz*vz);
         
-        // 중간 위치에서의 전자 정보 기록 (스텝)
+        // Record electron information at the intermediate position (step)
         AddElectronStep(trackID, time, x, y, z, vx, vy, vz, energy);
     }
 }
@@ -317,7 +317,7 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                                              vx_s, vy_s, vz_s,
                                              en_s, elec.processType);
                     
-                    // 트랙 ID를 행렬에 저장
+                    // Save track ID to matrix
                     elec.matrix(2,2) = static_cast<float>(newTrk);
                     
                     // Calculate collision time
@@ -375,10 +375,10 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                     int trkID = static_cast<int>(Ensemble_non_emi[j](2, 2));
                     result(2, 2) = trkID;
                     
-                    // 애노드에 도달하는 과정의 위치 기록
+                    // Record the position of the electron reaching the anode
                     TrackElectronOutsidePore(Ensemble_non_emi[j], result, trkID, cts);
                     
-                    // 애노드 도달 처리
+                    // Process the electron reaching the anode
                     float finalTime = result(2, 0);
                     float finalPosX = result(0, 0);
                     float finalPosY = result(0, 1);
@@ -388,7 +388,7 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                     float finalVelZ = result(1, 2);
                     float finalEnergy = 0.5f * m * (finalVelX*finalVelX + finalVelY*finalVelY + finalVelZ*finalVelZ);
                     
-                    // 트랙 종료 (애노드 도달)
+                    // Finalize track (anode hit)
                     FinalizeElectron(trkID, 1, finalTime,
                                   finalPosX, finalPosY, finalPosZ,
                                   finalVelX, finalVelY, finalVelZ,

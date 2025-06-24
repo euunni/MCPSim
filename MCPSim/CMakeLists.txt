@@ -6,7 +6,7 @@ set(EIGEN3_INCLUDE_DIR "/home/jangh/eigen-3.4.0")
 
 find_package(ROOT REQUIRED)
 
-# ROOT 딕셔너리 생성
+# Create ROOT dictionary
 ROOT_GENERATE_DICTIONARY(MCPEventDict
                          ${CMAKE_CURRENT_SOURCE_DIR}/include/MCPEventData.h
                          LINKDEF ${CMAKE_CURRENT_SOURCE_DIR}/include/MCPEventDataLinkDef.h
@@ -54,7 +54,7 @@ set_target_properties(MCPSim_exe PROPERTIES
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config 
      DESTINATION ${CMAKE_BINARY_DIR}/MCPSim)
 
-# 설치
+# Install
 install(TARGETS MCPSim MCPSim_exe
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
@@ -65,7 +65,7 @@ install(FILES ${HEADERS}
     DESTINATION include/MCPSim
 )
 
-# 딕셔너리 파일 설치
+# Install dictionary files
 install(FILES
     ${CMAKE_BINARY_DIR}/lib/libMCPSim_rdict.pcm
     ${CMAKE_BINARY_DIR}/lib/libMCPSim.rootmap

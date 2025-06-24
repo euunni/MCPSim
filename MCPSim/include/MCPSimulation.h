@@ -21,22 +21,22 @@ public:
 private:
     mcp::Event ConvertEvent(const std::vector<Matrix3x3>& results, double initial_energy);
     
-    // 포어 밖에서 전자의 궤적을 기록하는 함수
+    // Function to record the trajectory of electrons outside the pore
     void TrackElectronOutsidePore(const Matrix3x3& start, const Matrix3x3& end, int trackID, double cts);
     
-    // 새 전자 생성 (트랙 추가)
+    // Create new electron (add track)
     int CreateElectron(int parentID, float time,
                      float posX, float posY, float posZ,
                      float velX, float velY, float velZ,
                      float energy, int procType);
     
-    // 전자 위치 업데이트 (스텝 추가)
+    // Update electron position (add step)
     void AddElectronStep(int trackID, float time,
                        float posX, float posY, float posZ,
                        float velX, float velY, float velZ,
                        float energy, bool isInteraction = false);
     
-    // 전자 종료 (애노드 도달 또는 종료)
+    // Electron termination (anode hit or end)
     void FinalizeElectron(int trackID, int status, float time,
                         float posX, float posY, float posZ,
                         float velX, float velY, float velZ,
@@ -46,9 +46,9 @@ private:
     double x0, x1, x2;
     double q, limite, I_strip, c_c, m;
     int nextTrackID_ = 0;                             // unique track id counter
-    mcp::Track tracks_;                               // 실제 전자 정보
-    mcp::Step steps_;                                 // 궤적 포인트 정보
-    std::unordered_map<int, int> trackIDMap_;         // 외부 trackID -> 내부 trackID 매핑
+    mcp::Track tracks_;                               // Actual electron information
+    mcp::Step steps_;                                 // Trajectory point information
+    std::unordered_map<int, int> trackIDMap_;         // External trackID -> internal trackID mapping
 };
 
 struct SimElectron {
