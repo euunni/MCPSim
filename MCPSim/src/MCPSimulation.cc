@@ -177,13 +177,13 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
             float vx = M(1,0), vy = M(1,1), vz = M(1,2);
             float E  = 0.5f * config.get("m") * (vx*vx + vy*vy + vz*vz);
 
-            // 새 전자 생성 (트랙 추가)
+            // Create new electron (add track)
             int trk = CreateElectron(-1, M(2,0),       // parent, time
                                 M(0,0), M(0,1), M(0,2),  // pos
                                 vx, vy, vz, E,            // vel, energy
                                 PROCESS_SECONDARY);    // Initial electron is set to secondary
             
-            // 트랙 ID를 행렬에 저장
+            // Save track ID to matrix
             M(2, 2) = static_cast<float>(trk);
 
             double time_1_hit = physics->Point_de_contact2(M, check.second, cts);
@@ -238,7 +238,7 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                         int currentTrackID = static_cast<int>(Ensemble_non_emi[j](2, 2));
                         M_passage(2, 2) = currentTrackID;
                         
-                        // 포어 밖에서 전자의 위치 기록
+                        // Record the position of the electron outside the pore
                         TrackElectronOutsidePore(Ensemble_non_emi[j], M_passage, currentTrackID, cts);
                         
                         if (M_passage(0, 0) >= config.get("x2")) {
@@ -248,10 +248,10 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                             // Preserve trackID
                             M_recuperated(2, 2) = currentTrackID;
                             
-                            // 애노드에 도달하는 과정의 위치 기록
+                            // Record the position of the electron reaching the anode
                             TrackElectronOutsidePore(M_passage, M_recuperated, currentTrackID, cts);
                             
-                            // 애노드 도달 처리
+                            // Process the electron reaching the anode
                             float finalTime = M_recuperated(2, 0);
                             float finalPosX = M_recuperated(0, 0);
                             float finalPosY = M_recuperated(0, 1);
@@ -261,7 +261,7 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                             float finalVelZ = M_recuperated(1, 2);
                             float finalEnergy = 0.5f * m * (finalVelX*finalVelX + finalVelY*finalVelY + finalVelZ*finalVelZ);
                             
-                            // 트랙 종료 (애노드 도달)
+                            // Finalize track (anode hit)
                             FinalizeElectron(currentTrackID, 1, finalTime,
                                           finalPosX, finalPosY, finalPosZ,
                                           finalVelX, finalVelY, finalVelZ,
