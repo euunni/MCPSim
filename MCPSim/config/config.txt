@@ -1,0 +1,35 @@
+# Physical constants
+diff_pot = 600.0
+m = 9.1
+x0 = 500.0
+x1 = 900.0
+x2 = 1500.0
+c_e = 0.05621
+pas = 2.0
+dia = 10.0
+alpha = 0.13
+limite = 599.0
+E0 = 5.0
+Resistance = 1e8
+q = 1.6e-7
+
+# Secondary emission parameters
+P_inf = 0.05
+P_1e = 0.1
+W = 60.0
+Ee = 0.0
+p = 1.0
+P_1r = 0.5
+r = 1.0
+Er = 30.0
+e1 = 0.26
+e2 = 2.0
+r1 = 0.26
+r2 = 2.0
+t1 = 0.25
+t2 = 0.8
+t3 = 0.25
+t4 = 1.0
+gama_ts0 = 3.5
+E_ts = 260.0
+s = 1.54 
