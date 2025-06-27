@@ -1,0 +1,47 @@
+#!/bin/bash -l
+# UG Section 2.5, page UG-24 Job Submission Options
+# Note: Command line switches will override values in this file.
+
+# ----------------- PBS Directives ----------------- #
+# These options are mandatory in LCRC; qsub will fail without them.
+
+# select: number of nodes. Adjust these values as per your job's requirement. In the below example, 4 nodes are requested.
+# ncpus: number of cores per node. (use 128 unless you have a reason otherwise)
+# mpiprocs: number of MPI processes (use the same value as ncpus unless you have a reason otherwise ).
+# walltime: a limit on the total time from the start to the completion of a job
+#PBS -A jlab
+#PBS -l select=1:ncpus=128:mpiprocs=128
+#PBS -l walltime=03:00:00
+
+# Queue for the job submission
+#PBS -q compute
+
+# Job name (first 15 characters are displayed in qstat)
+#PBS -N MCPSim
+
+# Output options: 'oe' to merge stdout/stderr into stdout, 'eo' for stderr, 'n' to not merge.
+#PBS -j n
+
+#PBS -o /home/jangh/MCPSim/v3_track/Batch/Log/MCPSim.out
+#PBS -e /home/jangh/MCPSim/v3_track/Batch/Log/MCPSim.err
+
+# Email notifications: 'b' at begin, 'e' at end, 'a' on abort. Remove 'n' for no emails.
+#PBS -m be
+#PBS -M jangh@anl.gov
+
+
+#use this for the Improv
+
+export PYTHONPATH=$HOME/.local/lib/python3.6/site-packages:$PYTHONPATH
+export PATH=$HOME/.local/bin:$PATH
+
+# OUTPUT_DIR="/home/jangh/MCPSim/v3_track/output/250604_validation"
+# mkdir -p ${OUTPUT_DIR}
+
+cd /home/jangh/MCPSim/v3_track/install/config
+
+for i in `seq 0 127`; do
+    bash -c "/home/jangh/MCPSim/v3_track/install/bin/MCPSim ${PBS_JOBID} ${i}" &
+done
+
+wait
