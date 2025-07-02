@@ -38,6 +38,11 @@ private:
                         float velX, float velY, float velZ,
                         float energy);
 
+    // --- Ensemble-based processing helpers (under migration) ---
+    void ProcessMCP1Ensemble(double& cts1, double alpha1, double x0, double x1,
+                             double R, double dia, double pas, double m, double E0,
+                             int& nextTrackBaseID);
+
     std::unique_ptr<Physics> physics;
     double x0, x1, x2;
     double q, limite, I_strip, c_c, m;
@@ -45,6 +50,17 @@ private:
     mcp::Track tracks_;                               // Actual electron information
     mcp::Step steps_;                                 // Trajectory point information
     std::unordered_map<int, int> trackIDMap_;         // External trackID -> internal trackID mapping
+
+    // --- New data structures for v3_track-style event-driven algorithm ---
+    // MCP-1
+    std::vector<Matrix3x3> E1_emi_;      // electrons that have a pending wall collision (sorted by t_hit in (2,1))
+    std::vector<Matrix3x3> E1_nonemi_;   // electrons inside the pore but currently not destined to hit wall
+    std::vector<Matrix3x3> G1_;          // electrons traveling in GAP1 (x1→x2)
+
+    // MCP-2
+    std::vector<Matrix3x3> E2_emi_;
+    std::vector<Matrix3x3> E2_nonemi_;
+    std::vector<Matrix3x3> G2_;          // electrons traveling in GAP2 (x3→x4)
 };
 
 struct SimElectron {

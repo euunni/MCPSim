@@ -874,8 +874,6 @@ TCanvas* MCPVisualizer::DrawMCP2DWithPoresAndSteps() {
     float r = dia / 2.0;
     float pitch = dia + pas;
 
-    std::cout << "alpha1: " << alpha1 << ", alpha2: " << alpha2 << std::endl;
-
     // 3. MCP1, MCP2 포어 경계 그리기
     float pore_center_y0 = 6.0; // 중심 포어 y=6.0에 맞춤
     auto clip_line = [](float x0, float y0, float x1, float y1, float y_min, float y_max, float& cx0, float& cy0, float& cx1, float& cy1) {
