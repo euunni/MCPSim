@@ -576,13 +576,13 @@ Matrix3x3 Physics::Transporter1(const Matrix3x3& Mat, double t, double cts, doub
     return M;
 }
 
-Matrix3x3 Physics::Transporter2(const Matrix3x3& Mat, double t, double cts, double alpha) {
-    double x = Mat(0, 0) + Mat(1, 0) * t + cts * (t * t) / 2;
-    // double y2 = Mat(0, 1) + Mat(1, 1) * t + std::tan(alpha) * cts * (t * t) / 2;
-    double y2 = Mat(0, 1) + Mat(1, 1) * t;
+Matrix3x3 Physics::Transporter2(const Matrix3x3& Mat, double t, double cts, double /*alpha*/) {
+    double x = Mat(0, 0) + Mat(1, 0) * t + 0.5 * cts * t * t;
+    double y2 = Mat(0, 1) + Mat(1, 1) * t; // identical to v3_track implementation (no y-accel)
     double z2 = Mat(0, 2) + Mat(1, 2) * t;
+
     double vx = Mat(1, 0) + cts * t;
-    
+
     Matrix3x3 M = Matrix3x3::Zero();
     M(0, 0) = x;
     M(0, 1) = y2;
@@ -591,10 +591,10 @@ Matrix3x3 Physics::Transporter2(const Matrix3x3& Mat, double t, double cts, doub
     M(1, 1) = Mat(1, 1);
     M(1, 2) = Mat(1, 2);
     M(2, 0) = Mat(2, 0) + t;
-    
-    // Preserve trackID (new version)
+
+    // Preserve trackID
     M(2, 2) = Mat(2, 2);
-    
+
     return M;
 }
 

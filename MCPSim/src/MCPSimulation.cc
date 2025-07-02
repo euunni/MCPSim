@@ -128,9 +128,12 @@ void Simulation::TrackElectronOutsidePore(const Matrix3x3& start, const Matrix3x
         float ratio = static_cast<float>(step) / numSteps;
         float t = totalTime * ratio;
         
-        // Calculate the intermediate position (using physical equations)
+        // Calculate the intermediate position (assuming uniform acceleration along X
+        // and a possible projection of that acceleration on Y due to the channel tilt).
         float x = start(0, 0) + start(1, 0) * t + 0.5f * cts * t * t;
+
         float y = start(0, 1) + start(1, 1) * t;
+
         float z = start(0, 2) + start(1, 2) * t;
         
         // Calculate velocity
@@ -200,24 +203,46 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
         std::cout << "Electron did not enter valid channel region" << std::endl;
         return Resultat_final;
     }
+
+    // Clear ensemble vectors (in case Run() called twice)
+    E1_emi_.clear();  E1_nonemi_.clear();  G1_.clear();
+    E2_emi_.clear();  E2_nonemi_.clear();  G2_.clear();
+
     // 2. MCP1 증폭 루프 (초기 3전자)
-        for (int w = 0; w < 3; w++) {
-            Matrix3x3 M = Matrix3x3::Zero();
-            M(0, 0) = Mat(0, 0) - 0.1 * w;
-            M(0, 1) = Mat(0, 1);
-            M(0, 2) = Mat(0, 2);
-            M(1, 0) = Mat(1, 0);
-            M(1, 1) = Mat(1, 1);
-            M(1, 2) = Mat(1, 2);
+    for (int w = 0; w < 3; w++) {
+        Matrix3x3 M = Matrix3x3::Zero();
+        M(0, 0) = Mat(0, 0) - 0.1 * w;
+        M(0, 1) = Mat(0, 1);
+        M(0, 2) = Mat(0, 2);
+        M(1, 0) = Mat(1, 0);
+        M(1, 1) = Mat(1, 1);
+        M(1, 2) = Mat(1, 2);
         M(2, 0) = Mat(2, 0);
-            float vx = M(1,0), vy = M(1,1), vz = M(1,2);
+
+        float vx = M(1,0), vy = M(1,1), vz = M(1,2);
         float E  = 0.5f * m * (vx*vx + vy*vy + vz*vz);
         int trk = CreateElectron(-1, M(2,0), M(0,0), M(0,1), M(0,2), vx, vy, vz, E, PROCESS_SECONDARY);
-            M(2, 2) = static_cast<float>(trk);
-        double time_1_hit = physics->Point_de_contact2(M, check.second, cts1, alpha1, x0, x1, R, dia, pas);
-            M(2, 1) = time_1_hit;
+        M(2, 2) = static_cast<float>(trk);
+
+        // v3_track 방식: 첫 번째 충돌까지 시간 계산
+        double t_hit = physics->Point_de_contact2(M, check.second, cts1, alpha1, x0, x1, R, dia, pas);
+        M(2, 1) = t_hit;
+
+        // 기존 상태-머신용 electrons 벡터에도 그대로 추가 (단계적 이전을 위해 유지)
         electrons.push_back({M, MCP1, trk, -1, PROCESS_SECONDARY, check.second});
+
+        // --- 새 Ensemble 벡터에도 동일하게 push ---
+        if (t_hit == true) {
+            // 불가능(벽 안맞고 뒤로 빠짐)이지만 호환 위해 무시
+            continue;
+        } else if (t_hit == false) {
+            E1_nonemi_.push_back(M);
+        } else {
+            // t_hit > 0 → 벽 충돌 예정, (2,1)에 t 저장 후 시간순 삽입
+            physics->ajouter_element_trie(E1_emi_, M);
+        }
     }
+
     // --- 메인 루프: 모든 전자를 동시에 상태 기반으로 관리 ---
     bool all_finished = false; // enter loop at least once
     int iteration = 0;
@@ -238,17 +263,22 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
         }
         std::cout << "[iter " << iteration << "] ANODE: " << n_anode << std::endl;
 
+        // --- temporary: process MCP1 ensemble stub ---
+        int dummyID = 0;
+        ProcessMCP1Ensemble(cts1, alpha1, x0, x1, R, dia, pas, m, E0, dummyID);
+
         // -------------------------------------------------
         // Current-based electric field adjustment (B)
         // -------------------------------------------------
         double I1 = 0.0, I2 = 0.0;
         for (const auto& ec : electrons) {
-            if (ec.status == MCP1) {
-                if (ec.state(0,0) < x1) {
+            if (ec.status == MCP1 || ec.status == GAP1) {
+                // Same denominator (channel length) as v3_track for continuity
+                if (ec.state(0,0) < x2) { // up to MCP2 entrance
                     I1 += q * ec.state(1,0) / (x1 - x0);
                 }
-            } else if (ec.status == MCP2) {
-                if (ec.state(0,0) < x3) {
+            } else if (ec.status == MCP2 || ec.status == GAP2) {
+                if (ec.state(0,0) < x4) { // up to anode
                     I2 += q * ec.state(1,0) / (x3 - x2);
                 }
             }
@@ -301,7 +331,10 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
 
                     double t_hit = physics->Point_de_contact2(e.state, n_mcp1, cts1, alpha1, x0, x1, R, dia, pas);
                     if (t_hit == false) {
-                        // Electron exits MCP1; keep current state and immediately enter GAP1 (v3_track behaviour)
+                        // Electron exits MCP1 without hitting the wall – move it exactly to the pore exit (x1) first
+                        Matrix3x3 M_exit = physics->RecuperationTo(e.state, x1);
+                        TrackElectronOutsidePore(e.state, M_exit, e.trackID, cts1);
+                        e.state = M_exit;
                         e.status = GAP1;
                     } else if (t_hit == true) {
                         e.status = DEAD;
@@ -317,14 +350,23 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                             float en_s = 0.5f * m * (vx_s*vx_s + vy_s*vy_s + vz_s*vz_s);
                             int newTrk = CreateElectron(e.trackID, sec.matrix(2,0), sec.matrix(0,0), sec.matrix(0,1), sec.matrix(0,2), vx_s, vy_s, vz_s, en_s, sec.processType);
                             sec.matrix(2,2) = static_cast<float>(newTrk);
-                            // Use the same channel as parent for secondary in MCP1
                             double t_hit2 = physics->Point_de_contact2(sec.matrix, e.channel, cts1, alpha1, x0, x1, R, dia, pas);
                             ElectronState next_state;
-                            if (t_hit2 == false) { next_state = GAP1; /* std::cout << "[MCP1 secondary→GAP1]" << std::endl; */ }
-                            else if (t_hit2 == true) { next_state = DEAD; /* std::cout << "[MCP1 secondary→DEAD] (true)" << std::endl; */ }
-                            else if (std::isnan(t_hit2) || t_hit2 <= 0) { next_state = DEAD; /* std::cout << "[Warn] MCP1 secondary: t_hit2 비정상(" << t_hit2 << ") → DEAD 처리" << std::endl; */ }
-                            else { next_state = MCP1; /* std::cout << "[MCP1 secondary→MCP1]" << std::endl; */ }
-                            new_electrons.push_back({sec.matrix, next_state, newTrk, e.trackID, sec.processType, e.channel});
+                            Matrix3x3 state_for_push = sec.matrix;
+                            if (t_hit2 == false) {
+                                // Transport exactly to pore exit before entering GAP1
+                                Matrix3x3 M_exit = physics->RecuperationTo(sec.matrix, x1);
+                                TrackElectronOutsidePore(sec.matrix, M_exit, newTrk, cts1);
+                                state_for_push = M_exit;
+                                next_state = GAP1;
+                            } else if (t_hit2 == true) {
+                                next_state = DEAD;
+                            } else if (std::isnan(t_hit2) || t_hit2 <= 0) {
+                                next_state = DEAD;
+                            } else {
+                                next_state = MCP1;
+                            }
+                            new_electrons.push_back({state_for_push, next_state, newTrk, e.trackID, sec.processType, e.channel});
                         }
                         e.state = temp;
                     }
@@ -351,20 +393,25 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                     Matrix3x3 M_step = physics->Transporter2(e.state, dt, cts1, alpha1);
                     TrackElectronOutsidePore(e.state, M_step, e.trackID, cts1);
                     e.state = M_step;
-                    // If boundary reached, align exactly and enter MCP2
+
+                    // If boundary (x2) reached, attempt to enter MCP2
                     if (e.state(0, 0) >= x2 - 1e-6) {
+                        // Snap exactly onto the entry plane
                         Matrix3x3 M_exact = physics->RecuperationTo(e.state, x2);
                         TrackElectronOutsidePore(e.state, M_exact, e.trackID, cts1);
                         e.state = M_exact;
-                        // Determine channel index upon entry to MCP2
-                        int n_mcp2_ent;
-                        if ((e.state(0, 1) - 1) < 0) {
-                            n_mcp2_ent = int((e.state(0, 1) - 1) / (dia + pas)) - 1;
+
+                        // Check if the electron actually hits a pore opening of MCP2
+                        auto check2 = physics->Check_if_hit(e.state);
+
+                        if (!(check2.first && -limite < e.state(0, 1) && e.state(0, 1) < limite)) {
+                            // Missed the pore entrance of MCP2 → electron is lost.
+                            e.status = DEAD;
                         } else {
-                            n_mcp2_ent = int((e.state(0, 1) - 1) / (dia + pas));
+                            // Valid pore entry; store channel index and move to MCP2.
+                            e.channel = check2.second;
+                            e.status = MCP2;
                         }
-                        e.channel = n_mcp2_ent;
-                        e.status = MCP2;
                     }
                     break;
                 }
@@ -372,7 +419,10 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                     int n_mcp2 = e.channel; // stored channel index
                     double t_hit = physics->Point_de_contact2(e.state, n_mcp2, cts2, alpha2, x2, x3, R, dia, pas);
                     if (t_hit == false) {
-                        // Electron exits MCP2; keep current state and immediately enter GAP2 (v3_track behaviour)
+                        // Electron exits MCP2 – bring it to pore exit (x3) before entering GAP2
+                        Matrix3x3 M_exit = physics->RecuperationTo(e.state, x3);
+                        TrackElectronOutsidePore(e.state, M_exit, e.trackID, cts2);
+                        e.state = M_exit;
                         e.status = GAP2;
                     } else if (t_hit == true) {
                         e.status = DEAD;
@@ -388,14 +438,23 @@ std::vector<Matrix3x3> Simulation::Run(double initial_energy) {
                             float en_s = 0.5f * m * (vx_s*vx_s + vy_s*vy_s + vz_s*vz_s);
                             int newTrk = CreateElectron(e.trackID, sec.matrix(2,0), sec.matrix(0,0), sec.matrix(0,1), sec.matrix(0,2), vx_s, vy_s, vz_s, en_s, sec.processType);
                             sec.matrix(2,2) = static_cast<float>(newTrk);
-                            // Same channel as parent
                             double t_hit2 = physics->Point_de_contact2(sec.matrix, e.channel, cts2, alpha2, x2, x3, R, dia, pas);
                             ElectronState next_state;
-                            if (t_hit2 == false) { next_state = GAP2; /* std::cout << "[MCP2 secondary→GAP2]" << std::endl; */ }
-                            else if (t_hit2 == true) { next_state = DEAD; /* std::cout << "[MCP2 secondary→DEAD] (true)" << std::endl; */ }
-                            else if (std::isnan(t_hit2) || t_hit2 <= 0) { next_state = DEAD; /* std::cout << "[Warn] MCP2 secondary: t_hit2 비정상(" << t_hit2 << ") → DEAD 처리" << std::endl; */ }
-                            else { next_state = MCP2; /* std::cout << "[MCP2 secondary→MCP2]" << std::endl; */ }
-                            new_electrons.push_back({sec.matrix, next_state, newTrk, e.trackID, sec.processType, e.channel});
+                            Matrix3x3 state_for_push2 = sec.matrix;
+                            if (t_hit2 == false) {
+                                // Transport to pore exit (x3) before entering GAP2
+                                Matrix3x3 M_exit2 = physics->RecuperationTo(sec.matrix, x3);
+                                TrackElectronOutsidePore(sec.matrix, M_exit2, newTrk, cts2);
+                                state_for_push2 = M_exit2;
+                                next_state = GAP2;
+                            } else if (t_hit2 == true) {
+                                next_state = DEAD;
+                            } else if (std::isnan(t_hit2) || t_hit2 <= 0) {
+                                next_state = DEAD;
+                            } else {
+                                next_state = MCP2;
+                            }
+                            new_electrons.push_back({state_for_push2, next_state, newTrk, e.trackID, sec.processType, e.channel});
                         }
                         e.state = temp;
                     }
@@ -472,6 +531,58 @@ mcp::Event Simulation::ConvertEvent(const std::vector<Matrix3x3>& results, doubl
     std::cout << "Number of trajectory steps recorded: " << evt.steps.nSteps << std::endl;
     
     return evt;
+}
+
+// ------------------  Ensemble helpers under migration ------------------
+void Simulation::ProcessMCP1Ensemble(double& cts1, double alpha1, double x0, double x1,
+                                     double R, double dia, double pas, double m, double E0,
+                                     int& nextTrackBaseID) {
+    if (E1_emi_.empty() && E1_nonemi_.empty()) return; // nothing to process
+
+    // 1. Determine next collision time (temps)
+    double temps = 0.0;
+    if (!E1_emi_.empty()) {
+        temps = E1_emi_.front()(2, 1); // stored t_hit
+    } else {
+        // No pending collision; choose small step (1 ps) to propagate non-emi electrons
+        temps = 1.0;
+    }
+
+    // 2. Move non-colliding electrons by temps
+    std::vector<int> eraseIdx;
+    for (size_t i = 0; i < E1_nonemi_.size(); ++i) {
+        Matrix3x3 &M = E1_nonemi_[i];
+        Matrix3x3 M_pass = physics->Transporter2(M, temps, cts1, alpha1);
+        // track steps outside pore (optional)
+        // If electron exits pore (x >= x1) -> push to GAP1 vector
+        if (M_pass(0,0) >= x1) {
+            // bring exactly to exit plane for continuity
+            Matrix3x3 M_exit = physics->RecuperationTo(M_pass, x1);
+            G1_.push_back(M_exit);
+            eraseIdx.push_back(i);
+        } else {
+            E1_nonemi_[i] = M_pass;
+        }
+    }
+    // erase in reverse order
+    for (int idx = static_cast<int>(eraseIdx.size()) - 1; idx >= 0; --idx) {
+        E1_nonemi_.erase(E1_nonemi_.begin() + eraseIdx[idx]);
+    }
+
+    // 3. Process the leading collision if available
+    if (!E1_emi_.empty()) {
+        Matrix3x3 lead = E1_emi_.front();
+        E1_emi_.erase(E1_emi_.begin());
+
+        // Move to collision point
+        Matrix3x3 M_coll = physics->Transporter1(lead, temps, cts1, alpha1);
+
+        // NOTE: Secondary emission not yet implemented in 3-A-1; simply discard for now
+        // After collision, treat primary as absorbed (dead) so not added back.
+    }
+
+    // Debug print
+    std::cout << "[Ensemble] after step : E1_emi=" << E1_emi_.size() << " E1_nonemi=" << E1_nonemi_.size() << " G1=" << G1_.size() << std::endl;
 }
 
 } // namespace MCPSim 
