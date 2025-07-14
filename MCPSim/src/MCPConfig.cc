@@ -37,11 +37,13 @@ void Config::loadFromFile(const std::string& filename) {
     }
 
     config_values_["c_c"] = (1.6 * config_values_["diff_pot"]) / ((config_values_["x1"] - config_values_["x0"]) * config_values_["m"]);
-    config_values_["c_s"] = (1.6 * config_values_["diff_pot"]) / ((config_values_["x1"] - config_values_["x0"]) * config_values_["m"]);
+    // GAP-1 electric-field coefficient (uses gap_pot1 and length x2-x1)
+    config_values_["c_s"] = (1.6 * config_values_["gap_pot1"]) / ((config_values_["x2"] - config_values_["x1"]) * config_values_["m"]);
     config_values_["R"] = config_values_["dia"] / 2;
     config_values_["I_strip"] = config_values_["diff_pot"] / config_values_["Resistance"];
     config_values_["c_c2"] = (1.6 * config_values_["diff_pot"]) / ((config_values_["x3"] - config_values_["x2"]) * config_values_["m"]);
-    config_values_["c_s2"] = (1.6 * config_values_["diff_pot"]) / ((config_values_["x3"] - config_values_["x2"]) * config_values_["m"]);
+    // GAP-2 electric-field coefficient (uses gap_pot2 and length x4-x3)
+    config_values_["c_s2"] = (1.6 * config_values_["gap_pot2"]) / ((config_values_["x4"] - config_values_["x3"]) * config_values_["m"]);
     config_values_["R2"] = config_values_["dia"] / 2;
     config_values_["I_strip2"] = config_values_["diff_pot"] / config_values_["Resistance"];
 }

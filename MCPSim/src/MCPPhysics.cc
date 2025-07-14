@@ -254,27 +254,59 @@ Matrix3x3 Physics::premiere_arrivee(Matrix3x3 Matrice_photo_electron) {
 }
 
 std::pair<bool, int> Physics::Check_if_hit(const Matrix3x3& Matrice_arrive) {
-    int n, m;
-    
-    if ((Matrice_arrive(0, 1) - 1) < 0) {
-        n = int((Matrice_arrive(0, 1) - 1) / (dia + pas)) - 1;
+    /*
+     * Determine whether the electron with coordinates (x,y) lies inside a pore
+     * and, if so, return the corresponding channel index n.
+     *
+     * Previous implementation ignored the pore tilt angle (alpha) and x-offset
+     * of each MCP stage.  This produced wrong indices – especially for MCP-2
+     * where alpha is negative – which in turn broke Point_de_contact2.
+     *
+     * Strategy:
+     *   • Select the proper (alpha, x0) for the current stage based on the
+     *     longitudinal coordinate x.
+     *   • Project the hit position onto the local MCP plane by removing the
+     *     tilt component:   y' = y − tan(alpha)·(x − x0)
+     *   • Use y' to compute the channel index exactly as before.
+     */
+
+    auto &C = Config::getInstance();
+    double x  = Matrice_arrive(0, 0);
+    double y  = Matrice_arrive(0, 1);
+
+    // Geometry parameters
+    double alpha, x0_local;
+    if (x < C.get("x2")) {
+        // MCP-1 region
+        alpha     = C.get("alpha1");
+        x0_local  = C.get("x0");
     } else {
-        n = int((Matrice_arrive(0, 1) - 1) / (dia + pas));
+        // MCP-2 region
+        alpha     = C.get("alpha2");
+        x0_local  = C.get("x2");
     }
-    
-    if ((Matrice_arrive(0, 1) + 1) < 0) {
-        m = int((Matrice_arrive(0, 1) + 1) / (dia + pas)) - 1;
-    } else {
-        m = int((Matrice_arrive(0, 1) + 1) / (dia + pas));
-    }
-    
-    if (n == (Matrice_arrive(0, 1) - 1) / (dia + pas)) {
-        return {false, n};
-    } else if (n != m) {
-        return {false, n};
-    } else {
-        return {true, n};
-    }
+
+    // Remove tilt component to get radial coordinate in MCP reference frame
+    double y_prime = y - std::tan(alpha) * (x - x0_local);
+
+    // Channel index so that centre at y_c = (dia+pas)/2 corresponds to n=0
+    double pitch = dia + pas;
+    int n = static_cast<int>( std::round( (y_prime - 0.5*pitch) / pitch ) );
+
+    // Recompute y-center with the new n
+    double center_y = (n + 0.5) * pitch;
+    double dy = y_prime - center_y;
+
+    // --- handle z-axis periodicity (adjacent pores) ---
+    double z  = Matrice_arrive(0, 2);
+    int    nz = static_cast<int>( std::round( z / pitch ) );
+
+    double center_z = nz * pitch;
+    double dz = z - center_z;
+
+    bool inside = (dy * dy + dz * dz) <= (R * R);
+
+    return {inside, n};
 }
 
 double Physics::Point_de_contact2(const Matrix3x3& Mat, int n, double cts, double alpha, double x0, double x1, double R, double dia, double pas) {
@@ -343,24 +375,31 @@ double Physics::Point_de_contact2(const Matrix3x3& Mat, int n, double cts, doubl
 }
 
 std::vector<ElectronProcess> Physics::emi_sec(const Matrix3x3& Mat, int n, double alpha, double x0, double R, double dia, double pas, double m, double E0) {
+    // ── 결과 벡터 ───────────────────────────────
     std::vector<ElectronProcess> Resultat;
-    
-    // Calculate energy
+
+    // ── ① 포어 중심(zc) 계산 ───────────────────
+    double pitch = dia + pas;
+    int    nz    = static_cast<int>( std::round( Mat(0,2) / pitch ) );
+    double zc    = nz * pitch;                   // 현재 포어 중심의 전역 z
+
+    // ── ② 에너지 계산 ───────────────────────────
     double E = 0.5 * m * (pow(Mat(1, 0), 2) + pow(Mat(1, 1), 2) + pow(Mat(1, 2), 2));
-    
-    // Calculate teta
+
+    // ── ③ θ 계산(로컬 좌표 기준) ────────────────
     double y_r = Mat(0, 1) - tan(alpha) * Mat(0, 0) + tan(alpha) * x0 - (pas + dia) * n - (pas + dia) / 2;
-    double z_r = Mat(0, 2);
-    
+    double z_r = Mat(0, 2) - zc;                 // 로컬 z (포어 중심 기준)
+
     double teta = atan2(z_r, y_r);
     if (teta < 0) {
         teta += 2 * M_PI;
     }
 
-    // Create matrix
+    // ── ④ 충돌 위치 재정의(전역 좌표 복원) ──────
     Matrix3x3 ModifiedMat = Mat;
+    
     ModifiedMat(0, 1) = R * cos(teta) + tan(alpha) * (Mat(0, 0) - x0) + (pas + dia) * n + (pas + dia) / 2;
-    ModifiedMat(0, 2) = R * sin(teta);
+    ModifiedMat(0, 2) = zc + R * sin(teta);      // 전역 z 복원
     
     // Calculate
     Vector3d e_r(0, cos(teta), sin(teta));
@@ -531,13 +570,18 @@ Matrix3x3 Physics::Recuperation(const Matrix3x3& Mat) {
 
 // New: Recuperation to an arbitrary x_target (used for gap crossing to x2 or x4)
 Matrix3x3 Physics::RecuperationTo(const Matrix3x3& Mat, double x_target) {
-    double a = c_s / 2;
+    // Choose acceleration coefficient depending on which gap we are in.
+    auto& cfg = Config::getInstance();
+    double accel = (x_target <= x2 + 1e-6) ? c_s               // GAP-1 (entrance of MCP-2)
+                                          : cfg.get("c_s2"); // GAP-2 / anode gap
+
+    double a = accel / 2.0;
     double b = Mat(1, 0);
     double c = Mat(0, 0) - x_target;
 
     double t = Resolution(a, b, c);
     double y2 = Mat(0, 1) + Mat(1, 1) * t;
-    double vx = Mat(1, 0) + c_s * t;
+    double vx = Mat(1, 0) + accel * t;
     double z2 = Mat(0, 2) + Mat(1, 2) * t;
 
     Matrix3x3 M = Matrix3x3::Zero();
@@ -625,7 +669,16 @@ std::pair<std::vector<Matrix3x3>, std::vector<Matrix3x3>> Physics::Rearrangement
     std::vector<Matrix3x3> Emi;
     std::vector<Matrix3x3> N_Emi;
     for (const auto& M : A1) {
-        double time = Point_de_contact2(M, n, cts, alpha, x0, x1, R, dia, pas);
+        // Shift coordinates to local MCP frame before collision time calculation
+        Matrix3x3 Mshift = M;
+        Mshift(0,0) -= x0;                   // local x (plate entrance = 0)
+        // Align z to local pore axis
+        {
+            double pitch = dia + pas;
+            int    nz    = static_cast<int>( std::round( Mshift(0,2) / pitch ) );
+            Mshift(0,2) -= nz * pitch;
+        }
+        double time = Point_de_contact2(Mshift, n, cts, alpha, 0.0, x1 - x0, R, dia, pas);
         if (time == false) {
             N_Emi.push_back(M);
         } else if (time == true) {
@@ -642,7 +695,14 @@ std::pair<std::vector<Matrix3x3>, std::vector<Matrix3x3>> Physics::Rearrangement
         if (M(0, 0) > x1) {
             N_Emi.push_back(M);
         } else {
-            double time = Point_de_contact2(M, n, cts, alpha, x0, x1, R, dia, pas);
+            Matrix3x3 Mshift2 = M;
+            Mshift2(0,0) -= x0;
+            {
+                double pitch = dia + pas;
+                int    nz    = static_cast<int>( std::round( Mshift2(0,2) / pitch ) );
+                Mshift2(0,2) -= nz * pitch;
+            }
+            double time = Point_de_contact2(Mshift2, n, cts, alpha, 0.0, x1 - x0, R, dia, pas);
             if (time == false) {
                 N_Emi.push_back(M);
             } else if (time == true) {
