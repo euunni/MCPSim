@@ -254,57 +254,51 @@ Matrix3x3 Physics::premiere_arrivee(Matrix3x3 Matrice_photo_electron) {
 }
 
 std::pair<bool, int> Physics::Check_if_hit(const Matrix3x3& Matrice_arrive) {
-    /*
-     * Determine whether the electron with coordinates (x,y) lies inside a pore
-     * and, if so, return the corresponding channel index n.
-     *
-     * Previous implementation ignored the pore tilt angle (alpha) and x-offset
-     * of each MCP stage.  This produced wrong indices – especially for MCP-2
-     * where alpha is negative – which in turn broke Point_de_contact2.
-     *
-     * Strategy:
-     *   • Select the proper (alpha, x0) for the current stage based on the
-     *     longitudinal coordinate x.
-     *   • Project the hit position onto the local MCP plane by removing the
-     *     tilt component:   y' = y − tan(alpha)·(x − x0)
-     *   • Use y' to compute the channel index exactly as before.
-     */
+    // Retrieve commonly used parameters
+    auto& cfg   = Config::getInstance();
+    const double pitch  = dia + pas;   // channel pitch (static members already initialised)
+    const double R_ch   = R;           // pore radius (static)
 
-    auto &C = Config::getInstance();
-    double x  = Matrice_arrive(0, 0);
-    double y  = Matrice_arrive(0, 1);
+    // Global hit position
+    const double x = Matrice_arrive(0, 0);
+    const double y = Matrice_arrive(0, 1);
+    const double z = Matrice_arrive(0, 2);
 
-    // Geometry parameters
-    double alpha, x0_local;
-    if (x < C.get("x2")) {
-        // MCP-1 region
-        alpha     = C.get("alpha1");
-        x0_local  = C.get("x0");
-    } else {
-        // MCP-2 region
-        alpha     = C.get("alpha2");
-        x0_local  = C.get("x2");
-    }
+    // ------------------------------------------------------------
+    // 1) Determine which MCP the electron currently belongs to
+    // ------------------------------------------------------------
+    const double x2 = cfg.get("x2");
+    const bool isMCP1 = (x < x2);
+    const double alpha = isMCP1 ? cfg.get("alpha1") : cfg.get("alpha2");
+    const double x_entry = isMCP1 ? cfg.get("x0") : x2;   // plate entrance along x
 
-    // Remove tilt component to get radial coordinate in MCP reference frame
-    double y_prime = y - std::tan(alpha) * (x - x0_local);
+    // ------------------------------------------------------------
+    // 2) Convert hit position to the local MCP reference frame
+    //    -> remove the tilt component in y
+    // ------------------------------------------------------------
+    const double y_local = y - std::tan(alpha) * (x - x_entry);
 
-    // Channel index so that centre at y_c = (dia+pas)/2 corresponds to n=0
-    double pitch = dia + pas;
-    int n = static_cast<int>( std::round( (y_prime - 0.5*pitch) / pitch ) );
+    // ------------------------------------------------------------
+    // 3) Compute the transverse pore index n from the local y
+    //    Convention: centre of n = 0 pore is located at pitch*0.5
+    // ------------------------------------------------------------
+    // Determine n so that centre of pore (n) is at y = (n+0.5)*pitch.
+    const int n = static_cast<int>( std::round( (y_local - 0.5 * pitch) / pitch ) );
 
-    // Recompute y-center with the new n
-    double center_y = (n + 0.5) * pitch;
-    double dy = y_prime - center_y;
+    // Local y-offset from the centre of this pore
+    const double y_centre = (n + 0.5) * pitch;
+    const double dy = y_local - y_centre;
 
-    // --- handle z-axis periodicity (adjacent pores) ---
-    double z  = Matrice_arrive(0, 2);
-    int    nz = static_cast<int>( std::round( z / pitch ) );
+    // ------------------------------------------------------------
+    // 4) Handle z-periodicity (pore centres repeat every pitch)
+    // ------------------------------------------------------------
+    const int nz = static_cast<int>( std::round( z / pitch ) );
+    const double dz = z - nz * pitch;
 
-    double center_z = nz * pitch;
-    double dz = z - center_z;
-
-    bool inside = (dy * dy + dz * dz) <= (R * R);
+    // ------------------------------------------------------------
+    // 5) Inside / outside test
+    // ------------------------------------------------------------
+    const bool inside = (dy * dy + dz * dz) <= (R_ch * R_ch);
 
     return {inside, n};
 }
@@ -377,7 +371,7 @@ double Physics::Point_de_contact2(const Matrix3x3& Mat, int n, double cts, doubl
 std::vector<ElectronProcess> Physics::emi_sec(const Matrix3x3& Mat, int n, double alpha, double x0, double R, double dia, double pas, double m, double E0) {
     // ── 결과 벡터 ───────────────────────────────
     std::vector<ElectronProcess> Resultat;
-
+    
     // ── ① 포어 중심(zc) 계산 ───────────────────
     double pitch = dia + pas;
     int    nz    = static_cast<int>( std::round( Mat(0,2) / pitch ) );
@@ -385,11 +379,11 @@ std::vector<ElectronProcess> Physics::emi_sec(const Matrix3x3& Mat, int n, doubl
 
     // ── ② 에너지 계산 ───────────────────────────
     double E = 0.5 * m * (pow(Mat(1, 0), 2) + pow(Mat(1, 1), 2) + pow(Mat(1, 2), 2));
-
+    
     // ── ③ θ 계산(로컬 좌표 기준) ────────────────
     double y_r = Mat(0, 1) - tan(alpha) * Mat(0, 0) + tan(alpha) * x0 - (pas + dia) * n - (pas + dia) / 2;
     double z_r = Mat(0, 2) - zc;                 // 로컬 z (포어 중심 기준)
-
+    
     double teta = atan2(z_r, y_r);
     if (teta < 0) {
         teta += 2 * M_PI;

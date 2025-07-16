@@ -196,6 +196,8 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             // move emi lead
             Matrix3x3 lead=E1_emi.front();E1_emi.erase(E1_emi.begin());
             Matrix3x3 Mc=physics->Transporter1(lead,dt,cts1,alpha1);
+            // record full path inside MCP-1 (lead -> collision point)
+            TrackElectronOutsidePore(lead, Mc, int(lead(2,2)), cts1);
             Mc(2,2)=lead(2,2);
             auto secs=physics->emi_sec(Mc,hit.second,alpha1,x0,R,dia,pas,m,E0);
 
@@ -358,6 +360,8 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
 
             Matrix3x3 lead=E2_emi.front();E2_emi.erase(E2_emi.begin());
             Matrix3x3 Mc=physics->Transporter1(lead,dt,cts2,alpha2);
+            // record full path inside MCP-2 (lead -> collision point)
+            TrackElectronOutsidePore(lead, Mc, int(lead(2,2)), cts2);
             int ch = physics->Check_if_hit(lead).second;
             auto secs=physics->emi_sec(Mc,ch,alpha2,x2,R,dia,pas,m,E0);
 
@@ -444,7 +448,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
 
         /*========== 4. GAP-2 propagate =========*/
         {
-            const double dt=1.0;
+            const double dt=0.05;
             std::vector<size_t> del;
             for(size_t i=0;i<G2.size();++i){
                 auto M=physics->Transporter2(G2[i],dt,c_s2,alpha2);
@@ -463,7 +467,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
         }
 
         /*========== 5. 종료 조건 =========*/
-        if(anode_hits_.size()>=100) break;
+        if(anode_hits_.size()>=50) break;
         if(E1_emi.empty()&&E1_non.empty()&&G1.empty()&&
            E2_emi.empty()&&E2_non.empty()&&G2.empty()) break;
     }
