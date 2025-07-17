@@ -2,6 +2,7 @@
 #include "TH2F.h"
 #include "TCanvas.h"
 #include "TSystem.h"
+#include "TFile.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -173,7 +174,33 @@ int main(int argc, char** argv) {
         std::cout << "\nStarting visualization..." << std::endl;
         
         MCPVisualizer visualizer(&analyzer);
+        
+        // Draw MCP2D with cascade overlay
+        int nCascade = 30;                
+        std::vector<std::vector<int>> sets;
+        for(int k=0;k<nCascade;k++){
+            auto ids = analyzer.GetLineageTrackIDsForNthAnode(k);
+            if(ids.empty()) break;
+            sets.push_back(ids);
+        }
+        TCanvas* cCascade = visualizer.DrawMCP2DOverlay(sets);
+        cCascade->SaveAs((outputDir + outputPrefix + Form("_cascadeN%d.pdf", nCascade)).c_str());
 
+        // Draw MCP3D with cascade overlay
+        TCanvas* cCascade3D = visualizer.DrawMCP3DOverlay(sets);
+        cCascade3D->SaveAs((outputDir + outputPrefix + "_cascade3d.pdf").c_str());
+        
+        TFile* f = new TFile((outputDir + outputPrefix + "_cascade3d.root").c_str(), "RECREATE");
+        cCascade3D->Write();
+        f->Close();
+
+        // Draw MCP3D with zoom overlay
+        TCanvas* cZoom = visualizer.DrawMCP3DZoom(sets, 6, 6);
+        cZoom->SaveAs((outputDir + outputPrefix + "_cascade_zoom.root").c_str());
+
+        // Draw MCP2D with pore and step overlay
+        TCanvas* cPoreStep = visualizer.DrawMCP2DWithPoresAndSteps();
+        
         // Trajectory visualization - separate XY and XZ
         TCanvas* trajCanvasXY = visualizer.DrawTrajectoryXY();
         trajCanvasXY->SaveAs((outputDir + outputPrefix + "_trajectory_xy.pdf").c_str());
@@ -202,23 +229,23 @@ int main(int argc, char** argv) {
         int frameCount = visualizer.GetAnimationFrameCount();
         
         // Generate each frame
-        for (int i = 0; i < frameCount; i++) {
-            TCanvas* frame = visualizer.AnimateCascadeFrame(i, frameCount);
-            std::string frameFileName = outputDir + outputPrefix + "_animation_frame" + std::to_string(i) + ".png";
-            frame->SaveAs(frameFileName.c_str());
-            delete frame;
-        }
+        // for (int i = 0; i < frameCount; i++) {
+        //     TCanvas* frame = visualizer.AnimateCascadeFrame(i, frameCount);
+        //     std::string frameFileName = outputDir + outputPrefix + "_animation_frame" + std::to_string(i) + ".png";
+        //     frame->SaveAs(frameFileName.c_str());
+        //     delete frame;
+        // }
         
         // Create GIF creation script
-        std::string scriptName = outputDir + outputPrefix + "_animation_create_gif.sh";
-        std::ofstream scriptFile(scriptName);
-        scriptFile << "#!/bin/bash\n";
-        scriptFile << "convert -delay 20 -loop 0 " << outputDir + outputPrefix + "_animation_frame*.png " 
-                   << outputDir + outputPrefix + "_animation.gif\n";
-        scriptFile.close();
+        // std::string scriptName = outputDir + outputPrefix + "_animation_create_gif.sh";
+        // std::ofstream scriptFile(scriptName);
+        // scriptFile << "#!/bin/bash\n";
+        // scriptFile << "convert -delay 20 -loop 0 " << outputDir + outputPrefix + "_animation_frame*.png " 
+        //            << outputDir + outputPrefix + "_animation.gif\n";
+        // scriptFile.close();
         
-        std::string chmodCmd = "chmod +x " + scriptName;
-        system(chmodCmd.c_str());
+        // std::string chmodCmd = "chmod +x " + scriptName;
+        // system(chmodCmd.c_str());
     }
     
     std::cout << "Analysis completed successfully." << std::endl;

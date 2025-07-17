@@ -21,6 +21,15 @@ public:
     TCanvas* AnimateCascadeFrame(int frameIndex, int totalFrames);  // Returns single animation frame
     int GetAnimationFrameCount();  // Returns total number of frames needed
     TCanvas* DrawMCP2DWithPoresAndSteps();
+    // New: draw pores and only steps belonging to given trackID set (e.g., lineage)
+    TCanvas* DrawMCP2DForTracks(const std::vector<int>& trackIDs);
+    // Overlay multiple cascades; each inner vector is trackID list for one cascade
+    TCanvas* DrawMCP2DOverlay(const std::vector<std::vector<int>>& trackSets);
+    // Overlay multiple cascades (3D view); each inner vector is trackID list for one cascade
+    TCanvas* DrawMCP3DOverlay(const std::vector<std::vector<int>>& trackSets);
+    // Zoomed-in 3D view showing a few pores (±nRange rows) with cascades overlay
+    TCanvas* DrawMCP3DZoom(const std::vector<std::vector<int>>& trackSets,
+                           int nRange = 2, int nzRange = 2);
     
 private:
     const MCPAnalyzer* analyzer_;

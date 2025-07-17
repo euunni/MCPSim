@@ -259,3 +259,45 @@ int MCPAnalyzer::GetEleCount(bool inAnode) const {
         return event->tracks.nTracks;
     }
 } 
+
+// ================= Lineage utilities =================
+int MCPAnalyzer::GetNthAnodeTrackIndex(int nth) const {
+    const mcp::Event* event = GetEvent();
+    if(!event) return -1;
+    int count=0;
+    for(int i=0;i<event->tracks.nTracks;++i){
+        if(event->tracks.isAnode[i]==1){
+            if(count==nth) return i;
+            ++count;
+        }
+    }
+    return -1;
+}
+
+std::vector<int> MCPAnalyzer::GetLineageIndices(int trackIdx) const {
+    std::vector<int> lineage;
+    const mcp::Event* event = GetEvent();
+    if(!event) return lineage;
+    int idx=trackIdx;
+    while(idx>=0 && idx<event->tracks.nTracks){
+        lineage.push_back(idx);
+        int parentID = event->tracks.parentID[idx];
+        if(parentID<0) break;
+        idx = event->tracks.FindTrackIndex(parentID);
+        if(idx<0) break; // parent not found (should not happen)
+    }
+    return lineage;
+}
+
+std::vector<int> MCPAnalyzer::GetLineageTrackIDsForNthAnode(int nth) const {
+    std::vector<int> result;
+    int idx = GetNthAnodeTrackIndex(nth);
+    if(idx<0) return result;
+    auto lineageIdx = GetLineageIndices(idx);
+    const mcp::Event* event = GetEvent();
+    if(!event) return result;
+    for(int i: lineageIdx){
+        result.push_back(event->tracks.trackID[i]);
+    }
+    return result;
+} 

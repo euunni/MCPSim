@@ -36,6 +36,14 @@ public:
     // Electron count calculation (unified function)
     int GetEleCount(bool inAnode = false) const;
     
+    // Lineage utilities
+    // Find the track index (in tracks vectors) of the N-th electron that hit the anode (0-based). Returns -1 if not found.
+    int GetNthAnodeTrackIndex(int nth) const;
+    // Return list of track indices starting from given index and following parentID chain up to root (-1).
+    std::vector<int> GetLineageIndices(int trackIdx) const;
+    // Convenience: given an anode rank, return lineage trackID list.
+    std::vector<int> GetLineageTrackIDsForNthAnode(int nth) const;
+    
 private:
     std::vector<mcp::Event*> events_;
     int currentEventIndex_;

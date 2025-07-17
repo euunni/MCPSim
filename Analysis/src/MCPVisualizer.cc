@@ -21,15 +21,19 @@
 #include "TEllipse.h"
 #include "TGaxis.h"
 #include "TPolyMarker3D.h"
+#include "TPolyLine3D.h"
 #include "TView3D.h"
 #include "TSystem.h"
 #include "TDirectory.h"
 #include "TBox.h"
+#include <unordered_set> // Added for DrawMCP2DForTracks
 
 MCPVisualizer::MCPVisualizer(const MCPAnalyzer* analyzer) : analyzer_(analyzer) {
     // Set ROOT style
     gStyle->SetOptStat(0);
     gStyle->SetPalette(kViridis);
+    // Force OpenGL viewer for 3-D pads so that interactive rotation/zoom is available
+    gStyle->SetCanvasPreferGL(kTRUE);
 }
 
 MCPVisualizer::~MCPVisualizer() {
@@ -652,7 +656,7 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
     gPad->SetTopMargin(0.1);     
     
     TH2F* hXY = new TH2F(Form("hXY_%d", frameIndex), Form("XY View (Time: %.2f ps)", currentTime),
-                        100, minX, maxX, 100, -100, 300);
+                        100, minX, maxX, 100, -600, 600);
     hXY->SetStats(0);  
     hXY->GetXaxis()->SetTitle("X (#mum)");
     hXY->GetYaxis()->SetTitle("Y (#mum)");
@@ -675,7 +679,7 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
     gPad->SetTopMargin(0.1);     
     
     TH2F* hXZ = new TH2F(Form("hXZ_%d", frameIndex), "XZ View",
-                        100, minX, maxX, 100, minZ, maxZ);
+                        100, minX, maxX, 100, -600, 600);
     hXZ->SetStats(0);  
     hXZ->GetXaxis()->SetTitle("X (#mum)");
     hXZ->GetYaxis()->SetTitle("Z (#mum)");
@@ -695,7 +699,7 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
     gPad->SetTopMargin(0.1);     
     
     TH2F* hYZ = new TH2F(Form("hYZ_%d", frameIndex), "ZY View",  
-                        100, minZ, maxZ, 100, -100, 300);  
+                        100, -600, 600, 100, -600, 600);  
     hYZ->SetStats(0);  
     hYZ->GetXaxis()->SetTitle("Z (#mum)");  
     hYZ->GetYaxis()->SetTitle("Y (#mum)");
@@ -717,11 +721,11 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
     gPad->SetPhi(30);
     
     TH3F* h3D = new TH3F(Form("h3D_%d", frameIndex), "3D View",
-                        10, minX, maxX, 10, -100, 300, 10, minZ, maxZ);
+                        10, minX, maxX, 10, -600, 600, 10, -600, 600);
     h3D->SetStats(0);  
     h3D->GetXaxis()->SetTitle("X (#mum)");
-    h3D->GetYaxis()->SetTitle("Y (#mum)");
-    h3D->GetZaxis()->SetTitle("Z (#mum)");
+    h3D->GetYaxis()->SetTitle("Z (#mum)");
+    h3D->GetZaxis()->SetTitle("Y (#mum)");
     h3D->GetXaxis()->SetTitleOffset(2.0);  
     h3D->GetYaxis()->SetTitleOffset(2.2);  
     h3D->GetZaxis()->SetTitleOffset(2.8);  
@@ -786,7 +790,7 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
             
             canvas->cd(4);
             TPolyMarker3D* pm3d = new TPolyMarker3D(1);
-            pm3d->SetPoint(0, x, y, z);
+            pm3d->SetPoint(0, x, z, y);
             pm3d->SetMarkerColor(color);
             pm3d->SetMarkerStyle(20);
             pm3d->SetMarkerSize(0.8);
@@ -829,7 +833,7 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
             
             canvas->cd(4);
             TPolyMarker3D* pm3d = new TPolyMarker3D(1);
-            pm3d->SetPoint(0, x, y, z);
+            pm3d->SetPoint(0, x, z, y);
             pm3d->SetMarkerColor(color);
             pm3d->SetMarkerStyle(20);
             pm3d->SetMarkerSize(0.8);
@@ -944,5 +948,364 @@ TCanvas* MCPVisualizer::DrawMCP2DWithPoresAndSteps() {
             m->Draw();
         }
     }
+    return c;
+} 
+
+// ----------------------------------------------------------------------
+// Draw pores and steps for a subset of tracks (specified by trackID list)
+// ----------------------------------------------------------------------
+TCanvas* MCPVisualizer::DrawMCP2DForTracks(const std::vector<int>& trackIDs){
+    // Build a lookup set for fast membership test
+    std::unordered_set<int> sel(trackIDs.begin(), trackIDs.end());
+ 
+    // 1. canvas/frame (reuse same ranges)
+    TCanvas* c = new TCanvas("c_mcp2d_sel", "MCP Pores and Steps (selected)", 900,600);
+    TH2F* frame = new TH2F("f_sel","MCP Pores and Steps;X [#mum];Y [#mum]",100,0,3500,100,-100,300);
+    frame->SetStats(0);
+    frame->Draw();
+ 
+    // 2. draw pore boundaries (reuse helper lambda)
+    const mcp::ConfigParameters* config = analyzer_->GetConfig();
+    if(!config) return c;
+    float x0=config->x0,x1=config->x1,x2=config->x2,x3=config->x3;
+    float alpha1=config->alpha1,alpha2=config->alpha2;
+    float dia=config->dia,pas=config->pas,r=dia/2.0,pitch=dia+pas;
+    float pore_center_y0=6.0;
+    auto clip_line=[&](float x0,float y0,float x1,float y1,float y_min,float y_max,
+                        float& cx0,float& cy0,float& cx1,float& cy1){
+         cx0=x0;cy0=y0;cx1=x1;cy1=y1;
+         if(cy0<y_min){cx0=x0+(x1-x0)*(y_min-y0)/(y1-y0);cy0=y_min;}
+         if(cy0>y_max){cx0=x0+(x1-x0)*(y_max-y0)/(y1-y0);cy0=y_max;}
+         if(cy1<y_min){cx1=x0+(x1-x0)*(y_min-y0)/(y1-y0);cy1=y_min;}
+         if(cy1>y_max){cx1=x0+(x1-x0)*(y_max-y0)/(y1-y0);cy1=y_max;}
+     };
+     auto draw_pore=[&](float xs,float xe,float alpha){
+         float y_min=-100,y_max=300;
+         int n_min=int(std::floor((y_min-pore_center_y0)/pitch))-2;
+         int n_max=int(std::ceil((y_max-pore_center_y0)/pitch))+2;
+         for(int n=n_min;n<=n_max;++n){
+             float y0=pore_center_y0+n*pitch;
+             float y0t=y0+r, y0b=y0-r;
+             float y1t=y0+r+(xe-xs)*std::tan(alpha);
+             float y1b=y0-r+(xe-xs)*std::tan(alpha);
+             float cx0,cy0,cx1,cy1;
+             clip_line(xs,y0t,xe,y1t,y_min,y_max,cx0,cy0,cx1,cy1);
+             if((cy0>=y_min&&cy0<=y_max)||(cy1>=y_min&&cy1<=y_max)){
+                 TLine* l=new TLine(cx0,cy0,cx1,cy1); l->SetLineColor(kGray+1); l->Draw();}
+             clip_line(xs,y0b,xe,y1b,y_min,y_max,cx0,cy0,cx1,cy1);
+             if((cy0>=y_min&&cy0<=y_max)||(cy1>=y_min&&cy1<=y_max)){
+                 TLine* l=new TLine(cx0,cy0,cx1,cy1); l->SetLineColor(kGray+1); l->Draw();}
+         }
+     };
+     draw_pore(x0,x1,alpha1);
+     draw_pore(x2,x3,alpha2);
+ 
+     // 3. plot only steps whose trackID in sel
+     const mcp::Event* evt = analyzer_->GetEvent();
+     if(evt){
+         for(int i=0;i<evt->steps.nSteps;++i){
+             if(sel.find(evt->steps.trackID[i])==sel.end()) continue;
+             float x=evt->steps.posX[i];
+             float y=evt->steps.posY[i];
+             TMarker* m=new TMarker(x,y,7);
+             m->SetMarkerColor(kBlack);
+             m->SetMarkerStyle(20);
+             m->SetMarkerSize(0.3);
+             m->Draw();
+         }
+     }
+     return c;
+ } 
+
+// ----------------------------------------------------------------------
+// Overlay cascades: draw pores once, then each track-set with different color
+// ----------------------------------------------------------------------
+TCanvas* MCPVisualizer::DrawMCP2DOverlay(const std::vector<std::vector<int>>& trackSets){
+    // base frame
+    TCanvas* c = new TCanvas("c_mcp2d_overlay","Cascade Overlay",900,600);
+    TH2F* frame = new TH2F("f_overlay","MCP Cascades;X [#mum];Y [#mum]",100,0,3500,100,-100,300);
+    frame->SetStats(0);
+    frame->Draw();
+
+    // pore boundaries (reuse from earlier lambda)
+    const mcp::ConfigParameters* cfg = analyzer_->GetConfig();
+    if(!cfg) return c;
+    float x0=cfg->x0,x1=cfg->x1,x2=cfg->x2,x3=cfg->x3;
+    float alpha1=cfg->alpha1,alpha2=cfg->alpha2;
+    float dia=cfg->dia,pas=cfg->pas,r=dia/2.0,pitch=dia+pas;
+    float y0c=6.0;
+    auto clip=[&](float x0,float y0,float x1,float y1,float ymin,float ymax,float& cx0,float& cy0,float& cx1,float& cy1){
+        cx0=x0;cy0=y0;cx1=x1;cy1=y1;
+        if(cy0<ymin){cx0=x0+(x1-x0)*(ymin-y0)/(y1-y0);cy0=ymin;}
+        if(cy0>ymax){cx0=x0+(x1-x0)*(ymax-y0)/(y1-y0);cy0=ymax;}
+        if(cy1<ymin){cx1=x0+(x1-x0)*(ymin-y0)/(y1-y0);cy1=ymin;}
+        if(cy1>ymax){cx1=x0+(x1-x0)*(ymax-y0)/(y1-y0);cy1=ymax;}
+    };
+    auto drawP=[&](float xs,float xe,float alpha){
+        float ymin=-100, ymax=300;
+        int nmin=int(std::floor((ymin-y0c)/pitch))-2;
+        int nmax=int(std::ceil((ymax-y0c)/pitch))+2;
+        for(int n=nmin;n<=nmax;++n){
+            float y00=y0c+n*pitch;
+            float yt0=y00+r, yb0=y00-r;
+            float yt1=y00+r+(xe-xs)*std::tan(alpha);
+            float yb1=y00-r+(xe-xs)*std::tan(alpha);
+            float cx0,cy0,cx1,cy1;
+            clip(xs,yt0,xe,yt1,ymin,ymax,cx0,cy0,cx1,cy1);
+            if((cy0>=ymin&&cy0<=ymax)||(cy1>=ymin&&cy1<=ymax)){
+                TLine* l = new TLine(cx0,cy0,cx1,cy1);
+                l->Draw();
+            }
+            clip(xs,yb0,xe,yb1,ymin,ymax,cx0,cy0,cx1,cy1);
+            if((cy0>=ymin&&cy0<=ymax)||(cy1>=ymin&&cy1<=ymax)){
+                TLine* l2 = new TLine(cx0,cy0,cx1,cy1);
+                l2->Draw();
+            }
+        }
+    };
+    drawP(x0,x1,alpha1);
+    drawP(x2,x3,alpha2);
+
+    // color list
+    const int colors[] = {kRed, kBlue, kGreen+2, kMagenta, kOrange+7, kCyan+1, kViolet};
+    int nColors = sizeof(colors)/sizeof(int);
+
+    const mcp::Event* evt = analyzer_->GetEvent();
+    if(!evt) return c;
+
+    for(size_t s=0;s<trackSets.size();++s){
+        int col = colors[s % nColors];
+        std::unordered_set<int> sel(trackSets[s].begin(), trackSets[s].end());
+        for(int i=0;i<evt->steps.nSteps;++i){
+            if(sel.find(evt->steps.trackID[i])==sel.end()) continue;
+            TMarker* m = new TMarker(evt->steps.posX[i], evt->steps.posY[i], 20);
+            m->SetMarkerColor(col);
+            m->SetMarkerSize(0.4);
+            m->Draw();
+        }
+    }
+    return c;
+} 
+
+// ----------------------------------------------------------------------
+// 3D overlay view of cascades
+// ----------------------------------------------------------------------
+TCanvas* MCPVisualizer::DrawMCP3DOverlay(const std::vector<std::vector<int>>& trackSets){
+    // Create canvas
+    TCanvas* c = new TCanvas("c_mcp3d_overlay","MCP Cascades (3D)", 900, 700);
+    c->cd();
+
+    // Axis ranges – keep X same as 2D frame, Y and Z identical ranges for square aspect
+    double xMin = 0.0, xMax = 3500.0;
+    double yMin = -600.0, yMax = 600.0;
+    double zMin = -600.0, zMax = 600.0;
+
+    // Dummy histogram just to draw the 3-D box & axes
+    TH3F* hFrame = new TH3F("h3d_frame","MCP Cascades (3D);X [#mum];Z [#mum];Y [#mum]",
+                           10,xMin,xMax,
+                           10,zMin,zMax,
+                           10,yMin,yMax);
+    hFrame->SetStats(0);
+    hFrame->Draw("BOX");
+
+    // Set some view angles for initial inspection (user can rotate interactively)
+    gPad->SetTheta(25);
+    gPad->SetPhi(35);
+
+    // Colour palette for different cascades (same as 2D)
+    const int colors[] = {kRed, kBlue, kGreen+2, kMagenta, kOrange+7, kCyan+1, kViolet};
+    int nColors = sizeof(colors)/sizeof(int);
+
+    // Access event data
+    const mcp::Event* evt = analyzer_->GetEvent();
+    if(!evt) return c;
+
+    // Build look-up sets for quick membership testing per cascade
+    std::vector<std::unordered_set<int>> cascadeSel;
+    cascadeSel.reserve(trackSets.size());
+    for(const auto& v : trackSets){
+        cascadeSel.emplace_back(v.begin(), v.end());
+    }
+
+    // Iterate over all steps once, draw marker according to membership
+    for(int i=0;i<evt->steps.nSteps;++i){
+        int trackId = evt->steps.trackID[i];
+        // Determine which cascade this step belongs to
+        int cascadeIdx = -1;
+        for(size_t cIdx=0;cIdx<cascadeSel.size();++cIdx){
+            if(cascadeSel[cIdx].find(trackId)!=cascadeSel[cIdx].end()){
+                cascadeIdx = static_cast<int>(cIdx);
+                break;
+            }
+        }
+        if(cascadeIdx<0) continue; // step not in any selected cascade
+
+        // Grab coordinates
+        double x = evt->steps.posX[i];
+        double y = evt->steps.posY[i];
+        double z = evt->steps.posZ[i];
+
+        // Apply basic zoom cuts (optional): keep within axis limits
+        if(x < xMin || x > xMax) continue;
+        if(y < yMin || y > yMax) continue;
+        if(z < zMin || z > zMax) continue;
+
+        // Draw marker – re-use simple 1-point poly-marker to avoid memory of large arrays
+        TPolyMarker3D* pm = new TPolyMarker3D(1);
+        pm->SetPoint(0,x,z,y);
+        pm->SetMarkerColor(colors[cascadeIdx % nColors]);
+        pm->SetMarkerStyle(20);
+        pm->SetMarkerSize(0.6);
+        pm->Draw();
+    }
+
+    // Optionally draw pore walls as grey hatched regions along full Z span for context
+    const mcp::ConfigParameters* cfg = analyzer_->GetConfig();
+    if(cfg){
+        double x0=cfg->x0, x1=cfg->x1, x2=cfg->x2, x3=cfg->x3;
+        double alpha1=cfg->alpha1, alpha2=cfg->alpha2;
+        double dia = cfg->dia;
+        double r = dia/2.0;
+        double pitch = dia + cfg->pas;
+        double yMid=6.0;
+
+        // Helper lambda: draw filled planar wall (vertical rectangle extruded along Z)
+        auto drawWall = [&](double xs, double ys, double xe, double ye){
+            // Build rectangle (xs,ys) -> (xe,ye) and extrude between zMin,zMax
+            const int nPts = 5; // close the polygon
+            TPolyLine3D* surf = new TPolyLine3D(nPts);
+            surf->SetPoint(0, xs, zMin, ys);
+            surf->SetPoint(1, xs, zMax, ys);
+            surf->SetPoint(2, xe, zMax, ye);
+            surf->SetPoint(3, xe, zMin, ye);
+            surf->SetPoint(4, xs, zMin, ys);
+
+            // Solid grey fill with slight transparency for visibility
+            surf->SetLineColor(kGray+1);
+            surf->SetLineColorAlpha(kGray+1, 0.35); // 35% opaque
+            surf->SetLineWidth(1);
+            surf->Draw("F");  // draw filled surface
+        };
+
+        // Draw walls for several pore rows in range
+        int nMin = static_cast<int>(std::floor((yMin - yMid)/pitch)) - 2;
+        int nMax = static_cast<int>(std::ceil((yMax - yMid)/pitch)) + 2;
+        for(int n=nMin; n<=nMax; ++n){
+            double y0 = yMid + n*pitch;
+            // MCP1
+            double ysTop = y0 + r;
+            double ysBot = y0 - r;
+            double yeTop = y0 + r + (x1 - x0)*std::tan(alpha1);
+            double yeBot = y0 - r + (x1 - x0)*std::tan(alpha1);
+            drawWall(x0, ysTop, x1, yeTop);
+            drawWall(x0, ysBot, x1, yeBot);
+            // MCP2
+            ysTop = y0 + r;
+            ysBot = y0 - r;
+            yeTop = y0 + r + (x3 - x2)*std::tan(alpha2);
+            yeBot = y0 - r + (x3 - x2)*std::tan(alpha2);
+            drawWall(x2, ysTop, x3, yeTop);
+            drawWall(x2, ysBot, x3, yeBot);
+        }
+    }
+
+    return c;
+} 
+
+// ----------------------------------------------------------------------
+// Zoomed-in 3D view focusing on a handful of pores around centre
+// ----------------------------------------------------------------------
+TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& trackSets,
+                                      int nRange, int nzRange){
+    // Configuration parameters
+    const mcp::ConfigParameters* cfg = analyzer_->GetConfig();
+    if(!cfg) return nullptr;
+    const double x0 = cfg->x0, x1 = cfg->x1, x2 = cfg->x2, x3 = cfg->x3;
+    const double alpha1 = cfg->alpha1, alpha2 = cfg->alpha2;
+    const double dia = cfg->dia;
+    const double pitch = dia + cfg->pas;
+    const double R = dia/2.0;
+    const double y0c = 6.0;            // central pore row reference (n=0)
+
+    // Axis limits (tight)
+    double xMin = x0 - 20.0;           // entrance of MCP1 a bit before
+    double xMax = x3 + 20.0;           // exit of MCP2 a bit after
+    double yMin = y0c + (-nRange-1)*pitch - R*1.5;
+    double yMax = y0c + ( nRange+1)*pitch + R*1.5;
+    double zMin = (-nzRange-1)*pitch - R*1.5;
+    double zMax = ( nzRange+1)*pitch + R*1.5;
+
+    // Canvas & frame
+    TCanvas* c = new TCanvas("c_mcp3d_zoom","MCP Zoom", 900, 700);
+    TH3F* hFrame = new TH3F("h3d_zoom","MCP Zoom;X [#mum];Z [#mum];Y [#mum]",
+                           4,xMin,xMax,
+                           4,yMin,yMax,
+                           4,zMin,zMax);
+    hFrame->SetStats(0);
+    hFrame->Draw("BOX");
+    gPad->SetTheta(25);
+    gPad->SetPhi(35);
+
+    // Build colour mapping
+    const int colors[] = {kRed, kBlue, kGreen+2, kMagenta, kOrange+7, kCyan+1, kViolet};
+    const int nColors = sizeof(colors)/sizeof(int);
+
+    // Prepare cascade membership sets
+    std::vector<std::unordered_set<int>> selSets;
+    selSets.reserve(trackSets.size());
+    for(const auto& vec : trackSets){ selSets.emplace_back(vec.begin(), vec.end()); }
+
+    // Draw electron steps that fall within zoom box
+    const mcp::Event* evt = analyzer_->GetEvent();
+    if(evt){
+        for(int i=0;i<evt->steps.nSteps;++i){
+            double x = evt->steps.posX[i];
+            double y = evt->steps.posY[i];
+            double z = evt->steps.posZ[i];
+            if(x<xMin||x>xMax||y<yMin||y>yMax||z<zMin||z>zMax) continue;
+
+            int trackId = evt->steps.trackID[i];
+            int cIdx=-1;
+            for(size_t k=0;k<selSets.size();++k)
+                if(selSets[k].count(trackId)){ cIdx=k; break; }
+            if(cIdx<0) continue;
+            TPolyMarker3D* pm = new TPolyMarker3D(1);
+            pm->SetPoint(0,x,z,y);
+            pm->SetMarkerStyle(20);
+            pm->SetMarkerSize(0.6);
+            pm->SetMarkerColor(colors[cIdx % nColors]);
+            pm->Draw();
+        }
+    }
+
+    // Lambda to draw cylindrical outline loops for a given MCP segment
+    auto drawCylinderLoops=[&](double xs,double xe,double alpha){
+        const int nSamplesX = 8;                    // draw more x-slices so tilted cylinders look continuous
+        const int nSeg = 24;                       // segments per circle
+        for(int n=-nRange;n<=nRange;++n){
+            for(int nz=-nzRange;nz<=nzRange;++nz){
+                for(int ix=0; ix<=nSamplesX; ++ix){
+                    double x = xs + (xe-xs)*ix/nSamplesX;
+                    double y_center = y0c + n*pitch + std::tan(alpha)*(x - xs);
+                    double z_center = nz*pitch;
+                    TPolyLine3D* circ = new TPolyLine3D(nSeg+1);
+                    for(int s=0;s<=nSeg;++s){
+                        double phi = 2*M_PI*s/nSeg;
+                        double yy = y_center + R*std::cos(phi);
+                        double zz = z_center + R*std::sin(phi);
+                        circ->SetPoint(s,x,zz,yy);
+                    }
+                    circ->SetLineColor(kGray+2);
+                    circ->SetLineWidth(1);
+                    circ->Draw();
+                }
+            }
+        }
+    };
+
+    // Draw for MCP1 and MCP2
+    drawCylinderLoops(x0,x1,alpha1);
+    drawCylinderLoops(x2,x3,alpha2);
+
     return c;
 } 
