@@ -1228,9 +1228,20 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     const double R = dia/2.0;
     const double y0c = 6.0;            // central pore row reference (n=0)
 
-    // Axis limits (tight)
-    double xMin = x0 - 20.0;           // entrance of MCP1 a bit before
-    double xMax = x3 + 20.0;           // exit of MCP2 a bit after
+    // ------------------------------------------------------------------
+    // Shift the whole geometry so that the entrance of MCP-1 (x0) sits at
+    // the global origin X = 0.  All subsequent X coordinates are expressed
+    // relative to this plane.
+    // ------------------------------------------------------------------
+    const double xShift = x0;                // amount to subtract from all X
+    const double xs1 = x0 - xShift;          // = 0
+    const double xe1 = x1 - xShift;
+    const double xs2 = x2 - xShift;
+    const double xe2 = x3 - xShift;
+
+    // Axis limits (tight) – use shifted coordinates
+    double xMin = xs1 - 20.0;          // a bit before MCP-1 entrance (now 0)
+    double xMax = xe2 + 20.0;          // a bit after MCP-2 exit
     double zMin = y0c + (-nRange-1)*pitch - R*1.5;
     double zMax = y0c + ( nRange+1)*pitch + R*1.5;
     double yMin = (-nzRange-1)*pitch - R*1.5;
@@ -1285,20 +1296,13 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     world->SetLineColor(kGray+1); // visible wireframe
 
     // ------------------------------------------------------------------
-    // Wrap the world volume in a rotated assembly so that the default
-    // camera angles already show the desired chevron orientation.
+    // Use the world volume directly as the top node (no extra rotation).
+    // Any desired viewing angle can now be set interactively in the GL
+    // viewer or via standard camera APIs; we no longer manipulate the
+    // geometry axes programmatically.
     // ------------------------------------------------------------------
 
-    // Rotation: +90 deg around global X (swap Y/Z)
-    auto *rotScene = new TGeoRotation();
-    rotScene->RotateX(90);       // adjust as needed
-
-    auto *trScene  = new TGeoCombiTrans(0, 0, 0, rotScene);
-
-    // Assembly volume acts as new top container
-    TGeoVolume *top = geo->MakeVolumeAssembly("top");
-    top->AddNode(world, 1, trScene);
-    geo->SetTopVolume(top);
+    geo->SetTopVolume(world);
 
     // Helper lambda to add one MCP section (tube array)
     auto addMcpTubes = [&](double xs, double xe, double alpha){
@@ -1322,8 +1326,10 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
         for(int n=-nRange; n<=nRange; ++n){
             for(int nz=-nzRange; nz<=nzRange; ++nz){
                 double xMid = xs + halfLen;
-                double zMid = y0c + n*pitch + std::tan(alpha)*(xMid - xs);
-                double yMid = nz * pitch;
+                // Place rows along physical Y and columns along Z to match
+                // the coordinate convention used in the simulation code.
+                double yMid = y0c + n*pitch + std::tan(alpha)*(xMid - xs);
+                double zMid = nz * pitch;
 
                 auto* comb = new TGeoCombiTrans(xMid, yMid, zMid, rot);
                 comb->RegisterYourself();           // needed if reused
@@ -1332,8 +1338,8 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
         }
     };
 
-    addMcpTubes(x0, x1, alpha1);
-    addMcpTubes(x2, x3, alpha2);
+    addMcpTubes(xs1, xe1, alpha1);
+    addMcpTubes(xs2, xe2, alpha2);
 
     // Keep world box but draw only its wireframe
     // world->SetLineColor(kGray+1);
@@ -1342,8 +1348,8 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     // Finalise and draw geometry -----------------------------------------------------------------------
     geo->CloseGeometry();
 
-    // Draw geometry first to initialise GL viewer (use rotated top volume)
-    top->Draw("gl");
+    // Draw geometry first to initialise GL viewer
+    world->Draw("gl");
     gPad->Update();   // ensure TGLViewer is created
 
     // Pad will be updated later once geometry is drawn (see below).
@@ -1362,26 +1368,25 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
         ax->Draw();
     };
 
-    // Choose an axis origin near the world corner
-    double axX0 = xMin;
-    double axY0 = yMin;
-    double axZ0 = zMin;
-    double axLen = 0.30*(xMax - xMin);
+    // Axes anchored at the true global origin (0,0,0)
+    double axX0 = 0.0;
+    double axY0 = 0.0;
+    double axZ0 = 0.0;
+    double axLen = 0.25*(xMax - xMin);  // Length ~25% of scene width
 
-    // X-axis (red) - horizontal right
-    drawAxis(axX0, axY0, axZ0,  axX0+axLen, axY0, axZ0,  kRed);
-    // Y-axis (green) - vertical down (reversed)
-    drawAxis(axX0, axY0, axZ0,  axX0, axY0-axLen, axZ0, kGreen+2);
-    // Z-axis (blue) - vertical up
-    drawAxis(axX0, axY0, axZ0,  axX0, axY0, axZ0+axLen, kBlue);
+    // Physical axes: X (red), Y (green), Z (blue)
+    drawAxis(axX0, axY0, axZ0,  axX0+axLen, axY0, axZ0,  kRed);        // +X
+    drawAxis(axX0, axY0, axZ0,  axX0, axY0+axLen, axZ0,  kGreen+2);    // +Y
+    drawAxis(axX0, axY0, axZ0,  axX0, axY0, axZ0+axLen, kBlue);        // +Z
 
     // After geometry is visible, overlay electron steps inside zoom box
     const mcp::Event* evt = analyzer_->GetEvent();
     if(evt){
         for(int i=0;i<evt->steps.nSteps;++i){
-            double x = evt->steps.posX[i];
-            double z = evt->steps.posY[i];
-            double y = evt->steps.posZ[i];
+            double x = evt->steps.posX[i] - xShift;   // apply global X shift
+            double y = evt->steps.posY[i];
+            double z = evt->steps.posZ[i];
+
             if(x<xMin||x>xMax||y<yMin||y>yMax||z<zMin||z>zMax) continue;
 
             int trackId = evt->steps.trackID[i];
@@ -1392,44 +1397,22 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
             TPolyMarker3D* pm = new TPolyMarker3D(1);
             pm->SetPoint(0,x,y,z);
             pm->SetMarkerStyle(20);
-            pm->SetMarkerSize(0.6);
+            pm->SetMarkerSize(0.05);
             pm->SetMarkerColor(colors[cIdx % nColors]);
             pm->Draw();
         }
     }
 
-    std::cout << "MCP1 중심 Y(after rot) = "
-          << - (y0c +  std::tan(alpha1)*(x1-x0)/2)
-          << "\nMCP2 중심 Y(after rot) = "
-          << - (y0c +  std::tan(alpha2)*(x3-x2)/2) << std::endl;
+    std::cout << "MCP1 중심 Y = "
+          << (y0c +  std::tan(alpha1)*(xe1-xs1)/2)
+          << "\nMCP2 중심 Y = "
+          << (y0c +  std::tan(alpha2)*(x3-x2)/2) << std::endl;
 
-    // Draw thin reference box atop everything
-    gPad->Modified(); gPad->Update();
+    // Remove additional manual reference box edges; the world box (wireframe)
+    // already provides the visual boundary and is rotated consistently.
 
-    // Draw thin wireframe box for orientation (12 edges)
-    auto drawEdge = [&](double ax,double ay,double az,double bx,double by,double bz){
-        TPolyLine3D* line=new TPolyLine3D(2);
-        line->SetPoint(0,ax,ay,az);
-        line->SetPoint(1,bx,by,bz);
-        line->SetLineColor(kGray+1);
-        line->SetLineWidth(1);
-        line->Draw();
-    };
-    // bottom rectangle (z=zMin)
-    drawEdge(xMin,yMin,zMin, xMax,yMin,zMin);
-    drawEdge(xMax,yMin,zMin, xMax,yMax,zMin);
-    drawEdge(xMax,yMax,zMin, xMin,yMax,zMin);
-    drawEdge(xMin,yMax,zMin, xMin,yMin,zMin);
-    // top rectangle (z=zMax)
-    drawEdge(xMin,yMin,zMax, xMax,yMin,zMax);
-    drawEdge(xMax,yMin,zMax, xMax,yMax,zMax);
-    drawEdge(xMax,yMax,zMax, xMin,yMax,zMax);
-    drawEdge(xMin,yMax,zMax, xMin,yMin,zMax);
-    // vertical edges
-    drawEdge(xMin,yMin,zMin, xMin,yMin,zMax);
-    drawEdge(xMax,yMin,zMin, xMax,yMin,zMax);
-    drawEdge(xMax,yMax,zMin, xMax,yMax,zMax);
-    drawEdge(xMin,yMax,zMin, xMin,yMax,zMax);
+    gPad->Modified();
+    gPad->Update();
 
     return c;
 } 
