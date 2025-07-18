@@ -195,9 +195,9 @@ int main(int argc, char** argv) {
         f->Close();
 
         // Draw MCP3D with zoom overlay
-        TCanvas* cZoom = visualizer.DrawMCP3DZoom(sets, 6, 6);
+        TCanvas* cZoom = visualizer.DrawMCP3DZoom(sets, 8, 8);
         cZoom->SaveAs((outputDir + outputPrefix + "_cascade_zoom.root").c_str());
-
+        
         // Draw MCP2D with pore and step overlay
         TCanvas* cPoreStep = visualizer.DrawMCP2DWithPoresAndSteps();
         

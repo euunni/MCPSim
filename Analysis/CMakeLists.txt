@@ -23,9 +23,11 @@ target_link_libraries(Analysis PUBLIC
     ROOT::Hist
     ROOT::Graf
     ROOT::Graf3d
+    ROOT::RGL
     ROOT::Gpad
     ROOT::Physics
     ROOT::MathCore
+    ROOT::Geom
 )
 
 set_target_properties(Analysis

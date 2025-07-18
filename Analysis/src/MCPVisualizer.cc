@@ -23,10 +23,12 @@
 #include "TPolyMarker3D.h"
 #include "TPolyLine3D.h"
 #include "TView3D.h"
+#include "TGLViewer.h"   // for camera control in OpenGL viewer
 #include "TSystem.h"
 #include "TDirectory.h"
 #include "TBox.h"
 #include <unordered_set> // Added for DrawMCP2DForTracks
+#include "TGeoManager.h"
 
 MCPVisualizer::MCPVisualizer(const MCPAnalyzer* analyzer) : analyzer_(analyzer) {
     // Set ROOT style
@@ -1180,11 +1182,10 @@ TCanvas* MCPVisualizer::DrawMCP3DOverlay(const std::vector<std::vector<int>>& tr
             surf->SetPoint(3, xe, zMin, ye);
             surf->SetPoint(4, xs, zMin, ys);
 
-            // Solid grey fill with slight transparency for visibility
+            // Plain grey outline (no fill) to avoid any transparency path
             surf->SetLineColor(kGray+1);
-            surf->SetLineColorAlpha(kGray+1, 0.35); // 35% opaque
             surf->SetLineWidth(1);
-            surf->Draw("F");  // draw filled surface
+            surf->Draw();
         };
 
         // Draw walls for several pore rows in range
@@ -1230,21 +1231,18 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     // Axis limits (tight)
     double xMin = x0 - 20.0;           // entrance of MCP1 a bit before
     double xMax = x3 + 20.0;           // exit of MCP2 a bit after
-    double yMin = y0c + (-nRange-1)*pitch - R*1.5;
-    double yMax = y0c + ( nRange+1)*pitch + R*1.5;
-    double zMin = (-nzRange-1)*pitch - R*1.5;
-    double zMax = ( nzRange+1)*pitch + R*1.5;
+    double zMin = y0c + (-nRange-1)*pitch - R*1.5;
+    double zMax = y0c + ( nRange+1)*pitch + R*1.5;
+    double yMin = (-nzRange-1)*pitch - R*1.5;
+    double yMax = ( nzRange+1)*pitch + R*1.5;
 
-    // Canvas & frame
+    // Canvas (no bounding TH3F – geometry itself provides context)
     TCanvas* c = new TCanvas("c_mcp3d_zoom","MCP Zoom", 900, 700);
-    TH3F* hFrame = new TH3F("h3d_zoom","MCP Zoom;X [#mum];Z [#mum];Y [#mum]",
-                           4,xMin,xMax,
-                           4,yMin,yMax,
-                           4,zMin,zMax);
-    hFrame->SetStats(0);
-    hFrame->Draw("BOX");
-    gPad->SetTheta(25);
-    gPad->SetPhi(35);
+    // We avoid relying on camera/view rotation (problematic on some ROOT builds)
+    // Instead, we will rotate the entire geometry by +90° around X so that
+    // the default view (phi=30°, theta=30°, roll=0°) already shows the desired
+    // chevron orientation.  If you need a different orientation, simply adjust
+    // the rotation matrix below (RotateX / Y / Z).
 
     // Build colour mapping
     const int colors[] = {kRed, kBlue, kGreen+2, kMagenta, kOrange+7, kCyan+1, kViolet};
@@ -1255,13 +1253,135 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     selSets.reserve(trackSets.size());
     for(const auto& vec : trackSets){ selSets.emplace_back(vec.begin(), vec.end()); }
 
-    // Draw electron steps that fall within zoom box
+    // ------------------------------------------------------------------
+    //  Build geometry with a single reusable TGeoManager (avoid multiple
+    //  managers which often leads to dangling pointers inside GL viewer)
+    // ------------------------------------------------------------------
+
+    // Ensure a single global GeoManager instance is used ------------------------------------------------
+    TGeoManager* geo = nullptr;
+    if (gGeoManager) {
+        // Re-use existing manager after cleaning previous geometry
+        gGeoManager->GetListOfVolumes()->Delete();      // delete old volumes
+        gGeoManager->GetListOfShapes()->Delete();       // delete old shapes
+        gGeoManager->GetListOfMatrices()->Delete();     // delete old matrices
+        gGeoManager->SetTopVolume(nullptr);             // detach previous top
+        geo = gGeoManager;
+    } else {
+        // First time: create the global manager
+        geo = new TGeoManager("mcp_geo","MCP geometry");
+    }
+
+    // simple vacuum material/medium
+    TGeoMaterial* matVac = new TGeoMaterial("vacuum", 0,0,0);
+    TGeoMedium*  medVac = new TGeoMedium("vac", 1, matVac);
+
+    // world box (half-lengths a bit larger than view frustum)
+    double wdx = (xMax - xMin)/2 + 50;
+    double wdy = (yMax - yMin)/2 + 50;
+    double wdz = (zMax - zMin)/2 + 50;
+    // Build visible world box --------------------------------------------------------------------------
+    TGeoVolume* world = geo->MakeBox("world", medVac, wdx, wdy, wdz);
+    world->SetLineColor(kGray+1); // visible wireframe
+
+    // ------------------------------------------------------------------
+    // Wrap the world volume in a rotated assembly so that the default
+    // camera angles already show the desired chevron orientation.
+    // ------------------------------------------------------------------
+
+    // Rotation: +90 deg around global X (swap Y/Z)
+    auto *rotScene = new TGeoRotation();
+    rotScene->RotateX(90);       // adjust as needed
+
+    auto *trScene  = new TGeoCombiTrans(0, 0, 0, rotScene);
+
+    // Assembly volume acts as new top container
+    TGeoVolume *top = geo->MakeVolumeAssembly("top");
+    top->AddNode(world, 1, trScene);
+    geo->SetTopVolume(top);
+
+    // Helper lambda to add one MCP section (tube array)
+    auto addMcpTubes = [&](double xs, double xe, double alpha){
+        double len = xe - xs;                  // physical length along X
+        double halfLen = len / 2.0;
+
+        // base tube volume (axis along global X after rotation)
+        TString tubeName = Form("tube_%.0f", xs);
+        TGeoVolume* tube = geo->MakeTube(tubeName, medVac, 0, R, halfLen);
+        tube->SetLineColor(kGray+2);
+        tube->SetFillColor(kGray+2);          // semi-transparent faces
+        // Removed transparency to avoid libAfterImage segfaults
+        // tube->SetTransparency(90);            // 0=opaque,100=invisible (30% visible)
+
+        // build rotation: local Z (tube axis) -> global X; then tilt by alpha
+        auto* rot = new TGeoRotation();
+        rot->RotateY(90);                     // align local Z to global X
+        rot->RotateZ(alpha*180.0/TMath::Pi());       // apply pore tilt
+
+        // place tubes in requested Y/Z range
+        for(int n=-nRange; n<=nRange; ++n){
+            for(int nz=-nzRange; nz<=nzRange; ++nz){
+                double xMid = xs + halfLen;
+                double zMid = y0c + n*pitch + std::tan(alpha)*(xMid - xs);
+                double yMid = nz * pitch;
+
+                auto* comb = new TGeoCombiTrans(xMid, yMid, zMid, rot);
+                comb->RegisterYourself();           // needed if reused
+                world->AddNode(tube, (n+nRange)*(2*nzRange+1)+ (nz+nzRange), comb);
+            }
+        }
+    };
+
+    addMcpTubes(x0, x1, alpha1);
+    addMcpTubes(x2, x3, alpha2);
+
+    // Keep world box but draw only its wireframe
+    // world->SetLineColor(kGray+1);
+    // world->SetFillStyle(0);
+
+    // Finalise and draw geometry -----------------------------------------------------------------------
+    geo->CloseGeometry();
+
+    // Draw geometry first to initialise GL viewer (use rotated top volume)
+    top->Draw("gl");
+    gPad->Update();   // ensure TGLViewer is created
+
+    // Pad will be updated later once geometry is drawn (see below).
+
+    // ------------------------------------------------------------------
+    // Draw helper XYZ axes (X-Z-Y order)
+    // ------------------------------------------------------------------
+    auto drawAxis = [&](double x0,double y0,double z0,
+                         double x1,double y1,double z1,
+                         Color_t col){
+        TPolyLine3D* ax = new TPolyLine3D(2);
+        ax->SetPoint(0,x0,y0,z0);
+        ax->SetPoint(1,x1,y1,z1);
+        ax->SetLineColor(col);
+        ax->SetLineWidth(2);
+        ax->Draw();
+    };
+
+    // Choose an axis origin near the world corner
+    double axX0 = xMin;
+    double axY0 = yMin;
+    double axZ0 = zMin;
+    double axLen = 0.30*(xMax - xMin);
+
+    // X-axis (red) - horizontal right
+    drawAxis(axX0, axY0, axZ0,  axX0+axLen, axY0, axZ0,  kRed);
+    // Y-axis (green) - vertical down (reversed)
+    drawAxis(axX0, axY0, axZ0,  axX0, axY0-axLen, axZ0, kGreen+2);
+    // Z-axis (blue) - vertical up
+    drawAxis(axX0, axY0, axZ0,  axX0, axY0, axZ0+axLen, kBlue);
+
+    // After geometry is visible, overlay electron steps inside zoom box
     const mcp::Event* evt = analyzer_->GetEvent();
     if(evt){
         for(int i=0;i<evt->steps.nSteps;++i){
             double x = evt->steps.posX[i];
-            double y = evt->steps.posY[i];
-            double z = evt->steps.posZ[i];
+            double z = evt->steps.posY[i];
+            double y = evt->steps.posZ[i];
             if(x<xMin||x>xMax||y<yMin||y>yMax||z<zMin||z>zMax) continue;
 
             int trackId = evt->steps.trackID[i];
@@ -1270,7 +1390,7 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
                 if(selSets[k].count(trackId)){ cIdx=k; break; }
             if(cIdx<0) continue;
             TPolyMarker3D* pm = new TPolyMarker3D(1);
-            pm->SetPoint(0,x,z,y);
+            pm->SetPoint(0,x,y,z);
             pm->SetMarkerStyle(20);
             pm->SetMarkerSize(0.6);
             pm->SetMarkerColor(colors[cIdx % nColors]);
@@ -1278,34 +1398,38 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
         }
     }
 
-    // Lambda to draw cylindrical outline loops for a given MCP segment
-    auto drawCylinderLoops=[&](double xs,double xe,double alpha){
-        const int nSamplesX = 8;                    // draw more x-slices so tilted cylinders look continuous
-        const int nSeg = 24;                       // segments per circle
-        for(int n=-nRange;n<=nRange;++n){
-            for(int nz=-nzRange;nz<=nzRange;++nz){
-                for(int ix=0; ix<=nSamplesX; ++ix){
-                    double x = xs + (xe-xs)*ix/nSamplesX;
-                    double y_center = y0c + n*pitch + std::tan(alpha)*(x - xs);
-                    double z_center = nz*pitch;
-                    TPolyLine3D* circ = new TPolyLine3D(nSeg+1);
-                    for(int s=0;s<=nSeg;++s){
-                        double phi = 2*M_PI*s/nSeg;
-                        double yy = y_center + R*std::cos(phi);
-                        double zz = z_center + R*std::sin(phi);
-                        circ->SetPoint(s,x,zz,yy);
-                    }
-                    circ->SetLineColor(kGray+2);
-                    circ->SetLineWidth(1);
-                    circ->Draw();
-                }
-            }
-        }
-    };
+    std::cout << "MCP1 중심 Y(after rot) = "
+          << - (y0c +  std::tan(alpha1)*(x1-x0)/2)
+          << "\nMCP2 중심 Y(after rot) = "
+          << - (y0c +  std::tan(alpha2)*(x3-x2)/2) << std::endl;
 
-    // Draw for MCP1 and MCP2
-    drawCylinderLoops(x0,x1,alpha1);
-    drawCylinderLoops(x2,x3,alpha2);
+    // Draw thin reference box atop everything
+    gPad->Modified(); gPad->Update();
+
+    // Draw thin wireframe box for orientation (12 edges)
+    auto drawEdge = [&](double ax,double ay,double az,double bx,double by,double bz){
+        TPolyLine3D* line=new TPolyLine3D(2);
+        line->SetPoint(0,ax,ay,az);
+        line->SetPoint(1,bx,by,bz);
+        line->SetLineColor(kGray+1);
+        line->SetLineWidth(1);
+        line->Draw();
+    };
+    // bottom rectangle (z=zMin)
+    drawEdge(xMin,yMin,zMin, xMax,yMin,zMin);
+    drawEdge(xMax,yMin,zMin, xMax,yMax,zMin);
+    drawEdge(xMax,yMax,zMin, xMin,yMax,zMin);
+    drawEdge(xMin,yMax,zMin, xMin,yMin,zMin);
+    // top rectangle (z=zMax)
+    drawEdge(xMin,yMin,zMax, xMax,yMin,zMax);
+    drawEdge(xMax,yMin,zMax, xMax,yMax,zMax);
+    drawEdge(xMax,yMax,zMax, xMin,yMax,zMax);
+    drawEdge(xMin,yMax,zMax, xMin,yMin,zMax);
+    // vertical edges
+    drawEdge(xMin,yMin,zMin, xMin,yMin,zMax);
+    drawEdge(xMax,yMin,zMin, xMax,yMin,zMax);
+    drawEdge(xMax,yMax,zMin, xMax,yMax,zMax);
+    drawEdge(xMin,yMax,zMin, xMin,yMax,zMax);
 
     return c;
 } 
