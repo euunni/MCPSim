@@ -56,6 +56,15 @@ private:
 
     // electrons reaching anode
     std::vector<Matrix3x3> anode_hits_;
+
+    // statistics: secondaries (parentID!=-1) that exit MCP-1 into GAP-1
+    int nSecOutMCP1_ = 0;
+
+    // --- options ---
+    bool recordGapSteps_ = true;   // if false, TrackElectronOutsidePore() becomes no-op
+
+public:
+    void SetRecordGapSteps(bool on){ recordGapSteps_ = on; }
 };
 
 } // namespace MCPSim 

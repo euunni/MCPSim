@@ -865,7 +865,9 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
 
 TCanvas* MCPVisualizer::DrawMCP2DWithPoresAndSteps() {
     // 1. 캔버스/프레임 생성
-    TCanvas* c = new TCanvas("c_mcp2d", "MCP1/2 Pores and Steps", 900, 600);
+    static int mcp2dCounter = 0;
+    ++mcp2dCounter;
+    TCanvas* c = new TCanvas(Form("c_mcp2d_%d", mcp2dCounter), "MCP1/2 Pores and Steps", 900, 600);
     TH2F* frame = new TH2F("frame", "MCP1/2 Pores and Steps;X [#mum];Y [#mum]", 100, 0, 3500, 100, -100, 300);
     frame->SetStats(0);
     frame->Draw();
@@ -961,7 +963,8 @@ TCanvas* MCPVisualizer::DrawMCP2DForTracks(const std::vector<int>& trackIDs){
     std::unordered_set<int> sel(trackIDs.begin(), trackIDs.end());
  
     // 1. canvas/frame (reuse same ranges)
-    TCanvas* c = new TCanvas("c_mcp2d_sel", "MCP Pores and Steps (selected)", 900,600);
+    static int selCounter = 0; ++selCounter;
+    TCanvas* c = new TCanvas(Form("c_mcp2d_sel_%d", selCounter), "MCP Pores and Steps (selected)", 900,600);
     TH2F* frame = new TH2F("f_sel","MCP Pores and Steps;X [#mum];Y [#mum]",100,0,3500,100,-100,300);
     frame->SetStats(0);
     frame->Draw();
@@ -1024,7 +1027,8 @@ TCanvas* MCPVisualizer::DrawMCP2DForTracks(const std::vector<int>& trackIDs){
 // ----------------------------------------------------------------------
 TCanvas* MCPVisualizer::DrawMCP2DOverlay(const std::vector<std::vector<int>>& trackSets){
     // base frame
-    TCanvas* c = new TCanvas("c_mcp2d_overlay","Cascade Overlay",900,600);
+    static int overlayCounter = 0; ++overlayCounter;
+    TCanvas* c = new TCanvas(Form("c_mcp2d_overlay_%d", overlayCounter),"Cascade Overlay",900,600);
     TH2F* frame = new TH2F("f_overlay","MCP Cascades;X [#mum];Y [#mum]",100,0,3500,100,-100,300);
     frame->SetStats(0);
     frame->Draw();
@@ -1228,6 +1232,10 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     const double R = dia/2.0;
     const double y0c = 6.0;            // central pore row reference (n=0)
 
+    // DEBUG: Print config values
+    std::cout << "Config values: x0=" << x0 << ", x1=" << x1 << ", x2=" << x2 << ", x3=" << x3 << std::endl;
+    std::cout << "Expected gap between MCPs: " << (x2 - x1) << " µm" << std::endl;
+
     // ------------------------------------------------------------------
     // Shift the whole geometry so that the entrance of MCP-1 (x0) sits at
     // the global origin X = 0.  All subsequent X coordinates are expressed
@@ -1239,13 +1247,40 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     const double xs2 = x2 - xShift;
     const double xe2 = x3 - xShift;
 
+    std::cout << "After xShift=" << xShift << ": xs1=" << xs1 << ", xe1=" << xe1 
+              << ", xs2=" << xs2 << ", xe2=" << xe2 << std::endl;
+
     // Axis limits (tight) – use shifted coordinates
     double xMin = xs1 - 20.0;          // a bit before MCP-1 entrance (now 0)
-    double xMax = xe2 + 20.0;          // a bit after MCP-2 exit
-    double zMin = y0c + (-nRange-1)*pitch - R*1.5;
-    double zMax = y0c + ( nRange+1)*pitch + R*1.5;
-    double yMin = (-nzRange-1)*pitch - R*1.5;
-    double yMax = ( nzRange+1)*pitch + R*1.5;
+    double xMax = xe2 + 500.0;         // much more margin after MCP-2 exit
+    double zMin = (-nzRange - 1) * pitch - R * 1.5;
+    double zMax = ( nzRange + 1) * pitch + R * 1.5;
+
+    // Compute per-plate additional rows needed due to tilt (so full height is visible)
+    const int extraRows1 = static_cast<int>(std::ceil(std::fabs(std::tan(alpha1)) * (xe1 - xs1) / pitch)) + 1;
+    const int extraRows2 = static_cast<int>(std::ceil(std::fabs(std::tan(alpha2)) * (xe2 - xs2) / pitch)) + 1;
+
+    auto plateExtremes = [&](double xs, double xe, double alpha, int extraRows){
+        double span = (nRange + extraRows + 0.5) * pitch + R; // half-height including radius
+        double yTop0 = y0c + span;
+        double yBot0 = y0c - span;
+        double delta = std::tan(alpha) * (xe - xs);
+        double yTop1 = yTop0 + delta;
+        double yBot1 = yBot0 + delta;
+        return std::pair<double,double>( std::min(yBot0, yBot1), std::max(yTop0, yTop1) );
+    };
+
+    auto ext1 = plateExtremes(xs1, xe1, alpha1, extraRows1);
+    auto ext2 = plateExtremes(xs2, xe2, alpha2, extraRows2);
+
+    double yMin = std::min(ext1.first,  ext2.first)  - 20.0; // extra margin
+    double yMax = std::max(ext1.second, ext2.second) + 20.0;
+
+    // Y range already includes tilt effects via plateExtremes calculation
+
+    // ------------------------------------------------------------------
+    // Global row indices no longer needed (each plate computes its own).
+    // ------------------------------------------------------------------
 
     // Canvas (no bounding TH3F – geometry itself provides context)
     TCanvas* c = new TCanvas("c_mcp3d_zoom","MCP Zoom", 900, 700);
@@ -1276,7 +1311,7 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
         gGeoManager->GetListOfVolumes()->Delete();      // delete old volumes
         gGeoManager->GetListOfShapes()->Delete();       // delete old shapes
         gGeoManager->GetListOfMatrices()->Delete();     // delete old matrices
-        gGeoManager->SetTopVolume(nullptr);             // detach previous top
+        gGeoManager->SetTopVolume(nullptr);      
         geo = gGeoManager;
     } else {
         // First time: create the global manager
@@ -1287,13 +1322,23 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     TGeoMaterial* matVac = new TGeoMaterial("vacuum", 0,0,0);
     TGeoMedium*  medVac = new TGeoMedium("vac", 1, matVac);
 
-    // world box (half-lengths a bit larger than view frustum)
-    double wdx = (xMax - xMin)/2 + 50;
-    double wdy = (yMax - yMin)/2 + 50;
-    double wdz = (zMax - zMin)/2 + 50;
+    // world box (half-lengths chosen to cover max extents about origin)
+    double wdx = xMax + 500.0;  // Simple: use xMax + large margin instead of abs calculation
+    double wdy = std::max(std::abs(yMin), std::abs(yMax)) + 50;
+    double wdz = std::max(std::abs(zMin), std::abs(zMax)) + 50;
+    
+    // DEBUG: Check world box calculation
+    std::cout << "World box half-lengths: wdx=" << wdx << ", wdy=" << wdy << ", wdz=" << wdz << std::endl;
+    std::cout << "World box covers X: [" << -wdx << ", " << wdx << "]" << std::endl;
+    std::cout << "MCP2 needs X: [" << xs2 << ", " << xe2 << "]" << std::endl;
+    
+    // Ensure world box definitely covers both MCPs
+    wdx = std::max(wdx, xe2 + 500.0);  // Guarantee MCP2 coverage
+    
     // Build visible world box --------------------------------------------------------------------------
     TGeoVolume* world = geo->MakeBox("world", medVac, wdx, wdy, wdz);
     world->SetLineColor(kGray+1); // visible wireframe
+    world->SetVisLeaves(kTRUE);       // detach previous top
 
     // ------------------------------------------------------------------
     // Use the world volume directly as the top node (no extra rotation).
@@ -1305,15 +1350,17 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     geo->SetTopVolume(world);
 
     // Helper lambda to add one MCP section (tube array)
-    auto addMcpTubes = [&](double xs, double xe, double alpha){
+    int copyNo = 0; // unique copy number for TGeoNodes
+    auto addMcpTubes = [&](double xs, double xe, double alpha, int extraRows, int plateId){
         double len = xe - xs;                  // physical length along X
         double halfLen = len / 2.0;
 
         // base tube volume (axis along global X after rotation)
-        TString tubeName = Form("tube_%.0f", xs);
+        TString tubeName = Form("tube_p%d", plateId);
         TGeoVolume* tube = geo->MakeTube(tubeName, medVac, 0, R, halfLen);
         tube->SetLineColor(kGray+2);
-        tube->SetFillColor(kGray+2);          // semi-transparent faces
+        tube->SetFillColor(kGray+2);   
+        tube->SetVisibility(kTRUE);       // semi-transparent faces
         // Removed transparency to avoid libAfterImage segfaults
         // tube->SetTransparency(90);            // 0=opaque,100=invisible (30% visible)
 
@@ -1322,8 +1369,27 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
         rot->RotateY(90);                     // align local Z to global X
         rot->RotateZ(alpha*180.0/TMath::Pi());       // apply pore tilt
 
-        // place tubes in requested Y/Z range
-        for(int n=-nRange; n<=nRange; ++n){
+        int nRows = nRange + extraRows;
+
+        // DEBUG: Print plate info
+        std::cout << "=== Plate " << plateId << " (xs=" << xs << ", xe=" << xe 
+                  << ", alpha=" << alpha << ") ===" << std::endl;
+        std::cout << "  extraRows=" << extraRows << ", nRows=" << nRows << std::endl;
+        std::cout << "  World X range: [" << xMin << ", " << xMax << "]" << std::endl;
+        
+        int tubesAdded = 0;
+        for(int n=-nRows; n<=nRows; ++n){
+            // Check if this row's Y span intersects with world Y limits
+            double yEnt = y0c + n*pitch;
+            double yExt = yEnt + std::tan(alpha)*(xe - xs);
+            double rowYMin = std::min(yEnt, yExt) - R;
+            double rowYMax = std::max(yEnt, yExt) + R;
+            
+            // Skip rows completely outside world Y bounds
+            if (rowYMax < yMin || rowYMin > yMax) {
+                continue;
+            }
+            
             for(int nz=-nzRange; nz<=nzRange; ++nz){
                 double xMid = xs + halfLen;
                 // Place rows along physical Y and columns along Z to match
@@ -1333,13 +1399,39 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
 
                 auto* comb = new TGeoCombiTrans(xMid, yMid, zMid, rot);
                 comb->RegisterYourself();           // needed if reused
-                world->AddNode(tube, (n+nRange)*(2*nzRange+1)+ (nz+nzRange), comb);
+                world->AddNode(tube, copyNo++, comb);
+                tubesAdded++;
             }
         }
+        std::cout << "  Total tubes added: " << tubesAdded << std::endl;
     };
 
-    addMcpTubes(xs1, xe1, alpha1);
-    addMcpTubes(xs2, xe2, alpha2);
+    addMcpTubes(xs1, xe1, alpha1, extraRows1, 1);
+    addMcpTubes(xs2, xe2, alpha2, extraRows2, 2);
+
+    // ── MCP 외벽(입구·출구 면) 윤곽선 추가 ─────────────────
+    auto drawFace = [&](double xFace, double xsRef, double alpha){
+        // Compute Y shift relative to the MCP entrance (xsRef) so that
+        // both MCP1 and MCP2 faces reflect their own tilt correctly.
+        double yTop = y0c + (nRange + 0.5) * pitch + std::tan(alpha) * (xFace - xsRef) + R;
+        double yBot = y0c - (nRange + 0.5) * pitch + std::tan(alpha) * (xFace - xsRef) - R;
+
+        TPolyLine3D* rect = new TPolyLine3D(5);
+        rect->SetPoint(0, xFace, yTop, zMin);
+        rect->SetPoint(1, xFace, yTop, zMax);
+        rect->SetPoint(2, xFace, yBot, zMax);
+        rect->SetPoint(3, xFace, yBot, zMin);
+        rect->SetPoint(4, xFace, yTop, zMin);
+        rect->SetLineColor(kGray+1);
+        rect->SetLineWidth(2);
+        rect->Draw();
+    };
+
+    // Entrance / exit outlines (pass each MCP's own entrance as reference)
+    drawFace(xs1, xs1, alpha1);   // MCP-1 entrance
+    drawFace(xe1, xs1, alpha1);   // MCP-1 exit
+    drawFace(xs2, xs2, alpha2);   // MCP-2 entrance
+    drawFace(xe2, xs2, alpha2);   // MCP-2 exit
 
     // Keep world box but draw only its wireframe
     // world->SetLineColor(kGray+1);
@@ -1397,16 +1489,11 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
             TPolyMarker3D* pm = new TPolyMarker3D(1);
             pm->SetPoint(0,x,y,z);
             pm->SetMarkerStyle(20);
-            pm->SetMarkerSize(0.05);
+            pm->SetMarkerSize(0.2);
             pm->SetMarkerColor(colors[cIdx % nColors]);
             pm->Draw();
         }
     }
-
-    std::cout << "MCP1 중심 Y = "
-          << (y0c +  std::tan(alpha1)*(xe1-xs1)/2)
-          << "\nMCP2 중심 Y = "
-          << (y0c +  std::tan(alpha2)*(x3-x2)/2) << std::endl;
 
     // Remove additional manual reference box edges; the world box (wireframe)
     // already provides the visual boundary and is rotated consistently.

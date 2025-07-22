@@ -30,6 +30,8 @@ Simulation::Simulation()
     Physics::initialize();
     tracks_.Reset();
     steps_.Reset();
+    nSecOutMCP1_ = 0;
+    // nothing extra to initialise
 }
 
 int  Simulation::CreateElectron(int parent, float t,
@@ -39,6 +41,7 @@ int  Simulation::CreateElectron(int parent, float t,
     int ext=g_nextTrackID++;
     int in = tracks_.AddTrack(parent,t,x,y,z,vx,vy,vz,E,proc);
     trackIDMap_[ext]=in;
+    // no amplification bookkeeping
     return ext;
 }
 
@@ -63,6 +66,7 @@ void Simulation::FinalizeElectron(int tid,int st,float t,
 // track-outside-pore recorder (coarse 1 ps)
 void Simulation::TrackElectronOutsidePore(const Matrix3x3& A,const Matrix3x3& B,
                                           int tid,double cts){
+    if(!recordGapSteps_) return;  // gap step recording disabled
     const double dt=1.0;
     double T=A(2,0),T2=B(2,0),len=T2-T;
     int n= std::max(1,int(len/dt));
@@ -142,10 +146,6 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             E1_non.push_back(M);
         } else {
             // Positive time means collision scheduled; store in emission queue
-            if(th < 0.1) {
-                std::cout << "[MCP1-INIT-SMALL-DT] Initial photoe- collision time th=" << th 
-                          << ", y=" << M(0,1) << ", z=" << M(0,2) << std::endl;
-            }
             M(2, 1) = th;
             physics->ajouter_element_trie(E1_emi, M);
         }
@@ -188,6 +188,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                     Matrix3x3 M_exit = physics->Transporter2(M, dt_exit, cts1, alpha1);
                     TrackElectronOutsidePore(M, M_exit, tid, cts1);
                     G1.push_back(M_exit);
+                    ++nSecOutMCP1_;
                     del.push_back(i);
                 }else E1_non[i]=M;
             }
@@ -200,9 +201,6 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             TrackElectronOutsidePore(lead, Mc, int(lead(2,2)), cts1);
             Mc(2,2)=lead(2,2);
             auto secs=physics->emi_sec(Mc,hit.second,alpha1,x0,R,dia,pas,m,E0);
-
-            // std::cout << "[EMI] E=" << 0.5*m*(pow(Mc(1,0),2)+pow(Mc(1,1),2)+pow(Mc(1,2),2))
-            //           << "  secs=" << secs.size() << std::endl;
 
             for(auto& s:secs){
                 int tid=CreateElectron(int(Mc(2,2)),s.matrix(2,0),
@@ -233,11 +231,6 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                 }else if(t2==true){     // No collision in this channel segment
                     continue;           // nothing to add
                 }else{                  // Collision scheduled
-                    if(t2 < 0.1) {
-                        std::cout << "[MCP1-SEC-SMALL-DT] Secondary collision time t2=" << t2 
-                                  << ", y=" << s.matrix(0,1) << ", z=" << s.matrix(0,2) 
-                                  << ", vx=" << s.matrix(1,0) << ", alpha1=" << alpha1 << std::endl;
-                    }
                     s.matrix(2,1)=t2;
                     physics->ajouter_element_trie(E1_emi,s.matrix);
                 }
@@ -261,6 +254,36 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             }
         }
 
+        /*--- MCP-1 propagate when no collisions are scheduled ---*/
+        if(E1_emi.empty() && !E1_non.empty()){
+            const double dtsmall = 1.0;
+            std::vector<size_t> delIdx;
+            for(size_t i=0;i<E1_non.size();++i){
+                auto M = physics->Transporter2(E1_non[i], dtsmall, cts1, alpha1);
+                int tid = int(E1_non[i](2,2));
+                TrackElectronOutsidePore(E1_non[i], M, tid, cts1);
+
+                if(M(0,0) >= x1){               // exited MCP-1 → GAP-1
+                    double dt_exit = physics->Resolution(cts1/2.0, M(1,0), M(0,0) - x1);
+                    Matrix3x3 M_exit = physics->Transporter2(M, dt_exit, cts1, alpha1);
+                    TrackElectronOutsidePore(E1_non[i], M_exit, tid, cts1);
+                    G1.push_back(M_exit);
+                    delIdx.push_back(i);
+                }else{
+                    // r>R check
+                    auto hh = physics->Check_if_hit(M);
+                    if(!hh.first){               // left pore cylinder – absorb
+                        FinalizeElectron(tid, 0, M(2,0), M(0,0),M(0,1),M(0,2),
+                                         M(1,0),M(1,1),M(1,2), float(KE(M,m)));
+                        delIdx.push_back(i);
+                    }else{
+                        E1_non[i] = M;          // still inside pore
+                    }
+                }
+            }
+            for(int k=delIdx.size()-1; k>=0; --k) E1_non.erase(E1_non.begin()+delIdx[k]);
+        }
+
         /*========== 2. GAP-1 propagate =========*/
         {
             std::vector<size_t> del;
@@ -274,7 +297,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                 TrackElectronOutsidePore(G1[i],M,int(G1[i](2,2)),c_s);
                 
                 // MCP2 진입 조건: x2 근처 범위에서 검사 (정확한 x2가 아닌 범위 기반)
-                const double entrance_tolerance = 10.0;  // 5μm 허용 범위
+                const double entrance_tolerance = 0.1;  
                 if(M(0,0) >= x2 - entrance_tolerance){
                     M=physics->RecuperationTo(M,x2);
                     TrackElectronOutsidePore(G1[i],M,int(M(2,2)),c_s);
@@ -311,6 +334,19 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                                                             0.0, x3 - x2, R, dia, pas);
                         }
                         
+                        // Record entry Point_de_contact2 result for this electron (internal track index)
+                        {
+                            int extId = int(M(2,2));
+                            auto pitET = trackIDMap_.find(extId);
+                            if(pitET != trackIDMap_.end()){
+                                double storeVal;
+                                if(t2==false) storeVal = -2.0;      // flag: 'false'
+                                else if(t2==true) storeVal = -1.0;  // flag: 'true'
+                                else storeVal = t2;                 // positive collision time
+                                // entryT_MCP2_[pitET->second] = storeVal; // Removed
+                            }
+                        }
+
                         if(t2==false){
                             // keep z coordinate; do not overwrite with channel index
                             E2_non.push_back(M);
@@ -354,7 +390,20 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                     TrackElectronOutsidePore(E2_non[i], M_exit, tid, cts2);
                     G2.push_back(M_exit);
                     delN.push_back(i);} 
-                else E2_non[i]=M;
+                else {
+                    // Additional geometry check: has the electron left the pore cylinder?
+                    auto hh = physics->Check_if_hit(M);
+                    if(!hh.first){
+                        // Absorb on silica wall – stop tracking
+                        FinalizeElectron(tid, 0, M(2,0),
+                                         M(0,0), M(0,1), M(0,2),
+                                         M(1,0), M(1,1), M(1,2),
+                                         float(KE(M, m)));
+                        delN.push_back(i);
+                    }else{
+                        E2_non[i]=M;
+                    }
+                }
             }
             for(int i=delN.size()-1;i>=0;--i) E2_non.erase(E2_non.begin()+delN[i]);
 
@@ -363,10 +412,9 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             // record full path inside MCP-2 (lead -> collision point)
             TrackElectronOutsidePore(lead, Mc, int(lead(2,2)), cts2);
             int ch = physics->Check_if_hit(lead).second;
-            auto secs=physics->emi_sec(Mc,ch,alpha2,x2,R,dia,pas,m,E0);
+            auto secs = physics->emi_sec(Mc, ch, alpha2, x2, R, dia, pas, m, E0);
 
-            // std::cout << "[EMI] E=" << 0.5*m*(pow(Mc(1,0),2)+pow(Mc(1,1),2)+pow(Mc(1,2),2))
-            //           << "  secs=" << secs.size() << std::endl;
+            // no amplification bookkeeping
 
             for(auto& s:secs){
                 int tid=CreateElectron(int(Mc(2,2)),s.matrix(2,0),
@@ -406,7 +454,6 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                     s.matrix(2,1)=t2;
                     physics->ajouter_element_trie(E2_emi,s.matrix);
                 }
-                // std::cout << "[PUSH] t2=" << t2 << std::endl;
             }
 
             /*--- dynamic field MCP-2 ---*/
@@ -426,7 +473,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
 
         /*--- MCP-2 propagate when no collisions are scheduled ---*/
         if(E2_emi.empty() && !E2_non.empty()){
-            const double dtsmall = 1.0;  // same step as GAP blocks
+            const double dtsmall = 1.0; 
             std::vector<size_t> delIdx;
             for(size_t i=0;i<E2_non.size();++i){
                 auto M = physics->Transporter2(E2_non[i], dtsmall, cts2, alpha2);
@@ -440,7 +487,15 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                     G2.push_back(M_exit);
                     delIdx.push_back(i);
                 }else{
-                    E2_non[i] = M;              // keep inside MCP-2
+                    // r>R check for small-step propagation as well
+                    auto hh = physics->Check_if_hit(M);
+                    if(!hh.first){
+                        FinalizeElectron(tid, 0, M(2,0), M(0,0),M(0,1),M(0,2),
+                                         M(1,0),M(1,1),M(1,2), float(KE(M,m)));
+                        delIdx.push_back(i);
+                    }else{
+                        E2_non[i] = M;          // still inside pore
+                    }
                 }
             }
             for(int k = delIdx.size()-1; k>=0; --k) E2_non.erase(E2_non.begin()+delIdx[k]);
@@ -467,12 +522,13 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
         }
 
         /*========== 5. 종료 조건 =========*/
-        if(anode_hits_.size()>=50) break;
+        // if(anode_hits_.size()>=200) break;
         if(E1_emi.empty()&&E1_non.empty()&&G1.empty()&&
            E2_emi.empty()&&E2_non.empty()&&G2.empty()) break;
     }
 
-    std::cout<<"Simulation completed, anode="<<anode_hits_.size()<<"\n";
+    std::cout << "Simulation completed. anode=" << anode_hits_.size()
+              << ", MCP1→Gap1 secondaries = " << nSecOutMCP1_ << std::endl;
     return anode_hits_;
 }
 

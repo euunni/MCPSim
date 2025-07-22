@@ -176,7 +176,7 @@ int main(int argc, char** argv) {
         MCPVisualizer visualizer(&analyzer);
         
         // Draw MCP2D with cascade overlay
-        int nCascade = 30;                
+        int nCascade = 150;                
         std::vector<std::vector<int>> sets;
         for(int k=0;k<nCascade;k++){
             auto ids = analyzer.GetLineageTrackIDsForNthAnode(k);
@@ -195,7 +195,7 @@ int main(int argc, char** argv) {
         f->Close();
 
         // Draw MCP3D with zoom overlay
-        TCanvas* cZoom = visualizer.DrawMCP3DZoom(sets, 8, 8);
+        TCanvas* cZoom = visualizer.DrawMCP3DZoom(sets, 8, 5);
         cZoom->SaveAs((outputDir + outputPrefix + "_cascade_zoom.root").c_str());
         
         // Draw MCP2D with pore and step overlay
