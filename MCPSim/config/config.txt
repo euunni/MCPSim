@@ -38,3 +38,5 @@ t4 = 1.0
 gama_ts0 = 3.5
 E_ts = 260.0
 s = 1.54 
+
+outputLevel = 0

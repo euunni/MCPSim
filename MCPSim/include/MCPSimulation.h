@@ -15,6 +15,11 @@ namespace MCPSim {
 
 using Matrix3x3 = Eigen::Matrix<double,3,3>;
 
+// ---------- Output control (Track / Node / Step) ----------
+enum class OutputLevel { kTrack = 0, kNode = 1, kStep = 2 };
+// Return current output level read from configuration (default = kNode)
+OutputLevel GetOutputLevel();
+
 class Simulation {
 public:
     Simulation();
@@ -42,6 +47,7 @@ private:
     void TrackElectronOutsidePore(const Matrix3x3& start,
                                   const Matrix3x3& end,
                                   int trackID, double cts);
+    void RecordNode(int trackID, const Matrix3x3& M);   // <— NEW helper: store single point depending on level
     void FinalizeElectron(int trackID, int status, float time,
                           float x, float y, float z,
                           float vx, float vy, float vz,

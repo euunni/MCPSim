@@ -4,12 +4,32 @@
 #include <algorithm>
 #include <random>
 #include <cmath>
+#include <exception>
 
 #define DEBUG_MCP2
 
 static int g_nextTrackID = 1;          // Global trackID
 
 namespace MCPSim {
+
+// ---------------------------------------------------------------------
+// Output level helper (Track / Node / Step)
+// ---------------------------------------------------------------------
+OutputLevel GetOutputLevel(){
+    auto& cfg = Config::getInstance();
+    try{
+        double v = cfg.get("outputLevel");
+        int iv = static_cast<int>(std::round(v));
+        switch(iv){
+            case 0: return OutputLevel::kTrack;
+            case 2: return OutputLevel::kStep;
+            default: return OutputLevel::kNode;   // 1 or any other value
+        }
+    }catch(const std::exception&){
+        // parameter not found → default
+        return OutputLevel::kNode;
+    }
+}
 
 // ───────────────────────────────────────────
 // 0. Helpers
@@ -31,7 +51,8 @@ Simulation::Simulation()
     tracks_.Reset();
     steps_.Reset();
     nSecOutMCP1_ = 0;
-    // nothing extra to initialise
+    // control gap-step recording based on output level (only full-step mode stores every 1 ps)
+    recordGapSteps_ = (GetOutputLevel() == OutputLevel::kStep);
 }
 
 int  Simulation::CreateElectron(int parent, float t,
@@ -63,25 +84,52 @@ void Simulation::FinalizeElectron(int tid,int st,float t,
         tracks_.FinalizeTrack(it->second,st,t,x,y,z,vx,vy,vz,E);
 }
 
-// track-outside-pore recorder (coarse 1 ps)
-void Simulation::TrackElectronOutsidePore(const Matrix3x3& A,const Matrix3x3& B,
-                                          int tid,double cts){
-    if(!recordGapSteps_) return;  // gap step recording disabled
-    const double dt=1.0;
-    double T=A(2,0),T2=B(2,0),len=T2-T;
-    int n= std::max(1,int(len/dt));
-    for(int i=1;i<=n;i++){
-        double f=double(i)/n;
-        double t=len*f;
-        Matrix3x3 M=A;
-        M.row(0)+=(A.row(1)*t);
-        M(0,0)+=0.5*cts*t*t;
-        M(1,0)+=cts*t;
-        M(2,0)=T+t;
-        AddElectronStep(tid,float(M(2,0)),
-                        float(M(0,0)),float(M(0,1)),float(M(0,2)),
-                        float(M(1,0)),float(M(1,1)),float(M(1,2)),
-                        float(KE(M,Config::getInstance().get("m"))));
+// ---------------------------------------------------------------------
+// Record a single point (Node) depending on output level
+// ---------------------------------------------------------------------
+void Simulation::RecordNode(int tid, const Matrix3x3& M){
+    AddElectronStep(tid,
+                    float(M(2,0)),
+                    float(M(0,0)), float(M(0,1)), float(M(0,2)),
+                    float(M(1,0)), float(M(1,1)), float(M(1,2)),
+                    float(KE(M, Config::getInstance().get("m"))));
+}
+
+// ---------------------------------------------------------------------
+// Track electron segment outside pore with variable granularity
+// ---------------------------------------------------------------------
+void Simulation::TrackElectronOutsidePore(const Matrix3x3& A, const Matrix3x3& B,
+                                          int tid, double cts)
+{
+    const auto level = GetOutputLevel();
+
+    if(level == OutputLevel::kTrack){
+        return;                                     // no positional recording
+    }
+    if(level == OutputLevel::kNode){
+        RecordNode(tid, A);
+        RecordNode(tid, B);
+        return;                                     // endpoints only
+    }
+
+    // Full step (kStep) – 1 ps sampling along the segment
+    const double dt = 1.0;                          // ps
+    double T  = A(2,0);
+    double T2 = B(2,0);
+    double len = T2 - T;
+    int n = std::max(1, static_cast<int>(len / dt));
+
+    for(int i = 1; i <= n; ++i){
+        double f = static_cast<double>(i) / n;
+        double t = len * f;
+
+        Matrix3x3 M = A;
+        M.row(0) += (A.row(1) * t);
+        M(0,0)  += 0.5 * cts * t * t;
+        M(1,0)  += cts * t;
+        M(2,0)   = T + t;
+
+        RecordNode(tid, M);
     }
 }
 
@@ -541,8 +589,48 @@ void Simulation::Save(const std::vector<Matrix3x3>& res,double E,const std::stri
     r.WriteEvt(ConvertEvent(res,E)); r.Close();
 }
 mcp::Event Simulation::ConvertEvent(const std::vector<Matrix3x3>& res,double Ein){
-    mcp::Event evt; evt.eventInfo.initialEnergy=Ein;
-    evt.config.LoadFromConfig(); evt.tracks=tracks_; evt.steps=steps_;
+    mcp::Event evt; 
+    evt.eventInfo.initialEnergy = Ein;
+    evt.config.LoadFromConfig();
+
+    // -----------------------------------------------------------------
+    // Filter: if outputLevel == kTrack, keep 애노드에 도달한 Track 만
+    // -----------------------------------------------------------------
+    if(GetOutputLevel() == OutputLevel::kTrack){
+        mcp::Track filt; filt.Reset();
+        const auto& src = tracks_;
+        for(int i=0;i<src.nTracks;++i){
+            if(src.isAnode[i]==1){
+                filt.nTracks++;
+                filt.trackID.push_back(      src.trackID[i]);
+                filt.parentID.push_back(     src.parentID[i]);
+                filt.birthTime.push_back(    src.birthTime[i]);
+                filt.birthPosX.push_back(    src.birthPosX[i]);
+                filt.birthPosY.push_back(    src.birthPosY[i]);
+                filt.birthPosZ.push_back(    src.birthPosZ[i]);
+                filt.birthVelX.push_back(    src.birthVelX[i]);
+                filt.birthVelY.push_back(    src.birthVelY[i]);
+                filt.birthVelZ.push_back(    src.birthVelZ[i]);
+                filt.birthEnergy.push_back(  src.birthEnergy[i]);
+                filt.processType.push_back(  src.processType[i]);
+                filt.isAnode.push_back(      src.isAnode[i]);  // always 1
+                filt.finalTime.push_back(    src.finalTime[i]);
+                filt.finalPosX.push_back(    src.finalPosX[i]);
+                filt.finalPosY.push_back(    src.finalPosY[i]);
+                filt.finalPosZ.push_back(    src.finalPosZ[i]);
+                filt.finalVelX.push_back(    src.finalVelX[i]);
+                filt.finalVelY.push_back(    src.finalVelY[i]);
+                filt.finalVelZ.push_back(    src.finalVelZ[i]);
+                filt.finalEnergy.push_back(  src.finalEnergy[i]);
+            }
+        }
+        evt.tracks = std::move(filt);
+    }else{
+        evt.tracks = tracks_;
+    }
+
+    // steps_: 이미 outputLevel==kTrack 일 때는 기록이 없으므로 그대로 복사해도 비어 있음
+    evt.steps = steps_;
     return evt;
 }
 
