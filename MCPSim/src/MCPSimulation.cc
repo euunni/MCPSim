@@ -204,8 +204,17 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
     //           << ", E1_non=" << E1_non.size() << std::endl;
 
     // ── 상태 변수 ───────────────────────────────────
-    int   Etat1=0,Etat2=0;
-    double inst1=0,inst2=0;
+    // (old) per-plate state variables kept but disabled
+    int   Etat1=0, Etat2=0;
+    double inst1=0, inst2=0;
+
+    // ── NEW : global dynamic field feedback ──────────
+    int    EtatG = 0;           // 0 = normal, 1 = scaled(0.8)
+    double instG = 0.0;         // time when scale toggled
+
+    // holders for per-iteration currents & times
+    double I1_cur = 0.0, I2_cur = 0.0;
+    double time1_cur = 0.0, time2_cur = 0.0;
     int   iter=0;
 
     // ────────────────────────────────────────────────
@@ -291,15 +300,9 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             for(auto& M:E1_emi) addI(M);
             for(auto& M:E1_non) addI(M);
             double time=Mc(2,0);
-            if(Etat1==0 && I1>=0.05*Istrip){
-                cts1*=0.8; Etat1=1; inst1=time;
-                auto res=physics->Rearrangement(E1_emi,E1_non,hit.second,cts1,alpha1,x0,x1,R,dia,pas);
-                E1_emi=res.first;E1_non=res.second;
-            }else if(Etat1==1 && time>=inst1+5.0 && I1<0.05*Istrip){
-                cts1/=0.8; Etat1=0; inst1=time;
-                auto res=physics->Rearrangement(E1_emi,E1_non,hit.second,cts1,alpha1,x0,x1,R,dia,pas);
-                E1_emi=res.first;E1_non=res.second;
-            }
+            I1_cur = I1;    // store for global logic
+            time1_cur = time;
+            // per-plate dynamic scaling disabled; handled globally
         }
 
         /*--- MCP-1 propagate when no collisions are scheduled ---*/
@@ -508,15 +511,9 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             double I2=0; auto addI2=[&](const Matrix3x3& M){ if(M(0,0)<x3) I2+=q*M(1,0)/(x3-x2);};
             for(auto& M:E2_emi) addI2(M);for(auto& M:E2_non) addI2(M);
             double time=Mc(2,0);
-            if(Etat2==0 && I2>=0.05*Istrip){
-                cts2*=0.8; Etat2=1; inst2=time;
-                auto res=physics->Rearrangement(E2_emi,E2_non,ch,cts2,alpha2,x2,x3,R,dia,pas);
-                E2_emi=res.first;E2_non=res.second;
-            }else if(Etat2==1 && time>=inst2+5.0 && I2<0.05*Istrip){
-                cts2/=0.8; Etat2=0; inst2=time;
-                auto res=physics->Rearrangement(E2_emi,E2_non,ch,cts2,alpha2,x2,x3,R,dia,pas);
-                E2_emi=res.first;E2_non=res.second;
-            }
+            I2_cur = I2;
+            time2_cur = time;
+            // per-plate scaling logic disabled; see global block later
         }
 
         /*--- MCP-2 propagate when no collisions are scheduled ---*/
@@ -569,8 +566,44 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             for(int i=del.size()-1;i>=0;--i) G2.erase(G2.begin()+del[i]);
         }
 
+        /*========== 4.5  Global dynamic field feedback =========*/
+        {
+            double I_tot = I1_cur + I2_cur;
+            double curTime = std::max(time1_cur, time2_cur);
+
+            if(EtatG==0 && I_tot >= 0.05*Istrip){
+                cts1 *= 0.8; cts2 *= 0.8; EtatG = 1; instG = curTime;
+
+                auto res1 = physics->Rearrangement(E1_emi, E1_non, hit.second,
+                                                  cts1, alpha1, x0, x1, R, dia, pas);
+                E1_emi = res1.first; E1_non = res1.second;
+
+                int ch_idx = 0;
+                if(!E2_emi.empty()) ch_idx = physics->Check_if_hit(E2_emi.front()).second;
+                else if(!E2_non.empty()) ch_idx = physics->Check_if_hit(E2_non.front()).second;
+
+                auto res2 = physics->Rearrangement(E2_emi, E2_non, ch_idx,
+                                                  cts2, alpha2, x2, x3, R, dia, pas);
+                E2_emi = res2.first; E2_non = res2.second;
+            } else if(EtatG==1 && curTime >= instG + 5.0 && I_tot < 0.05*Istrip){
+                cts1 /= 0.8; cts2 /= 0.8; EtatG = 0; instG = curTime;
+
+                auto res1 = physics->Rearrangement(E1_emi, E1_non, hit.second,
+                                                  cts1, alpha1, x0, x1, R, dia, pas);
+                E1_emi = res1.first; E1_non = res1.second;
+
+                int ch_idx = 0;
+                if(!E2_emi.empty()) ch_idx = physics->Check_if_hit(E2_emi.front()).second;
+                else if(!E2_non.empty()) ch_idx = physics->Check_if_hit(E2_non.front()).second;
+
+                auto res2 = physics->Rearrangement(E2_emi, E2_non, ch_idx,
+                                                  cts2, alpha2, x2, x3, R, dia, pas);
+                E2_emi = res2.first; E2_non = res2.second;
+            }
+        }
+
         /*========== 5. 종료 조건 =========*/
-        // if(anode_hits_.size()>=200) break;
+        // if(anode_hits_.size()>=100) break;
         if(E1_emi.empty()&&E1_non.empty()&&G1.empty()&&
            E2_emi.empty()&&E2_non.empty()&&G2.empty()) break;
     }
