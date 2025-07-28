@@ -1,0 +1,28 @@
+Running on node: i034
+PBS Job ID: 745255.imgt1
+['', '/home/jangh/.local/lib/python3.6/site-packages', '/gpfs/fs1/home/jangh/MCPSim', '/usr/lib64/python36.zip', '/usr/lib64/python3.6', '/usr/lib64/python3.6/lib-dynload', '/usr/lib64/python3.6/site-packages', '/usr/lib/python3.6/site-packages']
+Job started at: Mon Mar 10 16:55:38 CDT 2025
+	Command being timed: "python3 MCPSim_multiRun.py --output /home/jangh/MCPSim/output/400µm600V_3.5_0.5_saturation_0.8_each_5ps_745255.imgt1.pkl"
+	User time (seconds): 5306.79
+	System time (seconds): 15.25
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:28:51
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 120132
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 40025
+	Voluntary context switches: 4671
+	Involuntary context switches: 1678
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+Job finished at: Mon Mar 10 18:24:30 CDT 2025

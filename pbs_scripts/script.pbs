@@ -1,0 +1,22 @@
+#!/bin/bash
+#PBS -N MCPSim
+#PBS -A jlab
+#PBS -l select=1:ncpus=128
+#PBS -l walltime=03:00:00
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+
+export PYTHONPATH=$HOME/.local/lib/python3.6/site-packages:$PYTHONPATH
+export PATH=$HOME/.local/bin:$PATH
+
+echo "Python path in PBS node:" >> runtime.log
+which python3 >> runtime.log
+python3 -c "import sys; print(sys.path)" >> runtime.log
+
+echo "Job started at: $(date)" > runtime.log
+
+/usr/bin/time -v python3 /home/jangh/MCPSim/code/MCPSim.py 2>&1 | tee -a runtime.log
+
+echo "Job finished at: $(date)" >> runtime.log
+

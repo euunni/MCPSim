@@ -1,0 +1,33 @@
+#!/bin/bash
+#PBS -N MCPSim
+#PBS -A eic
+#PBS -l select=1:ncpus=128
+#PBS -l walltime=05:00:00
+#PBS -j oe
+#PBS -r y
+
+cd $PBS_O_WORKDIR
+
+export PYTHONPATH=$HOME/.local/lib/python3.6/site-packages:$PYTHONPATH
+export PATH=$HOME/.local/bin:$PATH
+
+OUTPUT_DIR="/home/jangh/MCPSim/output"
+LOG_DIR="/home/jangh/MCPSim/output/log"
+
+mkdir -p ${OUTPUT_DIR}
+mkdir -p ${LOG_DIR}
+
+OUTPUT_FILE="${OUTPUT_DIR}/400µm600V_3.5_0.5_saturation_0.8_each_5ps_${PBS_JOBID}.pkl"
+LOG_FILE="${LOG_DIR}/runtime_${PBS_JOBID}.log"
+
+echo "Running on node: $(hostname)" >> ${LOG_FILE}
+echo "PBS Job ID: ${PBS_JOBID}" >> ${LOG_FILE}
+
+python3 -c "import sys; print(sys.path)" >> ${LOG_FILE} 2>&1
+
+echo "Job started at: $(date)" >> ${LOG_FILE}
+
+/usr/bin/time -v python3 MCPSim_multiRun.py --output ${OUTPUT_FILE} 2>&1 | tee -a ${LOG_FILE}
+
+echo "Job finished at: $(date)" >> ${LOG_FILE}
+
