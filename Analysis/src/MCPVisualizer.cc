@@ -31,7 +31,6 @@
 #include "TGeoManager.h"
 
 MCPVisualizer::MCPVisualizer(const MCPAnalyzer* analyzer) : analyzer_(analyzer) {
-    // Set ROOT style
     gStyle->SetOptStat(0);
     gStyle->SetPalette(kViridis);
     // Force OpenGL viewer for 3-D pads so that interactive rotation/zoom is available
@@ -864,7 +863,6 @@ TCanvas* MCPVisualizer::AnimateCascadeFrame(int frameIndex, int totalFrames) {
 } 
 
 TCanvas* MCPVisualizer::DrawMCP2DWithPoresAndSteps() {
-    // 1. 캔버스/프레임 생성
     static int mcp2dCounter = 0;
     ++mcp2dCounter;
     TCanvas* c = new TCanvas(Form("c_mcp2d_%d", mcp2dCounter), "MCP1/2 Pores and Steps", 900, 600);
@@ -872,7 +870,6 @@ TCanvas* MCPVisualizer::DrawMCP2DWithPoresAndSteps() {
     frame->SetStats(0);
     frame->Draw();
 
-    // 2. config 파라미터 읽기
     const mcp::ConfigParameters* config = analyzer_->GetConfig();
     if (!config) return c;
     float x0 = config->x0, x1 = config->x1, x2 = config->x2, x3 = config->x3, x4 = config->x4;
@@ -882,27 +879,26 @@ TCanvas* MCPVisualizer::DrawMCP2DWithPoresAndSteps() {
     float r = dia / 2.0;
     float pitch = dia + pas;
 
-    // 3. MCP1, MCP2 포어 경계 그리기
     float pore_center_y0 = 6.0; // 중심 포어 y=6.0에 맞춤
     auto clip_line = [](float x0, float y0, float x1, float y1, float y_min, float y_max, float& cx0, float& cy0, float& cx1, float& cy1) {
         cx0 = x0; cy0 = y0;
         cx1 = x1; cy1 = y1;
-        // y0가 아래로 벗어나면
+        // if y0 is below y_min
         if (cy0 < y_min) {
             cx0 = x0 + (x1 - x0) * (y_min - y0) / (y1 - y0);
             cy0 = y_min;
         }
-        // y0가 위로 벗어나면
+        // if y0 is above y_max
         if (cy0 > y_max) {
             cx0 = x0 + (x1 - x0) * (y_max - y0) / (y1 - y0);
             cy0 = y_max;
         }
-        // y1가 아래로 벗어나면
+        // if y1 is below y_min
         if (cy1 < y_min) {
             cx1 = x0 + (x1 - x0) * (y_min - y0) / (y1 - y0);
             cy1 = y_min;
         }
-        // y1가 위로 벗어나면
+        // if y1 is above y_max
         if (cy1 > y_max) {
             cx1 = x0 + (x1 - x0) * (y_max - y0) / (y1 - y0);
             cy1 = y_max;
@@ -939,7 +935,7 @@ TCanvas* MCPVisualizer::DrawMCP2DWithPoresAndSteps() {
     draw_pore_array(x0, x1, alpha1, kGray+1);
     draw_pore_array(x2, x3, alpha2, kGray+1);
 
-    // 4. 모든 step 누적 포인트 찍기
+    // draw all step points
     const mcp::Event* event = analyzer_->GetEvent();
     if (event) {
         for (int i = 0; i < event->steps.nSteps; ++i) {
@@ -1247,9 +1243,6 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     const double xs2 = x2 - xShift;
     const double xe2 = x3 - xShift;
 
-    std::cout << "After xShift=" << xShift << ": xs1=" << xs1 << ", xe1=" << xe1 
-              << ", xs2=" << xs2 << ", xe2=" << xe2 << std::endl;
-
     // Axis limits (tight) – use shifted coordinates
     double xMin = xs1 - 20.0;          // a bit before MCP-1 entrance (now 0)
     double xMax = xe2 + 500.0;         // much more margin after MCP-2 exit
@@ -1282,15 +1275,8 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     // Global row indices no longer needed (each plate computes its own).
     // ------------------------------------------------------------------
 
-    // Canvas (no bounding TH3F – geometry itself provides context)
     TCanvas* c = new TCanvas("c_mcp3d_zoom","MCP Zoom", 900, 700);
-    // We avoid relying on camera/view rotation (problematic on some ROOT builds)
-    // Instead, we will rotate the entire geometry by +90° around X so that
-    // the default view (phi=30°, theta=30°, roll=0°) already shows the desired
-    // chevron orientation.  If you need a different orientation, simply adjust
-    // the rotation matrix below (RotateX / Y / Z).
 
-    // Build colour mapping
     const int colors[] = {kRed, kBlue, kGreen+2, kMagenta, kOrange+7, kCyan+1, kViolet};
     const int nColors = sizeof(colors)/sizeof(int);
 
@@ -1339,14 +1325,6 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     TGeoVolume* world = geo->MakeBox("world", medVac, wdx, wdy, wdz);
     world->SetLineColor(kGray+1); // visible wireframe
     world->SetVisLeaves(kTRUE);       // detach previous top
-
-    // ------------------------------------------------------------------
-    // Use the world volume directly as the top node (no extra rotation).
-    // Any desired viewing angle can now be set interactively in the GL
-    // viewer or via standard camera APIs; we no longer manipulate the
-    // geometry axes programmatically.
-    // ------------------------------------------------------------------
-
     geo->SetTopVolume(world);
 
     // Helper lambda to add one MCP section (tube array)
@@ -1370,12 +1348,6 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
         rot->RotateZ(alpha*180.0/TMath::Pi());       // apply pore tilt
 
         int nRows = nRange + extraRows;
-
-        // DEBUG: Print plate info
-        std::cout << "=== Plate " << plateId << " (xs=" << xs << ", xe=" << xe 
-                  << ", alpha=" << alpha << ") ===" << std::endl;
-        std::cout << "  extraRows=" << extraRows << ", nRows=" << nRows << std::endl;
-        std::cout << "  World X range: [" << xMin << ", " << xMax << "]" << std::endl;
         
         int tubesAdded = 0;
         for(int n=-nRows; n<=nRows; ++n){
@@ -1409,7 +1381,7 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     addMcpTubes(xs1, xe1, alpha1, extraRows1, 1);
     addMcpTubes(xs2, xe2, alpha2, extraRows2, 2);
 
-    // ── MCP 외벽(입구·출구 면) 윤곽선 추가 ─────────────────
+    // add MCP wall outline
     auto drawFace = [&](double xFace, double xsRef, double alpha){
         // Compute Y shift relative to the MCP entrance (xsRef) so that
         // both MCP1 and MCP2 faces reflect their own tilt correctly.
@@ -1444,11 +1416,7 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
     world->Draw("gl");
     gPad->Update();   // ensure TGLViewer is created
 
-    // Pad will be updated later once geometry is drawn (see below).
-
-    // ------------------------------------------------------------------
     // Draw helper XYZ axes (X-Z-Y order)
-    // ------------------------------------------------------------------
     auto drawAxis = [&](double x0,double y0,double z0,
                          double x1,double y1,double z1,
                          Color_t col){
@@ -1494,9 +1462,6 @@ TCanvas* MCPVisualizer::DrawMCP3DZoom(const std::vector<std::vector<int>>& track
             pm->Draw();
         }
     }
-
-    // Remove additional manual reference box edges; the world box (wireframe)
-    // already provides the visual boundary and is rotated consistently.
 
     gPad->Modified();
     gPad->Update();

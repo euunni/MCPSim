@@ -22,8 +22,8 @@
 # Output options: 'oe' to merge stdout/stderr into stdout, 'eo' for stderr, 'n' to not merge.
 #PBS -j n
 
-#PBS -o /home/jangh/MCPSim/v3_track/Batch/Log/MCPSim.out
-#PBS -e /home/jangh/MCPSim/v3_track/Batch/Log/MCPSim.err
+#PBS -o /home/jangh/MCPSim/v3_geometry_3/MCPSim/Batch/Log/MCPSim.out
+#PBS -e /home/jangh/MCPSim/v3_geometry_3/MCPSim/Batch/Log/MCPSim.err
 
 # Email notifications: 'b' at begin, 'e' at end, 'a' on abort. Remove 'n' for no emails.
 #PBS -m be
@@ -37,11 +37,10 @@ export PATH=$HOME/.local/bin:$PATH
 
 # OUTPUT_DIR="/home/jangh/MCPSim/v3_track/output/250604_validation"
 # mkdir -p ${OUTPUT_DIR}
-
-cd /home/jangh/MCPSim/v3_track/install/config
+# cd /home/jangh/MCPSim/v3_geometry_3/MCPSim/install/share/MCPSim/config
 
 for i in `seq 0 127`; do
-    bash -c "/home/jangh/MCPSim/v3_track/install/bin/MCPSim ${PBS_JOBID} ${i}" &
+    bash -c "/home/jangh/MCPSim/v3_geometry_3/MCPSim/install/bin/MCPSim ${PBS_JOBID} ${i}" &
 done
 
 wait

@@ -12,9 +12,7 @@ static int g_nextTrackID = 1;          // Global trackID
 
 namespace MCPSim {
 
-// ---------------------------------------------------------------------
 // Output level helper (Track / Node / Step)
-// ---------------------------------------------------------------------
 OutputLevel GetOutputLevel(){
     auto& cfg = Config::getInstance();
     try{
@@ -31,9 +29,6 @@ OutputLevel GetOutputLevel(){
     }
 }
 
-// ───────────────────────────────────────────
-// 0. Helpers
-// ───────────────────────────────────────────
 namespace {
 inline double KE(const Matrix3x3& M,double m){
     double vx=M(1,0),vy=M(1,1),vz=M(1,2);
@@ -41,9 +36,6 @@ inline double KE(const Matrix3x3& M,double m){
 }
 } // anonymous
 
-// ───────────────────────────────────────────
-// 1. C-tors / Track helpers
-// ───────────────────────────────────────────
 Simulation::Simulation()
     : physics(std::make_unique<Physics>())
 {
@@ -84,9 +76,7 @@ void Simulation::FinalizeElectron(int tid,int st,float t,
         tracks_.FinalizeTrack(it->second,st,t,x,y,z,vx,vy,vz,E);
 }
 
-// ---------------------------------------------------------------------
 // Record a single point (Node) depending on output level
-// ---------------------------------------------------------------------
 void Simulation::RecordNode(int tid, const Matrix3x3& M){
     AddElectronStep(tid,
                     float(M(2,0)),
@@ -95,9 +85,7 @@ void Simulation::RecordNode(int tid, const Matrix3x3& M){
                     float(KE(M, Config::getInstance().get("m"))));
 }
 
-// ---------------------------------------------------------------------
 // Track electron segment outside pore with variable granularity
-// ---------------------------------------------------------------------
 void Simulation::TrackElectronOutsidePore(const Matrix3x3& A, const Matrix3x3& B,
                                           int tid, double cts)
 {
@@ -133,9 +121,7 @@ void Simulation::TrackElectronOutsidePore(const Matrix3x3& A, const Matrix3x3& B
     }
 }
 
-// ───────────────────────────────────────────
-// 2. Run()
-// ───────────────────────────────────────────
+// Run simulation
 std::vector<Matrix3x3> Simulation::Run(double Einit){
     auto& C=Config::getInstance();
     double x0=C.get("x0"),x1=C.get("x1"),x2=C.get("x2"),
@@ -151,7 +137,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
 
     anode_hits_.clear();
 
-    // ── 초기 광전자 생성 & 채널 확인 ─────────────────
+    // Initial photon emission and channel check
     Matrix3x3 P=physics->Pho_ele(Einit);
     P = physics->premiere_arrivee(P);
     auto hit=physics->Check_if_hit(P);
@@ -159,11 +145,10 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
     //           << ", y=" << P(0,1) << ", limite=" << limite << std::endl;
     if(!(hit.first && std::abs(P(0,1))<limite)){ return anode_hits_;}
 
-    // ── Ensemble 벡터 선언 ──────────────────────────
     std::vector<Matrix3x3> E1_emi,E1_non,G1;
     std::vector<Matrix3x3> E2_emi,E2_non,G2;
 
-    // ── 초기 3전자 MCP-1 벡터에 삽입 ────────────────
+    // Insert 3 initial electrons into MCP-1 vector
     for(int k=0;k<3;k++){
         Matrix3x3 M=P;
         M(0,0)-=0.1*k;
@@ -171,7 +156,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                                M(1,0),M(1,1),M(1,2),
                                float(KE(M,m)),mcp::PROCESS_SECONDARY);
         M(2,2)=trk;
-        // --- Point-de-contact (MCP-1) : work in local plate-1 coordinates ---
+        // Point-de-contact (MCP-1) : work in local plate-1 coordinates
         double th;
         {
             Matrix3x3 Mloc = M;                 // copy (keep global M for storage)
@@ -203,12 +188,12 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
     //           << "E1_emi=" << E1_emi.size()
     //           << ", E1_non=" << E1_non.size() << std::endl;
 
-    // ── 상태 변수 ───────────────────────────────────
-    // (old) per-plate state variables kept but disabled
+    // State variables
+    // OLD: per-plate state variables kept but disabled
     int   Etat1=0, Etat2=0;
     double inst1=0, inst2=0;
 
-    // ── NEW : global dynamic field feedback ──────────
+    // NEW: global dynamic field feedback
     int    EtatG = 0;           // 0 = normal, 1 = scaled(0.8)
     double instG = 0.0;         // time when scale toggled
 
@@ -217,10 +202,9 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
     double time1_cur = 0.0, time2_cur = 0.0;
     int   iter=0;
 
-    // ────────────────────────────────────────────────
     while(true){
         iter++;
-        // --- progress print every 100 iterations ---
+        // progress print every 100 iterations
         if(iter % 100 == 0){
             std::cout << "[Run] iteration " << iter
                       << ", E1_emi = " << E1_emi.size()
@@ -266,12 +250,12 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                                        float(KE(s.matrix,m)),s.processType);
                 s.matrix(2,2)=tid;
                 double t2; // collision time placeholder
-                // --- 2-D channel handling: recompute channel index & shift z to local ---
+                // 2-D channel handling: recompute channel index & shift z to local
                 {
-                    // ① 현재 전자가 속한 채널 인덱스(n) 재계산
+                    // 1) Recalculate channel index (n)
                     int chanIdx = physics->Check_if_hit(s.matrix).second;
 
-                    // ② z-축 로컬 변환 후 충돌 시간 계산
+                    // 2) Calculate collision time after z-axis local transformation
                     double pitch = dia + pas;
                     int    nz    = int(std::round(s.matrix(0,2) / pitch));
                     double zc    = nz * pitch;
@@ -347,30 +331,30 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                 auto M=physics->Transporter2(G1[i],dt,c_s,alpha1);
                 TrackElectronOutsidePore(G1[i],M,int(G1[i](2,2)),c_s);
                 
-                // MCP2 진입 조건: x2 근처 범위에서 검사 (정확한 x2가 아닌 범위 기반)
+                // MCP2 entrance condition: check in x2 vicinity (not exact x2 range)
                 const double entrance_tolerance = 0.1;  
                 if(M(0,0) >= x2 - entrance_tolerance){
                     M=physics->RecuperationTo(M,x2);
                     TrackElectronOutsidePore(G1[i],M,int(M(2,2)),c_s);
                     auto h=physics->Check_if_hit(M);
                     if(h.first && std::abs(M(0,1))<limite){
-                        // 음수 채널 인덱스 허용 (정상 처리)
-                        
-                        // ★ 디버그: 채널 인덱스와 실제 거리 확인 ★
+                        // Allow negative channel index (normal processing)
+
+                        // Debug: check channel index and actual distance
                         double pitch = dia + pas;
-                        // 올바른 거리 계산: Check_if_hit과 동일한 방식 사용
+                        // Correct distance calculation: use same method as Check_if_hit
                         double y_prime = M(0,1) - tan(alpha2) * (M(0,0) - x2);
                         double center_y_local = (h.second + 0.5) * pitch;
                         double dy = y_prime - center_y_local;
                         
-                        // z축도 포어 중심 기준으로 계산
+                        // Calculate z-axis also based on pore centre
                         int nz = int(round(M(0,2) / pitch));
                         double center_z = nz * pitch;
                         double dz = M(0,2) - center_z;
                         
                         double r_actual = sqrt(dy*dy + dz*dz);
                         double t2; // collision time placeholder
-                        // --- 2-D channel handling: shift z so that local pore axis is at z_c ---
+                        // 2-D channel handling: shift z so that local pore axis is at z_c
                         {
                             double pitch = dia + pas;
                             int    nz    = int(std::round(M(0,2) / pitch));
@@ -394,7 +378,6 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                                 if(t2==false) storeVal = -2.0;      // flag: 'false'
                                 else if(t2==true) storeVal = -1.0;  // flag: 'true'
                                 else storeVal = t2;                 // positive collision time
-                                // entryT_MCP2_[pitET->second] = storeVal; // Removed
                             }
                         }
 
@@ -411,15 +394,15 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                         }
                         del.push_back(i);
                     } else {
-                        // 포어에 못 들어간 전자는 끝
+                        // Electron that cannot enter the pore is finished
                         int tid = int(M(2,2));
                         FinalizeElectron(tid, 0, M(2,0),   // status=0: lost
                                          M(0,0),M(0,1),M(0,2),
                                          M(1,0),M(1,1),M(1,2),
                                          float(KE(M,m)));
-                        // Track 끝 위치 한 번만 기록하고 버림
+                        // Record the end position of the track only once and discard it
                         TrackElectronOutsidePore(G1[i], M, tid, c_s);
-                        del.push_back(i);                  // G1 리스트에서 제거
+                        del.push_back(i);                  // Remove from G1 list
                     }
                 }else G1[i]=M;
             }
@@ -465,8 +448,6 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             int ch = physics->Check_if_hit(lead).second;
             auto secs = physics->emi_sec(Mc, ch, alpha2, x2, R, dia, pas, m, E0);
 
-            // no amplification bookkeeping
-
             for(auto& s:secs){
                 int tid=CreateElectron(int(Mc(2,2)),s.matrix(2,0),
                                        s.matrix(0,0),s.matrix(0,1),s.matrix(0,2),
@@ -474,14 +455,13 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
                                        float(KE(s.matrix,m)),s.processType);
                 s.matrix(2,2)=tid;
                 double t2; // collision time placeholder
-                // --- 2-D channel handling: recompute channel index & shift z to local ---
+                // 2-D channel handling: recompute channel index & shift z to local
                 {
-                    // ① 채널 인덱스 재계산 (글로벌 좌표 기준)
+                    // 1) Recalculate channel index (global coordinate)
                     int chanIdx = physics->Check_if_hit(s.matrix).second;
+                    // Allow negative channel index (secondary electrons are also processed normally)
                     
-                    // 음수 채널 인덱스 허용 (secondary electrons도 정상 처리)
-
-                    // ② z-축 로컬 변환 후 충돌 시간 계산
+                    // 2) Calculate collision time after z-axis local transformation
                     double pitch = dia + pas;
                     int    nz    = int(std::round(s.matrix(0,2) / pitch));
                     double zc    = nz * pitch;
@@ -602,7 +582,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
             }
         }
 
-        /*========== 5. 종료 조건 =========*/
+        /*========== 5. End condition =========*/
         // if(anode_hits_.size()>=100) break;
         if(E1_emi.empty()&&E1_non.empty()&&G1.empty()&&
            E2_emi.empty()&&E2_non.empty()&&G2.empty()) break;
@@ -613,9 +593,7 @@ std::vector<Matrix3x3> Simulation::Run(double Einit){
     return anode_hits_;
 }
 
-// ───────────────────────────────────────────
-// 3. Save / ConvertEvent (그대로 유지)
-// ───────────────────────────────────────────
+// Save / ConvertEvent
 void Simulation::Save(const std::vector<Matrix3x3>& res,double E,const std::string& f){
     MCPRootManager r;
     if(!r.OpenFile(f)) throw std::runtime_error("root file open error");
@@ -626,35 +604,33 @@ mcp::Event Simulation::ConvertEvent(const std::vector<Matrix3x3>& res,double Ein
     evt.eventInfo.initialEnergy = Ein;
     evt.config.LoadFromConfig();
 
-    // -----------------------------------------------------------------
-    // Filter: if outputLevel == kTrack, keep 애노드에 도달한 Track 만
-    // -----------------------------------------------------------------
+    // Filter: if outputLevel == kTrack, keep anode-reaching tracks only
     if(GetOutputLevel() == OutputLevel::kTrack){
         mcp::Track filt; filt.Reset();
         const auto& src = tracks_;
         for(int i=0;i<src.nTracks;++i){
             if(src.isAnode[i]==1){
                 filt.nTracks++;
-                filt.trackID.push_back(      src.trackID[i]);
-                filt.parentID.push_back(     src.parentID[i]);
-                filt.birthTime.push_back(    src.birthTime[i]);
-                filt.birthPosX.push_back(    src.birthPosX[i]);
-                filt.birthPosY.push_back(    src.birthPosY[i]);
-                filt.birthPosZ.push_back(    src.birthPosZ[i]);
-                filt.birthVelX.push_back(    src.birthVelX[i]);
-                filt.birthVelY.push_back(    src.birthVelY[i]);
-                filt.birthVelZ.push_back(    src.birthVelZ[i]);
-                filt.birthEnergy.push_back(  src.birthEnergy[i]);
-                filt.processType.push_back(  src.processType[i]);
-                filt.isAnode.push_back(      src.isAnode[i]);  // always 1
-                filt.finalTime.push_back(    src.finalTime[i]);
-                filt.finalPosX.push_back(    src.finalPosX[i]);
-                filt.finalPosY.push_back(    src.finalPosY[i]);
-                filt.finalPosZ.push_back(    src.finalPosZ[i]);
-                filt.finalVelX.push_back(    src.finalVelX[i]);
-                filt.finalVelY.push_back(    src.finalVelY[i]);
-                filt.finalVelZ.push_back(    src.finalVelZ[i]);
-                filt.finalEnergy.push_back(  src.finalEnergy[i]);
+                filt.trackID.push_back(src.trackID[i]);
+                filt.parentID.push_back(src.parentID[i]);
+                filt.birthTime.push_back(src.birthTime[i]);
+                filt.birthPosX.push_back(src.birthPosX[i]);
+                filt.birthPosY.push_back(src.birthPosY[i]);
+                filt.birthPosZ.push_back(src.birthPosZ[i]);
+                filt.birthVelX.push_back(src.birthVelX[i]);
+                filt.birthVelY.push_back(src.birthVelY[i]);
+                filt.birthVelZ.push_back(src.birthVelZ[i]);
+                filt.birthEnergy.push_back(src.birthEnergy[i]);
+                filt.processType.push_back(src.processType[i]);
+                filt.isAnode.push_back(src.isAnode[i]);  // always 1
+                filt.finalTime.push_back(src.finalTime[i]);
+                filt.finalPosX.push_back(src.finalPosX[i]);
+                filt.finalPosY.push_back(src.finalPosY[i]);
+                filt.finalPosZ.push_back(src.finalPosZ[i]);
+                filt.finalVelX.push_back(src.finalVelX[i]);
+                filt.finalVelY.push_back(src.finalVelY[i]);
+                filt.finalVelZ.push_back(src.finalVelZ[i]);
+                filt.finalEnergy.push_back(src.finalEnergy[i]);
             }
         }
         evt.tracks = std::move(filt);
@@ -662,7 +638,7 @@ mcp::Event Simulation::ConvertEvent(const std::vector<Matrix3x3>& res,double Ein
         evt.tracks = tracks_;
     }
 
-    // steps_: 이미 outputLevel==kTrack 일 때는 기록이 없으므로 그대로 복사해도 비어 있음
+    // steps_: if outputLevel==kTrack, there is no record, so it is empty
     evt.steps = steps_;
     return evt;
 }

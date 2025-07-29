@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
         auto& config = MCPSim::Config::getInstance();
         config.loadFromFile(config_path.string());
 
-        std::string outFile = "/home/jangh/MCPSim/v3_geometry_3/MCPSim/output/400µm600V_3.5_0.5_saturation_0.8_each_5ps_" + 
+        std::string outFile = "/home/jangh/MCPSim/v3_geometry_3/MCPSim/output/pbs/250723/400µm600V_3.5_0.5_saturation_0.8_each_5ps_" + 
                              std::string(argv[1]) + "_" + std::string(argv[2]) + ".root";
 
         MCPSim::Simulation sim;

@@ -99,7 +99,6 @@ int main(int argc, char** argv) {
         std::vector<float> times = analyzer.GetTime(anodeOnly);
         std::vector<float> transitTimes = analyzer.GetTransitTime(anodeOnly);
 
-        // Regular time histogram
         TCanvas* c1 = new TCanvas("c_time", "", 800, 600);
         
         // Calculate median for time range
@@ -220,7 +219,7 @@ int main(int argc, char** argv) {
         densityXZ->SaveAs((outputDir + outputPrefix + "_density_xz.pdf").c_str());
         delete densityXZ;
         
-        // MCP1/2 포어+스텝 2D 시각화
+        // MCP1/2 pore+step 2D visualization
         TCanvas* mcp2d = visualizer.DrawMCP2DWithPoresAndSteps();
         mcp2d->SaveAs((outputDir + outputPrefix + "_mcp2d.pdf").c_str());
         delete mcp2d;
@@ -229,23 +228,23 @@ int main(int argc, char** argv) {
         int frameCount = visualizer.GetAnimationFrameCount();
         
         // Generate each frame
-        // for (int i = 0; i < frameCount; i++) {
-        //     TCanvas* frame = visualizer.AnimateCascadeFrame(i, frameCount);
-        //     std::string frameFileName = outputDir + outputPrefix + "_animation_frame" + std::to_string(i) + ".png";
-        //     frame->SaveAs(frameFileName.c_str());
-        //     delete frame;
-        // }
+        for (int i = 0; i < frameCount; i++) {
+            TCanvas* frame = visualizer.AnimateCascadeFrame(i, frameCount);
+            std::string frameFileName = outputDir + outputPrefix + "_animation_frame" + std::to_string(i) + ".png";
+            frame->SaveAs(frameFileName.c_str());
+            delete frame;
+        }
         
-        // Create GIF creation script
-        // std::string scriptName = outputDir + outputPrefix + "_animation_create_gif.sh";
-        // std::ofstream scriptFile(scriptName);
-        // scriptFile << "#!/bin/bash\n";
-        // scriptFile << "convert -delay 20 -loop 0 " << outputDir + outputPrefix + "_animation_frame*.png " 
-        //            << outputDir + outputPrefix + "_animation.gif\n";
-        // scriptFile.close();
+        Create GIF creation script
+        std::string scriptName = outputDir + outputPrefix + "_animation_create_gif.sh";
+        std::ofstream scriptFile(scriptName);
+        scriptFile << "#!/bin/bash\n";
+        scriptFile << "convert -delay 20 -loop 0 " << outputDir + outputPrefix + "_animation_frame*.png " 
+                   << outputDir + outputPrefix + "_animation.gif\n";
+        scriptFile.close();
         
-        // std::string chmodCmd = "chmod +x " + scriptName;
-        // system(chmodCmd.c_str());
+        std::string chmodCmd = "chmod +x " + scriptName;
+        system(chmodCmd.c_str());
     }
     
     std::cout << "Analysis completed successfully." << std::endl;

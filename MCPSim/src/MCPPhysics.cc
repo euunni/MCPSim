@@ -369,31 +369,31 @@ double Physics::Point_de_contact2(const Matrix3x3& Mat, int n, double cts, doubl
 }
 
 std::vector<ElectronProcess> Physics::emi_sec(const Matrix3x3& Mat, int n, double alpha, double x0, double R, double dia, double pas, double m, double E0) {
-    // ── 결과 벡터 ───────────────────────────────
+    // Result vector
     std::vector<ElectronProcess> Resultat;
     
-    // ── ① 포어 중심(zc) 계산 ───────────────────
+    // 1) Calculate zc (centre of pore)
     double pitch = dia + pas;
     int    nz    = static_cast<int>( std::round( Mat(0,2) / pitch ) );
-    double zc    = nz * pitch;                   // 현재 포어 중심의 전역 z
+    double zc    = nz * pitch;                   // global z of current pore centre
 
-    // ── ② 에너지 계산 ───────────────────────────
+    // 2) Calculate energy
     double E = 0.5 * m * (pow(Mat(1, 0), 2) + pow(Mat(1, 1), 2) + pow(Mat(1, 2), 2));
     
-    // ── ③ θ 계산(로컬 좌표 기준) ────────────────
+    // 3) Calculate theta (local coordinate)
     double y_r = Mat(0, 1) - tan(alpha) * Mat(0, 0) + tan(alpha) * x0 - (pas + dia) * n - (pas + dia) / 2;
-    double z_r = Mat(0, 2) - zc;                 // 로컬 z (포어 중심 기준)
+    double z_r = Mat(0, 2) - zc;                 // local z (pore centre)
     
     double teta = atan2(z_r, y_r);
     if (teta < 0) {
         teta += 2 * M_PI;
     }
 
-    // ── ④ 충돌 위치 재정의(전역 좌표 복원) ──────
+    // 4) Recalculate hit position (global coordinate)
     Matrix3x3 ModifiedMat = Mat;
     
     ModifiedMat(0, 1) = R * cos(teta) + tan(alpha) * (Mat(0, 0) - x0) + (pas + dia) * n + (pas + dia) / 2;
-    ModifiedMat(0, 2) = zc + R * sin(teta);      // 전역 z 복원
+    ModifiedMat(0, 2) = zc + R * sin(teta);      // global z
     
     // Calculate
     Vector3d e_r(0, cos(teta), sin(teta));

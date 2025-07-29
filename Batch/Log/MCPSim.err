@@ -1,0 +1,3490 @@
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:69:69:12:12:12: : error:  error: error: header 'compare' not found
+header 'compare' not found
+    header "compare"    header "compare"
+
+           ^           ^
+
+input_line_1:1input_line_1::101:: 10note: : submodule of top-level module 'std' implicitly imported herenote: 
+submodule of top-level module 'std' implicitly imported here#include <new>
+
+#include <new>         ^
+
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12:/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap :error: 69:header 'compare' not found12
+: error: header 'compare' not found    header "compare"
+
+           ^
+    header "compare"
+           ^
+input_line_1:1:10:input_line_1 :note: 1:submodule of top-level module 'std' implicitly imported here10
+:#include <new> 
+note:          ^
+submodule of top-level module 'std' implicitly imported here
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol Replaced symbol at_quick_exitat_quick_exit cannot be found in JIT!
+ cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap::6969::1212::  error: error: header 'compare' not found
+header 'compare' not found
+    header "compare"    header "compare"
+
+           ^           ^
+
+input_line_1:1input_line_1::101:: 10note: : submodule of top-level module 'std' implicitly imported herenote: 
+submodule of top-level module 'std' implicitly imported here#include <new>
+
+#include <new>         ^
+
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol Replaced symbol at_quick_exitat_quick_exit cannot be found in JIT!
+ cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+
+Results was:
+Results was:
+With exit code 0
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap::/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap69/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap69::::69126912::::12 12 :error: :error:   error: header 'compare' not founderror: header 'compare' not found
+
+header 'compare' not foundheader 'compare' not found
+
+    header "compare"    header "compare"
+    header "compare"    header "compare"
+           ^
+
+           ^
+           ^           ^
+
+
+input_line_1input_line_1:input_line_1:1:1input_line_1:1::10:101:10:: : 10note:  note: :note:  submodule of top-level module 'std' implicitly imported heresubmodule of top-level module 'std' implicitly imported herenote: 
+submodule of top-level module 'std' implicitly imported here
+#include <new>
+submodule of top-level module 'std' implicitly imported here#include <new>
+#include <new>
+
+         ^
+#include <new>         ^
+         ^
+
+
+         ^Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+Replaced symbol at_quick_exitReplaced symbol  cannot be found in JIT!
+Replaced symbol at_quick_exitReplaced symbol at_quick_exit cannot be found in JIT!
+at_quick_exit cannot be found in JIT!
+ cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap::6969::1212::  error: error: header 'compare' not found
+header 'compare' not found
+    header "compare"
+           ^    header "compare"
+
+           ^
+input_line_1:1input_line_1::101:: 10note: : submodule of top-level module 'std' implicitly imported herenote: 
+submodule of top-level module 'std' implicitly imported here#include <new>
+
+#include <new>         ^
+
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol Replaced symbol at_quick_exitat_quick_exitReplaced symbol  cannot be found in JIT!
+at_quick_exit cannot be found in JIT!
+ cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+In file included from input_line_4In file included from :In file included from input_line_436input_line_4::
+:36In file included from 36:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:
+In file included from :In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert43/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert::
+:43:
+43/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:
+:/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h3:::10310::: 10 fatal error: :fatal error: 'bits/wordsize.h' file not found 'bits/wordsize.h' file not found
+fatal error: 
+'bits/wordsize.h' file not found#include <bits/wordsize.h>
+#include <bits/wordsize.h>
+
+         ^~~~~~~~~~~~~~~~~#include <bits/wordsize.h>         ^~~~~~~~~~~~~~~~~
+
+
+         ^~~~~~~~~~~~~~~~~
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+
+Results was:
+Results was:
+In file included from With exit code input_line_4:With exit code 36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+0
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+0#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+Replaced symbol at_quick_exit cannot be found in JIT!
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemapResults was:
+:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+With exit code 0
+Replaced symbol at_quick_exit cannot be found in JIT!
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4In file included from :In file included from input_line_4In file included from 36In file included from input_line_4:input_line_4:
+input_line_4:36:In file included from :36:
+36/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert36:
+In file included from :
+::
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassertIn file included from 43In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:43:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:
+43:
+::
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h3/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h::/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h3:310::3::310:10 ::10:fatal error: 10 : fatal error: :fatal error:  'bits/wordsize.h' file not found fatal error: 
+'bits/wordsize.h' file not foundfatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+'bits/wordsize.h' file not found'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+
+#include <bits/wordsize.h>
+#include <bits/wordsize.h>         ^~~~~~~~~~~~~~~~~         ^~~~~~~~~~~~~~~~~
+
+
+
+         ^~~~~~~~~~~~~~~~~         ^~~~~~~~~~~~~~~~~
+
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+In file included from input_line_4In file included from :In file included from input_line_436input_line_4::
+:36In file included from 36:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:
+In file included from :In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert43/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert::
+:4343:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:
+:/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h3/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:::3103:::10 10:fatal error: : fatal error:  'bits/wordsize.h' file not foundfatal error: 
+'bits/wordsize.h' file not found
+'bits/wordsize.h' file not found#include <bits/wordsize.h>
+#include <bits/wordsize.h>
+
+#include <bits/wordsize.h>         ^~~~~~~~~~~~~~~~~         ^~~~~~~~~~~~~~~~~
+
+
+         ^~~~~~~~~~~~~~~~~
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+In file included from input_line_4:36Replaced symbol :
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:at_quick_exit cannot be found in JIT!
+3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+In file included from input_line_4In file included from :input_line_436::
+36In file included from :
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassertIn file included from :/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert43::
+43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h::33::1010::  fatal error: fatal error: 'bits/wordsize.h' file not found
+'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+#include <bits/wordsize.h>         ^~~~~~~~~~~~~~~~~
+
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not foundIn file included from 
+input_line_4:#include <bits/wordsize.h>36
+:
+         ^~~~~~~~~~~~~~~~~In file included from 
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:69:69:12:12:12: : error:  error: error: header 'compare' not found
+header 'compare' not foundheader 'compare' not found
+
+    header "compare"    header "compare"
+    header "compare"
+           ^
+           ^
+           ^
+
+input_line_1:1input_line_1input_line_1:::1011::: 1010note: ::  submodule of top-level module 'std' implicitly imported herenote: note: 
+submodule of top-level module 'std' implicitly imported heresubmodule of top-level module 'std' implicitly imported here#include <new>
+
+
+#include <new>#include <new>         ^
+
+
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+         ^         ^Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+
+
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+Replaced symbol Replaced symbol Replaced symbol at_quick_exitat_quick_exitat_quick_exit cannot be found in JIT!
+ cannot be found in JIT!
+ cannot be found in JIT!
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4In file included from :In file included from input_line_4In file included from 36In file included from input_line_4:input_line_4:
+input_line_4:36:In file included from :36:
+36/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert36:
+In file included from :
+::
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassertIn file included from 43In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:::/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert43:
+4343::
+:
+:
+43/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:
+::/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h33::/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h::33:1010::3::1010:  ::10fatal error: fatal error:   :'bits/wordsize.h' file not foundfatal error: fatal error:  'bits/wordsize.h' file not found
+'bits/wordsize.h' file not foundfatal error: 
+'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+#include <bits/wordsize.h>'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+         ^~~~~~~~~~~~~~~~~
+
+#include <bits/wordsize.h>         ^~~~~~~~~~~~~~~~~
+         ^~~~~~~~~~~~~~~~~
+
+
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+=>> PBS: job killed: walltime 10839 exceeded limit 10800
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+=>> PBS: job killed: walltime 10837 exceeded limit 10800
+=>> PBS: job killed: walltime 10834 exceeded limit 10800
+=>> PBS: job killed: walltime 10834 exceeded limit 10800
+=>> PBS: job killed: walltime 10837 exceeded limit 10800
+=>> PBS: job killed: walltime 10837 exceeded limit 10800
+=>> PBS: job killed: walltime 10837 exceeded limit 10800
+=>> PBS: job killed: walltime 10838 exceeded limit 10800
+=>> PBS: job killed: walltime 10834 exceeded limit 10800
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+ERROR in cling::CIFactory::createCI(): cannot extract standard library include paths!
+Invoking:
+  LC_ALL=C x86_64-conda-linux-gnu-c++  -O3 -DNDEBUG -xc++ -E -v /dev/null 2>&1 | sed -n -e '/^.include/,${' -e '/^ \/.*++/p' -e '}'
+Results was:
+With exit code 0
+C system headers (glibc/Xcode/Windows SDK) must be installed.
+/gpfs/fs1/home/jangh/anaconda3/envs/ROOT/etc/cling/std.modulemap:69:12: error: header 'compare' not found
+    header "compare"
+           ^
+input_line_1:1:10: note: submodule of top-level module 'std' implicitly imported here
+#include <new>
+         ^
+Warning in cling::IncrementalParser::CheckABICompatibility():
+  Failed to extract C++ standard library version.
+Replaced symbol at_quick_exit cannot be found in JIT!
+In file included from input_line_4:36:
+In file included from /../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/cassert:43:
+/../lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux/bits/c++config.h:3:10: fatal error: 'bits/wordsize.h' file not found
+#include <bits/wordsize.h>
+         ^~~~~~~~~~~~~~~~~
+=>> PBS: job killed: walltime 10836 exceeded limit 10800
